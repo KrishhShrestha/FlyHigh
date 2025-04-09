@@ -1,0 +1,108 @@
+package com.FlyHigh.controller;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+/**
+ * Servlet implementation class Register
+ */
+@WebServlet(asyncSupported = true, urlPatterns = { "/register"})
+public class Register extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Register() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("WEB-INF/pages/student-register.jsp").forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    // Retrieve form inputs
+	    String firstName = request.getParameter("firstname");
+	    String lastName = request.getParameter("lastname");
+	    String username = request.getParameter("username");
+	    String birthday = request.getParameter("birthday");
+	    String gender = request.getParameter("gender");
+	    String email = request.getParameter("email");
+	    String phone = request.getParameter("phone");
+	    String subject = request.getParameter("subject");
+	    String password = request.getParameter("password");
+	    String confirmPassword = request.getParameter("confirm-password");
+
+
+	    // Initialize error message
+	    String errorMessage = null;
+
+	    // Regex for email validation
+	    String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+
+	    // Validate fields are not empty and meet required conditions
+	    if (firstName == null || firstName.isEmpty()) {
+	        errorMessage = "First Name is required.";
+	    } else if (lastName == null || lastName.isEmpty()) {
+	        errorMessage = "Last Name is required.";
+	    } else if (username == null || username.isEmpty()) {
+	        errorMessage = "Username is required.";
+	    } else if (birthday == null || birthday.isEmpty()) {
+	        errorMessage = "Birthday is required.";
+	    } else if (gender == null || gender.isEmpty()) {
+	        errorMessage = "Gender is required.";
+	    } else if (email == null || email.isEmpty()) {
+	        errorMessage = "Email is required.";
+	    } else if (!email.matches(emailRegex)) {
+	        errorMessage = "Invalid email format.";
+	    } else if (phone == null || phone.isEmpty()) {
+	        errorMessage = "Phone number is required.";
+	    } else if (subject == null || subject.isEmpty()) {
+	        errorMessage = "Subject is required.";
+	    } else if (password == null || password.isEmpty()) {
+	        errorMessage = "Password is required.";
+	    } else if (!password.equals(confirmPassword)) {
+	        errorMessage = "Passwords do not match.";
+	    }
+	    
+	    
+
+	    // If there is an error, return the user to the form with the error message
+	    if (errorMessage != null) {
+	        
+	        System.out.println(errorMessage);
+	        response.sendRedirect("/student-islington/register");
+	    } else {
+
+	    	System.out.println(firstName);
+	    	System.out.println(lastName);
+	    	System.out.println(username);
+	    	System.out.println(birthday);
+	    	System.out.println(gender);
+	    	System.out.println(email);
+	    	System.out.println(phone);
+	    	System.out.println(subject);
+	    	System.out.println(password);
+	    	System.out.println(confirmPassword);
+	        
+	        // Forward to a success page
+	    	response.sendRedirect("/student-islington/login");
+	    }
+	}
+
+
+}
