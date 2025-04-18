@@ -80,8 +80,6 @@ public class RegisterController extends HttpServlet {
 	    }
 	    
 	    
-
-	    // If there is an error, return the user to the form with the error message
 	    if (errorMessage != null) {
 	        System.out.println(errorMessage);
 	        request.getRequestDispatcher("WEB-INF/pages/register.jsp").forward(request, response);
@@ -98,7 +96,7 @@ public class RegisterController extends HttpServlet {
 	    	System.out.println(password);
 	    	System.out.println(confirmPassword);
 	        
-	        // Forward to a success page
+	       
 	    	response.sendRedirect("/FlyHigh/login");
 	    }
 	}

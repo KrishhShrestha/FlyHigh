@@ -1,75 +1,125 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  
+pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Login to your account</title>
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/login.css" />
-</head>
-<body>
-<main class="main">
-	<div class="container">
-		<section class="wrapper">
-			<div class="heading">
-				<h1 class="text text-large">Registration form </h1>
-			</div>
-			<form name="signin" method="post" class="form">
-				<div class="grid-wrapper">
-				  <div class="input-control">
-				    <label for="firstname" class="input-label" hidden>First Name</label>
-				    <input type="text" name="firstname" id="firstname" class="input-field" placeholder="First Name">
-				  </div>
-				  <div class="input-control">
-				    <label for="lastname" class="input-label" hidden>Last Name</label>
-				    <input type="text" name="lastname" id="lastname" class="input-field" placeholder="Last Name">
-				  </div>
-				  <div class="input-control">
-				    <label for="username" class="input-label" hidden>Username</label>
-				    <input type="text" name="username" id="username" class="input-field" placeholder="Username">
-				  </div>
-				  <div class="input-control">
-				    <label for="birthday" class="input-label" hidden>Birthday</label>
-				    <input type="date" name="birthday" id="birthday" class="input-field" placeholder="Birthday">
-				  </div>
-				  
-				  <div class="input-control">
-				    <label for="gender" class="input-label" hidden>Gender</label>
-				    <select name="gender" id="gender" class="input-field">
-				      <option value="" disabled selected>Gender</option>
-				      <option value="male">Male</option>
-				      <option value="female">Female</option>
-				      <option value="other">Other</option>
-				    </select>
-				  </div>
-				  
-				  <div class="input-control">
-				    <label for="email" class="input-label" hidden>Email Address</label>
-				    <input type="email" name="email" id="email" class="input-field" placeholder="Email Address">
-				  </div>
-				  <div class="input-control">
-				    <label for="phone" class="input-label" hidden>Phone</label>
-				    <input type="tel" name="phone" id="phone" class="input-field" placeholder="Phone Number">
-				  </div>
-				  <div class="input-control">
-				    <label for="subject" class="input-label" hidden>Subject</label>
-				    <input type="text" name="subject" id="subject" class="input-field" placeholder="Subject">
-				  </div>
-				  <div class="input-control">
-				    <label for="password" class="input-label" hidden>Password</label>
-				    <input type="password" name="password" id="password" class="input-field" placeholder="Password">
-				  </div>
-				  <div class="input-control">
-				    <label for="confirm-password" class="input-label" hidden>Confirm Password</label>
-				    <input type="password" name="confirm-password" id="confirm-password" class="input-field" placeholder="Confirm Password">
-				  </div>
-				</div>
-				<div class="input-control">
-					<input type="submit" name="submit" class="input-submit" value="Register">
-				</div>
-			</form>
-		</section>
-	</div>
-</main>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/global/loginRegister.css" />
+
+    <script src="https://kit.fontawesome.com/385a42cb55.js"></script>
+  </head>
+
+  <body>
+    <main class="main">
+      <section class="register-wrapper">
+        <div class="image-container">
+          <img src="${pageContext.request.contextPath}/images/login-register-image.jpg" alt="" />
+
+          <div class="overlay"></div>
+        </div>
+
+        <form>
+          <h3 class="title">Register to Fly High</h3>
+          <section class="form-wrapper">
+            <div class="input-div">
+              <label for="first_name">first name</label>
+              <input
+                type="text"
+                id="first_name"
+                placeholder="Ram"
+                name="first_name"
+              />
+            </div>
+            <div class="input-div">
+              <label for="last_name">last name</label>
+              <input
+                type="text"
+                id="last_name"
+                placeholder="Thapa"
+                name="last_name"
+              />
+            </div>
+            <div class="input-div">
+              <label for="phone">Phone</label>
+              <input
+                type="text"
+                id="phone"
+                name="phone"
+                placeholder="+977 9860000011"
+              />
+            </div>
+            <div class="input-div">
+              <label for="gender">Gender</label>
+              <select id="gender" name="gender">
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="input-div">
+              <label for="dob">Date of Birth</label>
+              <input type="date" id="dob" name="dob" />
+            </div>
+            <div class="input-div">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="ram.thapa@flyhigh.com.np"
+              />
+            </div>
+            <div class="input-div">
+              <label for="address">Address</label>
+              <input
+                type="text"
+                id="address"
+                placeholder="kamalpokhari 123"
+                name="address"
+              />
+            </div>
+            <div class="input-div">
+              <label for="image">Image</label>
+              <input type="file" id="image" name="image" />
+            </div>
+            <div class="input-div">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="P@$sw0Rd!"
+                name="password"
+              />
+            </div>
+            <div class="input-div">
+              <label for="confirm-password">Confirm Password</label>
+              <input
+                type="password"
+                id="confirm-password"
+                placeholder="P@$sw0Rd!"
+                name="confirm-password"
+              />
+            </div>
+
+            <button class="submit-cta" type="submit">
+              Submit
+
+              <i class="fa-solid fa-user-plus"></i>
+            </button>
+          </section>
+
+          <hr class="hr" />
+
+          <p class="signup-text">
+            Already have an account? <a href="/">Sign in.</a>
+          </p>
+        </form>
+      </section>
+    </main>
+  </body>
 </html>

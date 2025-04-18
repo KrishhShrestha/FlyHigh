@@ -4,7 +4,7 @@
         <div class="about_section">
           <a href="#">
             <img
-              src="${pageContext.request.contextPath}/assets/logo-1.png"
+              src="${pageContext.request.contextPath}/images/logo-1.png"
               class="footer_logo"
               alt="Footer Logo"
             />
@@ -38,5 +38,5 @@
         </div>
       </div>
 
-      <p class="copyright">&copy; Fly High Corp 2025</p>
+      <p class="copyright">&copy; Fly High 2025</p>
     </footer>

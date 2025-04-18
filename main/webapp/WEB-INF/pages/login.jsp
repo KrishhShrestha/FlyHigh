@@ -1,34 +1,62 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Login to your account</title>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/login.css" />
-</head>
-<body>
-<main class="main">
-	<div class="container">
-		<section class="wrapper">
-			<div class="heading">
-				<h1 class="text text-large">Login </h1>
-			</div>
-			<form method="POST" name="signin" class="form">
-				<div class="input-control">
-					<label for="username" class="input-label" hidden>Email Address</label>
-					<input type="email" name="email" id="email" class="input-field" placeholder="Email Address">
-				</div>
-				<div class="input-control">
-					<label for="password" class="input-label" hidden>Password</label>
-					<input type="password" name="password" id="password" class="input-field" placeholder="Password">
-				</div>
-				<div class="input-control">
-					<input type="submit" name="submit" class="input-submit" value="Sign In"/>
-				</div>
-			</form>
-		</section>
-	</div>
-</main>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/default.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/global/loginRegister.css" />
+    
+    <script src="https://kit.fontawesome.com/385a42cb55.js"></script>
+  </head>
+
+  <body>
+    <main class="main">
+      <section class="register-wrapper login-wrapper">
+        <div class="image-container">
+          <img src="/assets/register-hero.jpg" alt="" />
+
+          <div class="overlay"></div>
+        </div>
+
+        <form>
+          <h3 class="title">Login to Fly High</h3>
+          <section class="form-wrapper">
+            <div class="input-div">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="ram.thapa@flyhigh.com.np"
+              />
+            </div>
+
+            <div class="input-div">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="P@$sw0Rd!"
+                name="password"
+              />
+            </div>
+
+            <button class="submit-cta" type="submit">
+              login <i class="fa-solid fa-right-to-bracket"></i>
+            </button>
+          </section>
+
+          <hr class="hr" />
+
+          <p class="signup-text">
+            Don't have an account?
+            <a href="/">Sign Up.</a>
+          </p>
+        </form>
+      </section>
+    </main>
+  </body>
 </html>

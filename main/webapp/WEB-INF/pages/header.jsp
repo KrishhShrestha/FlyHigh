@@ -9,7 +9,7 @@
 
         <div class="header_logo_wrapper">
           <a href="#">
-            <img src="${pageContext.request.contextPath}/assets/logo.png" alt="Logo" class="header_logo" />
+            <img src="${pageContext.request.contextPath}/images/logo.png" alt="Logo" class="header_logo" />
           </a>
         </div>
 
