@@ -16,7 +16,7 @@
     <main class="main">
       <section class="register-wrapper login-wrapper">
         <div class="image-container">
-          <img src="/assets/register-hero.jpg" alt="" />
+          <img src="${pageContext.request.contextPath}/images/login-register-image.jpg" alt="" />
 
           <div class="overlay"></div>
         </div>
