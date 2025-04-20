@@ -28,7 +28,7 @@ public class ImageUtil {
 	 * @return the extracted file name. If no filename is found, returns a default
 	 *         name "download.png".
 	 */
-	public String getImageNameFromPart(Part part) {
+	public static String getImageNameFromPart(Part part) {
 		// Retrieve the content-disposition header from the part
 		String contentDisp = part.getHeader("content-disposition");
 
@@ -96,6 +96,6 @@ public class ImageUtil {
 	}
 	
 	public String getSavePath(String saveFolder) {
-		return "C:/Users/Prithivi/eclipse-workspace/islington-student/src/main/webapp/resources/images/"+saveFolder+"/";
+		return "C:\\Users\\nowal\\OneDrive\\Documents/"+saveFolder+"/";
 	}
 }
