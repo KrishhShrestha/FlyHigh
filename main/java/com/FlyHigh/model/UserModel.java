@@ -4,135 +4,159 @@ import java.time.LocalDate;
 
 public class UserModel {
     private int id;
-    private String firstName;
-    private String lastName;
-    private String userName;
-    private LocalDate dob;
+    private String firstname;
+    private String lastname;
+    private String phone;
     private String gender;
+    private String dob;
     private String email;
-    private String number;
+    private String address;
     private String password;
-    private String imageUrl;
+    private String confirmpassword;
     private String role;
 
-    
+    // 1. Empty constructor
     public UserModel() {
     }
-   
-    public UserModel(int id, String firstName, String lastName, String userName, LocalDate dob, String gender, 
-                     String email, String number, String password, String imageUrl) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.userName = userName;
-        this.dob = dob;
-        this.gender = gender;
-        this.email = email;
-        this.number = number;
-        this.password = password;
-        this.imageUrl = imageUrl;
-    }
 
-    public UserModel(String firstName, String lastName, String userName, LocalDate dob, String gender, 
-                     String email, String number, String password, String imageUrl, String role) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.userName = userName;
-        this.dob = dob;
+    // 2. Constructor with all variables
+    public UserModel(int id, String firstname, String lastname, String phone, String gender,
+                       String dob, String email,String address, String password, String confirmpassword, String role) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.phone = phone;
         this.gender = gender;
+        this.dob = dob;
         this.email = email;
-        this.number = number;
+        this.address = address;
         this.password = password;
-        this.imageUrl = imageUrl;
+        this.confirmpassword = confirmpassword;
         this.role = role;
     }
 
-    // Getters and Setters
-    public int getId() {
-        return id;
+    // 3. Constructor with all variables except id
+    public UserModel(String firstname, String lastname, String phone, String gender,
+            String dob, String email,String address, String password, String confirmpassword, String role) {
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.phone = phone;
+		this.gender = gender;
+		this.dob = dob;
+		this.email = email;
+		this.address = address;
+		this.password = password;
+		this.confirmpassword = confirmpassword;
+		this.role = role;
     }
 
-    public void setId(int id) {
-        this.id = id;
+
+    // 4. Constructor with all variables except id and role
+    public UserModel( String firstname, String lastname, String phone, String gender,
+            String dob, String email,String address, String password, String confirmpassword) {
+
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.phone = phone;
+		this.gender = gender;
+		this.dob = dob;
+		this.email = email;
+		this.address = address;
+		this.password = password;
+		this.confirmpassword = confirmpassword;
+		
+		
+
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public String getFirstname() {
+		return firstname;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
 
-    public String getUserName() {
-        return userName;
-    }
+	public String getLastname() {
+		return lastname;
+	}
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
 
-    public LocalDate getDob() {
-        return dob;
-    }
+	public String getPhone() {
+		return phone;
+	}
 
-    public void setDob(LocalDate dob) {
-        this.dob = dob;
-    }
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
-    public String getGender() {
-        return gender;
-    }
+	public String getGender() {
+		return gender;
+	}
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getDob() {
+		return dob;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setDob(String dob) {
+		this.dob = dob;
+	}
 
-    public String getNumber() {
-        return number;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setNumber(String number) {
-        this.number = number;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getAddress() {
+		return address;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public String getRole() {
-        return role;
-    }
+	public String getConfirmpassword() {
+		return confirmpassword;
+	}
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+	public void setConfirmpassword(String confirmpassword) {
+		this.confirmpassword = confirmpassword;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	
+
 }

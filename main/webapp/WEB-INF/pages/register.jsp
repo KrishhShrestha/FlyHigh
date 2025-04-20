@@ -22,7 +22,7 @@ pageEncoding="UTF-8"%>
           <div class="overlay"></div>
         </div>
 
-        <form>
+        <form method="post" action="${pageContext.request.contextPath}/register">
           <h3 class="title">Register to Fly High</h3>
           <section class="form-wrapper">
             <div class="input-div">

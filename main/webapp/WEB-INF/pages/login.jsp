@@ -21,7 +21,8 @@
           <div class="overlay"></div>
         </div>
 
-        <form>
+        <form method="post" action="${pageContext.request.contextPath}/login">
+
           <h3 class="title">Login to Fly High</h3>
           <section class="form-wrapper">
             <div class="input-div">

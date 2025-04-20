@@ -5,9 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.college.config.DbConfig;
-import com.college.model.StudentModel;
-import com.college.util.PasswordUtil;
+import com.FlyHigh.config.DbConfig;
+import com.FlyHigh.model.UserModel;
+import com.FlyHigh.util.PasswordUtil;
 
 /**
  * Service class for handling login operations. Connects to the database,
@@ -38,19 +38,19 @@ public class LoginService {
 	 * @return true if the user credentials are valid, false otherwise; null if a
 	 *         connection error occurs
 	 */
-	public Boolean loginUser(StudentModel studentModel) {
+	public Boolean loginUser(UserModel UserModel) {
 		if (isConnectionError) {
 			System.out.println("Connection Error!");
 			return null;
 		}
 
-		String query = "SELECT username, password FROM student WHERE username = ?";
+		String query = "SELECT email, password FROM user WHERE email = ?";
 		try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
-			stmt.setString(1, studentModel.getUserName());
+			stmt.setString(1, UserModel.getEmail());
 			ResultSet result = stmt.executeQuery();
 
 			if (result.next()) {
-				return validatePassword(result, studentModel);
+				return validatePassword(result, UserModel);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -69,11 +69,11 @@ public class LoginService {
 	 * @return true if the passwords match, false otherwise
 	 * @throws SQLException if a database access error occurs
 	 */
-	private boolean validatePassword(ResultSet result, StudentModel studentModel) throws SQLException {
-		String dbUsername = result.getString("username");
+	private boolean validatePassword(ResultSet result, UserModel UserModel) throws SQLException {
+		String dbEmail = result.getString("email");
 		String dbPassword = result.getString("password");
 
-		return dbUsername.equals(studentModel.getUserName())
-				&& PasswordUtil.decrypt(dbPassword, dbUsername).equals(studentModel.getPassword());
+		return dbEmail.equals(UserModel.getEmail())
+				&& PasswordUtil.decrypt(dbPassword, dbEmail).equals(UserModel.getPassword());
 	}
 }
