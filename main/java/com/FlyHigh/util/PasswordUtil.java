@@ -58,7 +58,7 @@ public class PasswordUtil {
     }
 
     // return a base64 encoded AES encrypted text
-    public static String encrypt(String employee_id, String password){
+    public static String encrypt(String email, String password){
     	try {
 		    // 16 bytes salt
 		    byte[] salt = getRandomNonce(SALT_LENGTH_BYTE);
@@ -67,7 +67,7 @@ public class PasswordUtil {
 		    byte[] iv = getRandomNonce(IV_LENGTH_BYTE);
 		
 		    // secret key from password
-		    SecretKey aesKeyFromPassword = getAESKeyFromPassword(employee_id.toCharArray(), salt);
+		    SecretKey aesKeyFromPassword = getAESKeyFromPassword(email.toCharArray(), salt);
 		
 		    Cipher cipher = Cipher.getInstance(ENCRYPT_ALGO);
 		
@@ -92,7 +92,7 @@ public class PasswordUtil {
     }
 
     
-    public static String decrypt(String encryptedPassword, String username) {
+    public static String decrypt(String encryptedPassword, String email) {
 		try {
 			byte[] decode = Base64.getDecoder().decode(encryptedPassword.getBytes(UTF_8));
 	
@@ -109,7 +109,7 @@ public class PasswordUtil {
 			bb.get(cipherText);
 	
 			// get back the aes key from the same password and salt
-			SecretKey aesKeyFromPassword = PasswordUtil.getAESKeyFromPassword(username.toCharArray(), salt);
+			SecretKey aesKeyFromPassword = PasswordUtil.getAESKeyFromPassword(email.toCharArray(), salt);
 	
 			Cipher cipher = Cipher.getInstance(ENCRYPT_ALGO);
 	

@@ -11,6 +11,7 @@ import java.io.IOException;
 
 import com.FlyHigh.model.UserModel;
 import com.FlyHigh.service.RegisterService;
+import com.FlyHigh.util.PasswordUtil;
 import com.FlyHigh.util.ValidationUtil;
 
 @WebServlet(asyncSupported = true, urlPatterns = { "/register" })
@@ -66,7 +67,8 @@ public class RegisterController extends HttpServlet {
         System.out.println(address);
         System.out.println(password);
         System.out.println(confirmpassword);
-
+        
+        password = PasswordUtil.encrypt(email, password);
         // Create model and persist user
         UserModel userModel = new UserModel(
             firstname,

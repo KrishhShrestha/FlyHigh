@@ -19,6 +19,7 @@ pageEncoding="UTF-8"%>
   </head>
 
   <body>
+
     <main class="main">
       <section class="register-wrapper">
         <div class="image-container">
@@ -116,10 +117,16 @@ pageEncoding="UTF-8"%>
 
               <i class="fa-solid fa-user-plus"></i>
             </button>
+            <%
+    		String error = (String) request.getAttribute("errorMessage");
+    		if (error != null) {
+			%>
+    		<div style="color: red; margin-bottom: 10px;"><%= error %></div>
+			<%
+    		}
+			%>
           </section>
-
           <hr class="hr" />
-
           <p class="signup-text">
             Already have an account? <a href="${contextPath}/login">Sign in.</a>
           </p>
