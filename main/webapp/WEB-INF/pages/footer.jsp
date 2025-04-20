@@ -1,3 +1,9 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/global/HeaderFooter.css" />
+
+
 
     <footer class="footer">
       <div class="container">
@@ -20,10 +26,10 @@
         <div class="">
           <p class="footer_subtitle">QUICK LINKS</p>
           <ul class="footer_ul">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Drones</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Contact Us</a></li>
+        	  <li><a href="${contextPath}/home">Home</a></li>
+        	  <li><a href="${contextPath}/drones">Drones</a></li>
+        	  <li><a href="${contextPath}/about">About Us</a></li>
+        	  <li><a href="${contextPath}/contact">Contact Us</a></li>
           </ul>
         </div>
 

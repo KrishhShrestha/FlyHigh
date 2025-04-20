@@ -54,7 +54,6 @@ public class UserModel {
     // 4. Constructor with all variables except id and role
     public UserModel( String firstname, String lastname, String phone, String gender,
             String dob, String email,String address, String password, String confirmpassword) {
-
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.phone = phone;
@@ -64,9 +63,12 @@ public class UserModel {
 		this.address = address;
 		this.password = password;
 		this.confirmpassword = confirmpassword;
-		
-		
-
+    }
+    
+    // 5. Constructor with email and pass
+    public UserModel( String email, String password) {
+		this.email = email;
+		this.password = password;
     }
 
 	public int getId() {

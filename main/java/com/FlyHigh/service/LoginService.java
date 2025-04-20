@@ -44,14 +44,18 @@ public class LoginService {
 			return null;
 		}
 
-		String query = "SELECT email, password FROM user WHERE email = ?";
+		String query = "SELECT `User_email`, `User_password` FROM `user` WHERE `User_email` = ?";
+		
 		try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
 			stmt.setString(1, UserModel.getEmail());
+			
+			
 			ResultSet result = stmt.executeQuery();
-
+			
 			if (result.next()) {
 				return validatePassword(result, UserModel);
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
@@ -70,10 +74,11 @@ public class LoginService {
 	 * @throws SQLException if a database access error occurs
 	 */
 	private boolean validatePassword(ResultSet result, UserModel UserModel) throws SQLException {
-		String dbEmail = result.getString("email");
-		String dbPassword = result.getString("password");
+		String dbEmail = result.getString("User_email");
+		String dbPassword = result.getString("User_password");
 
-		return dbEmail.equals(UserModel.getEmail())
-				&& PasswordUtil.decrypt(dbPassword, dbEmail).equals(UserModel.getPassword());
+		return dbEmail.equals(UserModel.getEmail()) && dbPassword.equals(UserModel.getPassword());
+		
+		//		return dbEmail.equals(UserModel.getEmail()) && PasswordUtil.decrypt(dbPassword, dbEmail).equals(UserModel.getPassword());
 	}
 }

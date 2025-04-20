@@ -46,16 +46,23 @@ public class AuthenticationFilter implements Filter {
 
 		String uri = req.getRequestURI();
 		
+		if (uri.endsWith("/logout")) {
+		    chain.doFilter(request, response);
+		    return;
+		}
+
+		
 		// Allow access to resources
 		if (uri.endsWith(".png") || uri.endsWith(".jpg") || uri.endsWith(".css")) {
 			chain.doFilter(request, response);
 			return;
 		}
 		
-		boolean isLoggedIn = SessionUtil.getAttribute(req, "username") != null;
-		String userRole = CookieUtil.getCookie(req, "role") != null ? CookieUtil.getCookie(req, "role").getValue()
-				: null;
+		boolean isLoggedIn = SessionUtil.getAttribute(req, "email") != null;
+		
+		String userRole = CookieUtil.getCookie(req, "role") != null ? CookieUtil.getCookie(req, "role").getValue() : null;
 
+		
 		if ("admin".equals(userRole)) {
 			// Admin is logged in
 			if (uri.endsWith(LOGIN) || uri.endsWith(REGISTER)) {
@@ -68,7 +75,7 @@ public class AuthenticationFilter implements Filter {
 			} else {
 				res.sendRedirect(req.getContextPath() + DASHBOARD);
 			}
-		} else if ("user".equals(userRole)) {
+		} else if ("customer".equals(userRole)) {			
 			// User is logged in
 			if (uri.endsWith(LOGIN) || uri.endsWith(REGISTER)) {
 				res.sendRedirect(req.getContextPath() + HOME);
