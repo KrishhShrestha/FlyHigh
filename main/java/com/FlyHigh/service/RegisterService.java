@@ -57,11 +57,8 @@ public class RegisterService {
 			insertStmt.setString(5, UserModel.getEmail());               // User_email
 			insertStmt.setString(6, UserModel.getAddress());             // User_address
 			insertStmt.setString(7, UserModel.getPassword());            // User_password
-			insertStmt.setString(8, "user");                             // Role_Name — default role
+			insertStmt.setString(8, "customer");                             // Role_Name — default role
 			insertStmt.setString(9, "");                                 // User_image — empty for now
-
-
-			
 
 			return insertStmt.executeUpdate() > 0;
 		} catch (SQLException e) {

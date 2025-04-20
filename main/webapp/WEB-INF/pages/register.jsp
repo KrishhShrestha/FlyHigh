@@ -112,11 +112,7 @@ pageEncoding="UTF-8"%>
               />
             </div>
 
-            <button class="submit-cta" type="submit">
-              Submit
-
-              <i class="fa-solid fa-user-plus"></i>
-            </button>
+<div>
             <%
     		String error = (String) request.getAttribute("errorMessage");
     		if (error != null) {
@@ -125,6 +121,15 @@ pageEncoding="UTF-8"%>
 			<%
     		}
 			%>
+			
+            <button class="submit-cta" type="submit">
+              Submit
+
+              <i class="fa-solid fa-user-plus"></i>
+            </button>
+
+</div>
+
           </section>
           <hr class="hr" />
           <p class="signup-text">

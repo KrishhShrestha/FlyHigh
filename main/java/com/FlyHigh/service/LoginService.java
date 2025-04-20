@@ -74,11 +74,17 @@ public class LoginService {
 	 * @throws SQLException if a database access error occurs
 	 */
 	private boolean validatePassword(ResultSet result, UserModel UserModel) throws SQLException {
-		String dbEmail = result.getString("User_email");
-		String dbPassword = result.getString("User_password");
+	    String dbEmail = result.getString("User_email");
+	    String dbPassword = result.getString("User_password");
 
-		return dbEmail.equals(UserModel.getEmail()) && dbPassword.equals(UserModel.getPassword());
-		
-		//		return dbEmail.equals(UserModel.getEmail()) && PasswordUtil.decrypt(dbPassword, dbEmail).equals(UserModel.getPassword());
+	    String decryptedPassword = PasswordUtil.decrypt(dbPassword, dbEmail);
+
+	    if (decryptedPassword == null) {
+	        System.out.println("\nDecryption failed for email: " + dbEmail);
+	        return false;
+	    }
+
+	    return dbEmail.equals(UserModel.getEmail()) && decryptedPassword.equals(UserModel.getPassword());
 	}
+
 }

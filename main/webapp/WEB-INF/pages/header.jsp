@@ -25,7 +25,7 @@
       <li><a href="${contextPath}/contact">Contact Us</a></li>
     </ul>
     <div class="header_logo_wrapper">
-      <a href="#">
+      <a href="${contextPath}/home">
         <img src="${pageContext.request.contextPath}/images/logo.png" alt="Logo" class="header_logo" />
       </a>
     </div>

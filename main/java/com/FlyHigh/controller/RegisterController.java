@@ -20,6 +20,7 @@ import com.FlyHigh.util.ValidationUtil;
     maxFileSize = 1024 * 1024 * 10,       // 10MB
     maxRequestSize = 1024 * 1024 * 50     // 50MB
 )
+
 public class RegisterController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -69,6 +70,7 @@ public class RegisterController extends HttpServlet {
         System.out.println(confirmpassword);
         
         password = PasswordUtil.encrypt(email, password);
+        
         // Create model and persist user
         UserModel userModel = new UserModel(
             firstname,

@@ -6,6 +6,7 @@ import com.FlyHigh.model.UserModel;
 import com.FlyHigh.service.LoginService;
 import com.FlyHigh.util.CookieUtil;
 import com.FlyHigh.util.SessionUtil;
+import com.FlyHigh.util.ValidationUtil;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -56,6 +57,12 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
+	
+		if (email == null || email.trim().isEmpty() || !ValidationUtil.isValidEmail(email) || password == null || password.trim().isEmpty()) {
+			req.setAttribute("errorMessage", "Email and password are required.");
+			req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
+			return;
+		}
 
 		UserModel userModel = new UserModel(email, password);
 		
@@ -93,10 +100,10 @@ public class LoginController extends HttpServlet {
 		if (loginStatus == null) {
 			errorMessage = "Our server is under maintenance. Please try again later!";
 		} else {
-			errorMessage = "User credential mismatch. Please try again!";
+			errorMessage = "Invalid Email or password!";
 		}
-		System.out.println(errorMessage);
-		req.setAttribute("error", errorMessage);
+		
+		req.setAttribute("errorMessage", errorMessage);
 		req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
 	}
 

@@ -48,10 +48,25 @@
                 name="password"
               />
             </div>
-
-            <button class="submit-cta" type="submit">
+            
+            <div>
+            
+			<%
+    		String error = (String) request.getAttribute("errorMessage");
+    		if (error != null) {
+			%>
+    		<div style="color: red; margin-bottom: 10px;"><%= error %></div>
+			<%
+    		}
+			%>
+			
+			
+			<button class="submit-cta" type="submit">
               login <i class="fa-solid fa-right-to-bracket"></i>
             </button>
+			</div>
+
+
           </section>
 
           <hr class="hr" />
