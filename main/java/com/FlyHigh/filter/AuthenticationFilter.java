@@ -31,6 +31,7 @@ public class AuthenticationFilter implements Filter {
 	private static final String ABOUT = "/about";
 	private static final String PORTFOLIO = "/portfolio";
 	private static final String CONTACT = "/contact";
+	private static final String CART = "/cart";
 	private static final String ORDER_LIST = "/orderlist";
 	private static final String CART_LIST = "/cartlist";
 
@@ -96,6 +97,7 @@ public class AuthenticationFilter implements Filter {
 					uri.endsWith(ABOUT) || 
 					uri.endsWith(PORTFOLIO)|| 
 					uri.endsWith(CONTACT) || 
+					uri.endsWith(CART) ||
 					uri.endsWith(ORDER_LIST) || 
 					uri.endsWith(CART_LIST)) {
 				chain.doFilter(request, response);
