@@ -69,7 +69,8 @@ public class UserModel {
     public UserModel( String email, String password) {
 		this.email = email;
 		this.password = password;
-    }
+//		this.role = "admin";
+	}
 
 	public int getId() {
 		return id;

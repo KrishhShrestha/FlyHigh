@@ -23,7 +23,8 @@ public class AuthenticationFilter implements Filter {
 	private static final String HOME = "/home";
 	private static final String ROOT = "/";
 	private static final String DASHBOARD = "/dashboard";
-	private static final String MODIFY_STUDENTS = "/modifyStudents";
+	
+	private static final String MODIFY_STUDENTS = "/droneManage";
 	private static final String STUDENT_UPDATE = "/studentUpdate";
 	private static final String ADMIN_ORDER = "/adminOrder";
 	private static final String ABOUT = "/about";
