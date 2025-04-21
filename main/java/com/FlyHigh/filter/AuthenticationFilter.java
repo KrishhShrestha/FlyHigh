@@ -24,8 +24,9 @@ public class AuthenticationFilter implements Filter {
 	private static final String ROOT = "/";
 	private static final String DASHBOARD = "/dashboard";
 	
-	private static final String MODIFY_STUDENTS = "/droneManage";
-	private static final String STUDENT_UPDATE = "/studentUpdate";
+	private static final String MANAGE_DRONE = "/droneManage";
+	private static final String ADD_DRONE = "/addDrone";
+	
 	private static final String ADMIN_ORDER = "/adminOrder";
 	private static final String ABOUT = "/about";
 	private static final String PORTFOLIO = "/portfolio";
@@ -65,25 +66,40 @@ public class AuthenticationFilter implements Filter {
 
 		
 		if ("admin".equals(userRole)) {
+			System.out.println("Admin  Login");
 			// Admin is logged in
 			if (uri.endsWith(LOGIN) || uri.endsWith(REGISTER)) {
 				res.sendRedirect(req.getContextPath() + DASHBOARD);
-			} else if (uri.endsWith(DASHBOARD) || uri.endsWith(MODIFY_STUDENTS) || uri.endsWith(STUDENT_UPDATE)
-					|| uri.endsWith(ADMIN_ORDER) || uri.endsWith(HOME) || uri.endsWith(ROOT)) {
+			} else if (
+					uri.endsWith(DASHBOARD) ||
+					uri.endsWith(MANAGE_DRONE) || 
+					uri.endsWith(ADD_DRONE) || 
+					uri.endsWith(ADMIN_ORDER) || 
+					uri.endsWith(HOME) || 
+					uri.endsWith(ROOT)) {
+				
 				chain.doFilter(request, response);
 			} else if (uri.endsWith(ORDER_LIST) || uri.endsWith(CART_LIST)) {
 				res.sendRedirect(req.getContextPath() + DASHBOARD);
 			} else {
 				res.sendRedirect(req.getContextPath() + DASHBOARD);
 			}
-		} else if ("customer".equals(userRole)) {			
+		} else if ("customer".equals(userRole)) {	
+			System.out.println("Customer login");
+			
 			// User is logged in
 			if (uri.endsWith(LOGIN) || uri.endsWith(REGISTER)) {
 				res.sendRedirect(req.getContextPath() + HOME);
-			} else if (uri.endsWith(HOME) || uri.endsWith(ROOT) || uri.endsWith(ABOUT) || uri.endsWith(PORTFOLIO)
-					|| uri.endsWith(CONTACT) || uri.endsWith(ORDER_LIST) || uri.endsWith(CART_LIST)) {
+			} else if (
+					uri.endsWith(HOME) || 
+					uri.endsWith(ROOT) || 
+					uri.endsWith(ABOUT) || 
+					uri.endsWith(PORTFOLIO)|| 
+					uri.endsWith(CONTACT) || 
+					uri.endsWith(ORDER_LIST) || 
+					uri.endsWith(CART_LIST)) {
 				chain.doFilter(request, response);
-			} else if (uri.endsWith(DASHBOARD) || uri.endsWith(MODIFY_STUDENTS) || uri.endsWith(STUDENT_UPDATE)
+			} else if (uri.endsWith(DASHBOARD) || uri.endsWith(MANAGE_DRONE) || uri.endsWith(ADD_DRONE)
 					|| uri.endsWith(ADMIN_ORDER)) {
 				res.sendRedirect(req.getContextPath() + HOME);
 			} else {
@@ -94,6 +110,7 @@ public class AuthenticationFilter implements Filter {
 			if (uri.endsWith(LOGIN) || uri.endsWith(REGISTER) || uri.endsWith(HOME) || uri.endsWith(ROOT)) {
 				chain.doFilter(request, response);
 			} else {
+				System.out.println("Error redireting to login page");
 				res.sendRedirect(req.getContextPath() + LOGIN);
 			}
 		}
