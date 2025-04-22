@@ -37,9 +37,9 @@
                         <i class="fas fa-users"></i>
                     </div>
                     <div class="card-content">
-                        <h3>New Customers</h3>
+                        <h3>Total Customers</h3>
                         <p class="amount">24</p>
-                        <p class="trend positive">+8% from yesterday</p>
+  
                     </div>
                 </div>
                 
