@@ -29,6 +29,10 @@ public class AuthenticationFilter implements Filter {
 	
 	private static final String ADMIN_ORDER = "/droneDetails";
 	
+	private static final String CATEGORY = "/category";
+	private static final String ADDCATEGORY = "/addcategory";
+	private static final String EDITCATEGORY = "/editcategory";
+	
 	private static final String ABOUT = "/about";
 	private static final String PORTFOLIO = "/portfolio";
 	private static final String CONTACT = "/contact";
@@ -77,7 +81,10 @@ public class AuthenticationFilter implements Filter {
 					uri.endsWith(MANAGE_DRONE) || 
 					uri.endsWith(ADD_DRONE) || 
 					uri.endsWith(ADMIN_ORDER) || 
-					uri.endsWith(HOME) || 
+					uri.endsWith(HOME) ||
+					uri.endsWith(CATEGORY) ||
+					uri.endsWith(ADDCATEGORY) ||
+					uri.endsWith(EDITCATEGORY) ||
 					uri.endsWith(ROOT)) {
 				
 				chain.doFilter(request, response);
