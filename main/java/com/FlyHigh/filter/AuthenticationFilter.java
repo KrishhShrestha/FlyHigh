@@ -34,7 +34,8 @@ public class AuthenticationFilter implements Filter {
 	private static final String EDITCATEGORY = "/editcategory";
 	
 	private static final String ABOUT = "/about";
-	private static final String PORTFOLIO = "/portfolio";
+	private static final String PORTFOLIO = "/userprofile";
+	private static final String EDITPROFILE = "/edituserprofile";
 	private static final String CONTACT = "/contact";
 	private static final String CART = "/cart";
 	private static final String ORDER_LIST = "/orderlist";
@@ -107,6 +108,8 @@ public class AuthenticationFilter implements Filter {
 					uri.endsWith(CONTACT) || 
 					uri.endsWith(CART) ||
 					uri.endsWith(ORDER_LIST) || 
+					uri.endsWith(ABOUT) ||
+					uri.endsWith(EDITPROFILE) ||
 					uri.endsWith(CART_LIST)) {
 				chain.doFilter(request, response);
 			} else if (uri.endsWith(DASHBOARD) || uri.endsWith(MANAGE_DRONE) || uri.endsWith(ADD_DRONE)

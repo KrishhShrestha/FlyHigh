@@ -41,7 +41,7 @@
       	</c:when>
       	<c:otherwise>
       	  <li> <a href="${contextPath}/cart"> <i class="fa-solid fa-cart-shopping"></i> Cart</a> </li>
-      	  <li> <a href="${contextPath}/profile"><i class="fa-solid fa-user"></i> Account</a> </li>
+      	  <li> <a href="${contextPath}/userprofile"><i class="fa-solid fa-user"></i> Account</a> </li>
       
 			<li>
 			  <form action="${contextPath}/logout" method="post" style="display: inline;">
