@@ -27,7 +27,8 @@ public class AuthenticationFilter implements Filter {
 	private static final String MANAGE_DRONE = "/droneManage";
 	private static final String ADD_DRONE = "/addDrone";
 	
-	private static final String ADMIN_ORDER = "/adminOrder";
+	private static final String ADMIN_ORDER = "/droneDetails";
+	
 	private static final String ABOUT = "/about";
 	private static final String PORTFOLIO = "/portfolio";
 	private static final String CONTACT = "/contact";
