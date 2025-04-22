@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class DashboardController
  */
-@WebServlet("/DashboardController")
+@WebServlet("/dashboard")
 public class DashboardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

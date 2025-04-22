@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class DroneDetailsController
  */
-@WebServlet({ "/DroneDetailsController", "/DroneDetails" })
+@WebServlet({ "/droneDetails" })
 public class DroneDetailsController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

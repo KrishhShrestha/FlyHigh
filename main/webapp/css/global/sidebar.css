@@ -1,0 +1,94 @@
+@charset "UTF-8";
+
+
+.add_drone_page_main {
+  display: grid;
+  grid-template-columns: 2fr 11fr;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.add_drone_page_main .sidebar-sa {
+  background-color: rgb(229 231 235);
+  padding: 1rem;
+  position: relative;
+}
+
+.sidebar-sa ul {
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar-sa ul li a {
+  display: block;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+
+  border-radius: 0.5rem;
+
+  width: 100%;
+
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  color: rgb(64 64 64);
+
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.sidebar-sa .bottom-bar {
+  position: absolute;
+  width: 100%;
+
+  bottom: 0;
+  left: 0px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  justify-content: center;
+}
+
+.sidebar-sa .bottom-bar button {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  padding-left: 0px;
+  padding-right: 0px;
+
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-sa ul li:hover a {
+  background-color: rgb(212 212 212);
+  color: var(--color-primary);
+}
+
+.sidebar-sa .logo_sidebar {
+  display: block;
+  width: 65%;
+  margin-bottom: 2rem;
+}
+
+.sidebar-sa img {
+  mix-blend-mode: multiply;
+}
+
+.add-drone-page {
+  padding: 1rem;
+  background-color: rgb(243 244 246);
+  overflow-y: scroll;
+}
