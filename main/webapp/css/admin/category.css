@@ -1,0 +1,134 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap");
+
+* {
+  font-family: Poppins;
+}
+
+.container {
+  background-color: rgb(240, 240, 240);
+  max-width: 60%;
+  padding: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  margin: 80px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.heading {
+  font-size: 3rem;
+  font-weight: bold;
+}
+.category {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+.subheading {
+  background-color: rgb(255, 255, 255);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.subheading input {
+  width: 25rem;
+  background-color: rgb(240, 240, 240);
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: none;
+}
+
+.addbtn {
+  font-weight: 500;
+  padding: 1rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: #02a602;
+  color: white;
+}
+
+.info {
+  background-color: rgb(255, 255, 255);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #dedede;
+  text-align: center;
+  padding: 1rem;
+  color: rgb(0, 0, 0);
+
+  font-weight: 450;
+}
+
+td {
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 1px solid rgb(95, 93, 93, 0.1);
+}
+
+.editbtn {
+  padding: 4px 9px;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: rgb(241, 241, 125);
+}
+
+.delbtn {
+  padding: 4px 9px;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: rgb(237, 92, 92);
+}
+.editbtn:hover {
+  background-color: rgb(230, 230, 36);
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+  transition: all 0.2s ease;
+}
+
+.delbtn:hover {
+  background-color: rgb(216, 48, 48);
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+  transition: all 0.2s ease;
+}
+
+.addbtn:hover {
+  background-color: #04be04;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+  transition: all 0.2s ease;
+  color: white;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.crudcontainer {
+  background-color: rgb(240, 240, 240);
+  max-width: 30%;
+  padding: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  margin: 80px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
