@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2025 at 10:11 PM
+-- Generation Time: Apr 27, 2025 at 10:05 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -88,14 +88,22 @@ CREATE TABLE `user` (
   `User_id` int(11) NOT NULL,
   `User_name` varchar(50) NOT NULL,
   `User_phone` varchar(15) NOT NULL,
-  `Gender` varchar(20) NOT NULL,
+  `Gender` enum('male','female','other') NOT NULL,
   `User_DOB` date NOT NULL,
   `User_email` varchar(50) NOT NULL,
-  `User_password` varchar(15) NOT NULL,
+  `User_password` text NOT NULL,
   `User_address` varchar(50) NOT NULL,
-  `Role_Name` varchar(10) NOT NULL,
+  `Role_Name` enum('admin','customer') NOT NULL,
   `User_image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`User_id`, `User_name`, `User_phone`, `Gender`, `User_DOB`, `User_email`, `User_password`, `User_address`, `Role_Name`, `User_image`) VALUES
+(3, 'Aakrist', '9800000000', 'male', '2025-04-08', 'a@Thapa.com', 'XFsZmFliwIrZhKR470fWP8kjglftVkDGU/T+cvAoNT9u9NziANLwH1b1V6RleaCBbseA1A==', 'kamalpokhar', 'admin', ''),
+(4, 'Ram', '9855555554', 'male', '2025-04-03', 'fly@high.com', 'gOoHjwKAGKhNQ6f/OBG3VpMux7Ybhh3NJrMeZIdgZrZmEAt63ESqcTzsa+gJU+40o/PNHQ==', 'kammal', 'customer', '');
 
 -- --------------------------------------------------------
 
@@ -117,7 +125,6 @@ CREATE TABLE `user_drone_cart_item` (
 
 CREATE TABLE `user_drone_order` (
   `User_id` int(11) NOT NULL,
-  `Category_id` int(11) NOT NULL,
   `Drone_id` int(11) NOT NULL,
   `Order_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -174,7 +181,6 @@ ALTER TABLE `user_drone_cart_item`
 --
 ALTER TABLE `user_drone_order`
   ADD KEY `user_user_category_drone_order_fk` (`User_id`),
-  ADD KEY `category_user_category_drone_order_fk` (`Category_id`),
   ADD KEY `drone_user_category_drone_order_fk` (`Drone_id`),
   ADD KEY `order_user_category_drone_order_fk` (`Order_id`);
 
@@ -210,7 +216,7 @@ ALTER TABLE `order_table`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `User_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `User_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -234,7 +240,6 @@ ALTER TABLE `user_drone_cart_item`
 -- Constraints for table `user_drone_order`
 --
 ALTER TABLE `user_drone_order`
-  ADD CONSTRAINT `category_user_category_drone_order_fk` FOREIGN KEY (`Category_id`) REFERENCES `category` (`Category_id`),
   ADD CONSTRAINT `drone_user_category_drone_order_fk` FOREIGN KEY (`Drone_id`) REFERENCES `drone` (`Drone_id`),
   ADD CONSTRAINT `order_user_category_drone_order_fk` FOREIGN KEY (`Order_id`) REFERENCES `order_table` (`Order_id`),
   ADD CONSTRAINT `user_user_category_drone_order_fk` FOREIGN KEY (`User_id`) REFERENCES `user` (`User_id`);
