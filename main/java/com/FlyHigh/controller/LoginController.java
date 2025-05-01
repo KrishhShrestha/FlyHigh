@@ -1,6 +1,9 @@
 package com.FlyHigh.controller;
 
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import com.FlyHigh.model.UserModel;
 import com.FlyHigh.service.LoginService;
@@ -66,13 +69,16 @@ public class LoginController extends HttpServlet {
 
 		UserModel userModel = new UserModel(email, password);
 		
+		String UserRole = loginService.getUserRole(userModel);
+		userModel.setRole(UserRole);
+		
 		Boolean loginStatus = loginService.loginUser(userModel);
-
+		
 
 		if (loginStatus != null && loginStatus) {
 			SessionUtil.setAttribute(req, "email", email);
 			
-			if (email.equals("fly@high.com")) {
+			if (userModel.getRole().equals("admin")) {
 				CookieUtil.addCookie(resp, "role", "admin", 5 * 30);
 				resp.sendRedirect(req.getContextPath() + "/dashboard");
 			} else {
@@ -83,6 +89,8 @@ public class LoginController extends HttpServlet {
 			handleLoginFailure(req, resp, loginStatus);
 		}
 	}
+	
+	
 
 	/**
 	 * Handles login failures by setting attributes and forwarding to the login

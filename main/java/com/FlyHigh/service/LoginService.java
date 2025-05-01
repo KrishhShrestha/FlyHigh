@@ -53,6 +53,7 @@ public class LoginService {
 			ResultSet result = stmt.executeQuery();
 			
 			if (result.next()) {
+				
 				return validatePassword(result, UserModel);
 			}
 			
@@ -64,6 +65,33 @@ public class LoginService {
 		return false;
 	}
 
+	
+	
+	public String getUserRole(UserModel UserModel) {
+		String query = "SELECT `Role_Name` FROM `user` WHERE `User_email` = ?";
+		
+		try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
+			stmt.setString(1, UserModel.getEmail());
+			
+			
+			ResultSet result = stmt.executeQuery();
+			
+			if (result.next()) {
+				String Role_Name = result.getString("Role_Name");
+				
+				return Role_Name;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+		// Returning as customer if no role found
+		return "customer";
+		
+	}
+	
 	/**
 	 * Validates the password retrieved from the database.
 	 *
