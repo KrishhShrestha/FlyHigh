@@ -155,7 +155,11 @@ public class RegisterController extends HttpServlet {
     
 		try {
 			Part image = request.getPart("image");
-			
+		    
+			if (image == null || ValidationUtil.isNullOrEmpty(image.getSubmittedFileName())) {
+		        return "Drone image is required.";
+		    }
+		    
 			if (!ValidationUtil.isValidImageExtension(image)) 
 				return "Invalid image format. Only jpg, jpeg, png, and gif are allowed.";
 			

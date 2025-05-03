@@ -55,7 +55,7 @@
     		String error = (String) request.getAttribute("errorMessage");
     		if (error != null) {
 			%>
-    		<div style="color: red; margin-bottom: 10px;"><%= error %></div>
+    		<div class="toast error"><i class="fa-solid fa-xmark"></i> <%= error %></div>
 			<%
     		}
 			%>

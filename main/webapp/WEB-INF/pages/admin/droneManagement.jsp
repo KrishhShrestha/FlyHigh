@@ -1,3 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +19,7 @@
         <div class="card">
             <div class="button-container">
                 <a href="#" class="btn btn-delete">Delete</a>
-                <a href="#addDroneModal" class="btn btn-add">Add Drone</a>
+                <a href="${contextPath}/addDrone" class="btn btn-add">Add Drone</a>
             </div>
         </div>
         
@@ -157,76 +161,6 @@
     </div>
 
     <!-- Add Drone Modal using CSS-only approach with :target pseudo-class -->
-    <div id="addDroneModal" class="modal">
-        <div class="modal-content">
-            <a href="#" class="close">&times;</a>
-            <h2>Add New Drone</h2>
-            <form action="index.html" method="get">
-                <!-- Basic drone information -->
-                <div class="form-group">
-                    <label for="droneId">Drone ID</label>
-                    <input type="text" id="droneId" name="droneId" required>
-                </div>
-                <div class="form-group">
-                    <label for="droneName">Product Name</label>
-                    <input type="text" id="droneName" name="droneName" required>
-                </div>
-                <div class="form-group">
-                    <label for="droneDescription">Description</label>
-                    <textarea id="droneDescription" name="droneDescription" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="category">Category</label>
-                    <select id="category" name="category" required>
-                        <option value="">Select Category</option>
-                        <option value="Commercial">Commercial</option>
-                        <option value="Photography">Photography</option>
-                        <option value="Racing">Racing</option>
-                        <option value="Delivery">Delivery</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="price">Price ($)</label>
-                    <input type="number" id="price" name="price" min="0" step="0.01" required>
-                </div>
-                <div class="form-group">
-                    <label for="stock">Stock</label>
-                    <input type="number" id="stock" name="stock" min="0" required>
-                </div>
-                
-                <!-- Additional drone specifications -->
-                <div class="form-group">
-                    <label for="dimension">Dimensions (L譝譎 inches)</label>
-                    <input type="text" id="dimension" name="dimension" placeholder="e.g., 12󭅈">
-                </div>
-                <div class="form-group">
-                    <label for="weight">Weight (g)</label>
-                    <input type="number" id="weight" name="weight" min="0">
-                </div>
-                <div class="form-group">
-                    <label for="range">Range (km)</label>
-                    <input type="number" id="range" name="range" min="0" step="0.1">
-                </div>
-                <div class="form-group">
-                    <label for="flightTime">Flight Time (minutes)</label>
-                    <input type="number" id="flightTime" name="flightTime" min="0">
-                </div>
-                <div class="form-group">
-                    <label for="cameraQuality">Camera Quality</label>
-                    <input type="text" id="cameraQuality" name="cameraQuality" placeholder="e.g., 4K Ultra HD">
-                </div>
-                <div class="form-group">
-                    <label for="droneImage">Drone Image URL</label>
-                    <input type="url" id="droneImage" name="droneImage" placeholder="https://example.com/image.jpg">
-                </div>
-                
-                <!-- Form action buttons -->
-                <div class="form-actions">
-                    <a href="#" class="btn btn-reset">Cancel</a>
-                    <button type="submit" class="btn btn-add">Add Drone</button>
-                </div>
-            </form>
-        </div>
-    </div>
+
 </body>
 </html>

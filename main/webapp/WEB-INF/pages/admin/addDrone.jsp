@@ -46,23 +46,31 @@
       
       <main class="add-drone-page">
         <h2>Create a Drone</h2>
-        <form action="" class="form-wrapper">
+      
+      	   <%
+    		String error = (String) request.getAttribute("errorMessage");
+    		if (error != null) {
+			%>
+    		<div class="toast error"> <i class="fa-solid fa-xmark"></i> <%= error %></div>
+			<%
+    		}
+			%>
+        <form action="${pageContext.request.contextPath}/drone_add" method="post" enctype="multipart/form-data" class="form-wrapper">
           <section class="section-wrapper">
             <h3>Basic Information</h3>
             <div class="form-section">
               <div class="input-div">
-                <label for="name">Name</label>
+                <label for="drone_name">Name</label>
                 <input
                   type="text"
-                  id="name"
-                  name="name"
+                  id="drone_name"
+                  name="drone_name"
                   placeholder="DJI Mavic Air"
                 />
               </div>
               <div class="input-div">
                 <label for="description">Description</label>
                 <textarea
-                  type="text"
                   id="description"
                   name="description"
                   placeholder="Compact and powerful drone..."
@@ -81,9 +89,9 @@
                 <label for="category">Category</label>
                 <select id="category" name="category">
                   <option value="">Select a category</option>
-                  <option value="photography">Photography</option>
-                  <option value="racing">Racing</option>
-                  <option value="toy">Toy</option>
+                  <option value="1">Photography</option>
+                  <option value="2">Racing</option>
+                  <option value="3">Toy</option>
                 </select>
               </div>
             </div>
@@ -151,6 +159,8 @@
 
             <p class="subtitle_text">Supported: .jpg images. max 2MB</p>
           </section>
+          
+       
 
           <section class="submit-section">
             <button type="reset" class="btn btn-delete">
