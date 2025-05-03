@@ -2,6 +2,7 @@ package com.FlyHigh.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 import jakarta.servlet.http.Part;
 
@@ -28,33 +29,36 @@ public class ImageUtil {
 	 * @return the extracted file name. If no filename is found, returns a default
 	 *         name "download.png".
 	 */
-	public static String getImageNameFromPart(Part part) {
-		// Retrieve the content-disposition header from the part
-		String contentDisp = part.getHeader("content-disposition");
-
-		// Split the header by semicolons to isolate key-value pairs
-		String[] items = contentDisp.split(";");
-
-		// Initialize imageName variable to store the extracted file name
-		String imageName = null;
-
-		// Iterate through the items to find the filename
-		for (String s : items) {
-			if (s.trim().startsWith("filename")) {
-				// Extract the file name from the header value
-				imageName = s.substring(s.indexOf("=") + 2, s.length() - 1);
-			}
+		public static String getImageNameFromPart(Part part) {
+		    String contentDisp = part.getHeader("content-disposition");
+		    String[] items = contentDisp.split(";");
+		    String imageName = null;
+	
+		    for (String s : items) {
+		        if (s.trim().startsWith("filename")) {
+		            imageName = s.substring(s.indexOf("=") + 2, s.length() - 1);
+		        }
+		    }
+	
+		    if (imageName == null || imageName.isEmpty()) {
+		        imageName = "download.png";
+		    }
+	
+		    // Generate random 8-character hex
+		    String randomHex = UUID.randomUUID().toString().replace("-", "").substring(0, 8);
+	
+		    // Insert random hex before the file extension
+		    int dotIndex = imageName.lastIndexOf('.');
+		    if (dotIndex > 0) {
+		        String name = imageName.substring(0, dotIndex);
+		        String extension = imageName.substring(dotIndex);
+		        imageName = name + "_" + randomHex + extension;
+		    } else {
+		        imageName = imageName + "_" + randomHex;
+		    }
+	
+		    return imageName;
 		}
-
-		// Check if the filename was not found or is empty
-		if (imageName == null || imageName.isEmpty()) {
-			// Assign a default file name if none was provided
-			imageName = "download.png";
-		}
-
-		// Return the extracted or default file name
-		return imageName;
-	}
 
 	/**
 	 * Uploads the image file from the given {@link Part} object to a specified
@@ -71,7 +75,7 @@ public class ImageUtil {
 	 * @return {@code true} if the file was successfully uploaded, {@code false}
 	 *         otherwise.
 	 */
-	public boolean uploadImage(Part part, String rootPath, String saveFolder) {
+	public static boolean uploadImage(Part part, String rootPath, String saveFolder) {
 		String savePath = getSavePath(saveFolder);
 		File fileSaveDir = new File(savePath);
 
@@ -95,7 +99,7 @@ public class ImageUtil {
 		}
 	}
 	
-	public String getSavePath(String saveFolder) {
-		return "C:\\Users\\nowal\\OneDrive\\Documents/"+saveFolder+"/";
+	public static String getSavePath(String saveFolder) {
+		return "C:\\FlyHigh/"+saveFolder+"/";
 	}
 }

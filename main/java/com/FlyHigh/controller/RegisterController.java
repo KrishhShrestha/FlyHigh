@@ -1,6 +1,7 @@
 package com.FlyHigh.controller;
 
 import jakarta.servlet.ServletException;
+
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,8 +12,10 @@ import java.io.IOException;
 
 import com.FlyHigh.model.UserModel;
 import com.FlyHigh.service.RegisterService;
+import com.FlyHigh.util.ImageUtil;
 import com.FlyHigh.util.PasswordUtil;
 import com.FlyHigh.util.ValidationUtil;
+import jakarta.servlet.http.Part;
 
 @WebServlet(asyncSupported = true, urlPatterns = { "/register" })
 @MultipartConfig(
@@ -38,7 +41,6 @@ public class RegisterController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
-    	
         String errorMessage = validateRegistrationForm(request);
 
         if (errorMessage != null) {
@@ -59,17 +61,22 @@ public class RegisterController extends HttpServlet {
         String password = request.getParameter("password");
         String confirmpassword = request.getParameter("confirm-password");
 
-        System.out.println(firstname);
-        System.out.println(lastname);
-        System.out.println(phone);
-        System.out.println(gender);
-        System.out.println(dob);
-        System.out.println(email);
-        System.out.println(address);
-        System.out.println(password);
-        System.out.println(confirmpassword);
+//        System.out.println(firstname);
+//        System.out.println(lastname);
+//        System.out.println(phone);
+//        System.out.println(gender);
+//        System.out.println(dob);
+//        System.out.println(email);
+//        System.out.println(address);
+//        System.out.println(password);
+//        System.out.println(confirmpassword);
         
         password = PasswordUtil.encrypt(email, password);
+        
+        
+        Part image = request.getPart("image");
+		String imageUrl = ImageUtil.getImageNameFromPart(image);
+        
         
         // Create model and persist user
         UserModel userModel = new UserModel(
@@ -81,16 +88,31 @@ public class RegisterController extends HttpServlet {
             email,
             address,
             password,
-            confirmpassword
+            imageUrl
         );
-
+        
+        
         RegisterService registerService = new RegisterService();
-        registerService.addUser(userModel);
-
-        response.sendRedirect(request.getContextPath() + "/login");
+        
+        Boolean ImageUpload = uploadImage(request);
+        
+        if(ImageUpload) {
+        	registerService.addUser(userModel);
+        	System.out.println("User Created");
+        	
+        	response.sendRedirect(request.getContextPath() + "/login");
+        }else {
+        	System.out.println("Failed Adding Image");
+        }
+        
     }
+    
+	private boolean uploadImage(HttpServletRequest req) throws IOException, ServletException {
+		Part image = req.getPart("image");
+		return ImageUtil.uploadImage(image, req.getServletContext().getRealPath("/"), "user_profile");
+	}
 
-    // ✅ Moved outside doPost
+    
     private String validateRegistrationForm(HttpServletRequest request) {
         String firstname = request.getParameter("first_name");
         String lastname = request.getParameter("last_name");
@@ -120,7 +142,6 @@ public class RegisterController extends HttpServlet {
             return "Password is required.";
         if (ValidationUtil.isNullOrEmpty(confirmpassword))
             return "Please confirm your password.";
-
         if (!ValidationUtil.isValidPhoneNumber(phone))
             return "Phone number must be 10 digits and start with 98.";
         if (!ValidationUtil.isValidGender(gender))
@@ -131,7 +152,17 @@ public class RegisterController extends HttpServlet {
             return "Password must be at least 8 characters long, with 1 uppercase letter, 1 number, and 1 symbol.";
         if (!ValidationUtil.doPasswordsMatch(password, confirmpassword))
             return "Passwords do not match.";
-
-        return null; // All validations passed
+    
+		try {
+			Part image = request.getPart("image");
+			
+			if (!ValidationUtil.isValidImageExtension(image)) 
+				return "Invalid image format. Only jpg, jpeg, png, and gif are allowed.";
+			
+		} catch (IOException | ServletException e) {
+			return "Error handling image file. Please ensure the file is valid.";
+		}
+        
+        return null; 
     }
 }
