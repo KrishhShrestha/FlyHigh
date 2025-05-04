@@ -1,0 +1,294 @@
+@charset "UTF-8";
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header Styles */
+.header-container {
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    background-color: #8a2be2; /* Purple color from your design */
+    color: white;
+    font-size: 12px;
+}
+
+.auth-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background-color: white;
+}
+
+.logo img {
+    height: 40px;
+}
+
+.search-bar {
+    display: flex;
+    flex: 1;
+    max-width: 500px;
+    margin: 0 20px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+}
+
+.search-button {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-left: none;
+    padding: 0 15px;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+.monthly-deals, .my-account {
+    display: flex;
+    align-items: center;
+    margin: 0 15px;
+}
+
+.monthly-deals i, .my-account i {
+    color: #ff4500; /* Red color for icons */
+    font-size: 20px;
+    margin-right: 8px;
+}
+
+.cart-button {
+    background-color: #ff4500; /* Red button */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn {
+    background-color: #ff4500;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.page-title {
+    font-size: 28px;
+    margin: 20px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.page-description {
+    margin-bottom: 30px;
+    color: #555;
+    line-height: 1.5;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+    gap: 15px;
+}
+
+.filter-box {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    flex: 1;
+    min-width: 200px;
+}
+
+.filter-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.filter-options {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-option {
+    margin: 5px 0;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 20px;
+}
+
+.product-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-image {
+    height: 200px;
+    width: 100%;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-image img {
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.product-details {
+    padding: 15px;
+}
+
+.product-category {
+    color: #888;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.product-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.product-specs {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.product-price {
+    font-size: 18px;
+    color: #000000;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.product-rating {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.stars {
+    color: #ffcc00;
+    margin-right: 5px;
+}
+
+.add-to-cart {
+    background-color: #ff4500;
+    color: white;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.add-to-cart:hover {
+    background-color: #e63e00;
+}
+
+.service-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.service-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 250px;
+    margin: 15px;
+}
+
+.service-icon {
+    font-size: 40px;
+    color: #ff3a5c;
+    margin-bottom: 15px;
+}
+
+.service-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.service-description {
+    font-size: 14px;
+    color: #777;
+    line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+    .service-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .service-item {
+        width: 100%;
+        max-width: 300px;
+        margin-bottom: 30px;
+    }
+}
