@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2025 at 10:28 PM
+-- Generation Time: May 04, 2025 at 05:27 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -56,6 +56,7 @@ CREATE TABLE `drone` (
   `Drone_name` varchar(255) NOT NULL,
   `Drone_description` varchar(255) NOT NULL,
   `Drone_price` double NOT NULL,
+  `Drone_quantity` int(10) NOT NULL,
   `Weight_grams` float DEFAULT NULL,
   `Flight_time_minutes` float DEFAULT NULL,
   `Range_meter` float DEFAULT NULL,
