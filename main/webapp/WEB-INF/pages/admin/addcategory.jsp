@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Add Category</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/category.css" />
+
 <script src="https://kit.fontawesome.com/385a42cb55.js"></script>
 </head>
 <body>
@@ -15,7 +16,7 @@
           <p>Add New Category</p>
         </div>
 
-        <form action="/add-category" method="post" class="category">
+        <form action="${pageContext.request.contextPath}/addcategory" method="post" class="category">
           <div
             class="subheading"
             style="flex-direction: column; align-items: flex-start; gap: 1.5rem"
