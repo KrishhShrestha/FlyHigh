@@ -160,6 +160,25 @@
             <p class="subtitle_text">Supported: .jpg images. max 2MB</p>
           </section>
           
+          
+          <section class="section-wrapper image-section">
+            <h3>Additional Information</h3>
+
+            <div class="form-section">
+              <div class="input-div">
+                <label for="quantity">Quantity</label>
+                <input
+                  type="number"
+                  id="quantity"
+                  name="quantity"
+                  placeholder="52"
+                />
+              </div>
+            </div>
+
+            <p class="subtitle_text">Supported: .jpg images. max 2MB</p>
+          </section>
+          
        
 
           <section class="submit-section">

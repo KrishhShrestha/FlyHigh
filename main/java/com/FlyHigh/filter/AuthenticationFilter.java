@@ -134,7 +134,6 @@
 //		// Cleanup logic, if required
 //	}
 //}
-
 package com.FlyHigh.filter;
 
 import jakarta.servlet.Filter;
@@ -165,7 +164,7 @@ public class AuthenticationFilter implements Filter {
 
 	// Admin paths
 	private static final Set<String> ADMIN_PATHS = Set.of(
-		DASHBOARD, "/manage-drone", "/add-drone", "/drone-details", 
+		DASHBOARD, "/manage-drone", "/add-drone", "/droneDetails", 
 		HOME, "/category", "/addcategory", "/editcategory", ROOT, "/userprofileadmin"
 	);
 
@@ -176,8 +175,9 @@ public class AuthenticationFilter implements Filter {
 	);
 
 	// Public access paths
-			rivate static final Set<String> PUBLIC_PATHS = Set.of(LOGIN, REGISTER
-			@Override
+	private static final Set<String> PUBLIC_PATHS = Set.of(LOGIN, REGISTER, HOME, ROOT);
+
+	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		// Initialization logic, if needed
 	}
@@ -209,7 +209,7 @@ public class AuthenticationFilter implements Filter {
 				? CookieUtil.getCookie(req, "role").getValue()
 				: null;
 
-
+		if ("admin".equals(userRole)) {
 			if (uri.equals(LOGIN) || uri.equals(REGISTER)) {
 				res.sendRedirect(req.getContextPath() + DASHBOARD);
 			} else if (ADMIN_PATHS.contains(uri)) {
