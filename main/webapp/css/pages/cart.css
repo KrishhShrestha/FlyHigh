@@ -84,10 +84,7 @@ td a {
   color: rgb(230, 66, 66);
   font-weight: 500;
 }
-.btn {
-  display: flex;
-  justify-content: end;
-}
+
 
 .paybtn {
   width: 18.5rem;
