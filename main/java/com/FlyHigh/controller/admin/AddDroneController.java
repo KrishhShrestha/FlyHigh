@@ -21,7 +21,7 @@ import com.FlyHigh.util.ValidationUtil;
 /**
  * Servlet implementation class AddDroneController
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/drone_add" })
+@WebServlet(asyncSupported = true, urlPatterns = { "/add-drone" })
 @MultipartConfig(
     fileSizeThreshold = 1024 * 1024 * 2,  // 2MB
     maxFileSize = 1024 * 1024 * 10,       // 10MB
@@ -67,32 +67,22 @@ public class AddDroneController extends HttpServlet {
 		String name = request.getParameter("drone_name");
 		String description = request.getParameter("description");
 		float price = Float.parseFloat(request.getParameter("price"));
-		
-		int category = Integer.parseInt(request.getParameter("category"));
-		
+		int category = Integer.parseInt(request.getParameter("category"));		
 		float weight = Float.parseFloat(request.getParameter("weight"));
 		float flightTime = Float.parseFloat(request.getParameter("flight_time"));
 		float rangeStr = Float.parseFloat(request.getParameter("range"));
 		String cameraQuality = request.getParameter("camera_quality");
 		String dimension = request.getParameter("dimension");
+		int quantity = Integer.parseInt(request.getParameter("quantity"));
+
 		
 		Part image = request.getPart("image");
 		String imageUrl = ImageUtil.getImageNameFromPart(image);
+		String formattedImageUrl = ImageUtil.formatImageUrl(imageUrl);
 		
-		System.out.println("Name: " + name);
-		System.out.println("Description: " + description);
-		System.out.println("Price: " + price);
-		System.out.println("Category: " + category);
-		System.out.println("Weight: " + weight);
-		System.out.println("Flight Time: " + flightTime);
-		System.out.println("Range: " + rangeStr);
-		System.out.println("Camera Quality: " + cameraQuality);
-		System.out.println("Dimension: " + dimension);
-		System.out.println("ImageUrl" + imageUrl);
-		
-		
+
+		// create models
 		CategoryModel categoryModel = new CategoryModel(category);
-		
 		DroneModel droneModel = new DroneModel(
 			    name,
 			    description,
@@ -103,13 +93,17 @@ public class AddDroneController extends HttpServlet {
 			    rangeStr,
 			    cameraQuality,
 			    dimension,
-			    imageUrl
+			    formattedImageUrl,
+			    quantity
 			);
+
 		
+		// initalize service
 		DroneService droneService = new DroneService();
 		
-		
-		Boolean ImageUpload = uploadImage(request);
+	
+		// image upload
+		Boolean ImageUpload = ImageUtil.uploadImage(image, formattedImageUrl, request.getServletContext().getRealPath("/"), "product");
 		
         if(ImageUpload) {
         	droneService.addDrone(droneModel);
@@ -123,11 +117,6 @@ public class AddDroneController extends HttpServlet {
 		
 	}
 	
-	
-	private boolean uploadImage(HttpServletRequest req) throws IOException, ServletException {
-		Part image = req.getPart("image");
-		return ImageUtil.uploadImage(image, req.getServletContext().getRealPath("/"), "product");
-	}
 
 	public String validateFields(HttpServletRequest request) {
 	    String name = request.getParameter("drone_name");
@@ -216,6 +205,21 @@ public class AddDroneController extends HttpServlet {
 	    // Validate dimension
 	    if (ValidationUtil.isNullOrEmpty(dimension))
 	        return "Dimension is required.";
+	    
+	    
+	    String quantityStr = request.getParameter("quantity");
+	    if (ValidationUtil.isNullOrEmpty(quantityStr))
+	        return "Quantity is required.";
+
+	    int quantity;
+	    try {
+	        quantity = Integer.parseInt(quantityStr);
+	        if (quantity < 0)
+	            return "Quantity must be zero or a positive number.";
+	    } catch (NumberFormatException e) {
+	        return "Quantity must be a valid number.";
+	    }
+
 
 	    // Validate image
 	    try {

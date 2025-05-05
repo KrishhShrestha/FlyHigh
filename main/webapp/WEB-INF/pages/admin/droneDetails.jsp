@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,16 +12,14 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/droneDetails.css" />
 </head>
 <body>
-    <!-- ===== START OF PRODUCT DETAIL PAGE ===== -->
-    <div class="container fade-in">
-        <h1>Drone Details</h1>
+	<jsp:include page="sidebar.jsp" />
+   
+   
+    <div style='margin-left: 15vw'  class="">
+        <h1 style='margin-bottom: 1rem;'>Drone Details</h1>
         
-        <!-- Navigation and action buttons -->
-        <div class="card">
-            <a href="drone-management.html" class="btn btn-back">← Back to Drones</a>
-            <a href="#editDroneModal" class="btn btn-edit">Edit Drone</a>
-        </div>
-        
+
+
         <!-- Product detail container -->
         <div class="card">
             <div class="product-detail">

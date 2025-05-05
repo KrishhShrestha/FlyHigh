@@ -58,24 +58,15 @@ public class RegisterController extends HttpServlet {
         String dob = request.getParameter("dob");
         String email = request.getParameter("email");
         String address = request.getParameter("address");
-        String password = request.getParameter("password");
-        String confirmpassword = request.getParameter("confirm-password");
-
-//        System.out.println(firstname);
-//        System.out.println(lastname);
-//        System.out.println(phone);
-//        System.out.println(gender);
-//        System.out.println(dob);
-//        System.out.println(email);
-//        System.out.println(address);
-//        System.out.println(password);
-//        System.out.println(confirmpassword);
         
+        
+        String password = request.getParameter("password");       
         password = PasswordUtil.encrypt(email, password);
         
         
-        Part image = request.getPart("image");
+		Part image = request.getPart("image");
 		String imageUrl = ImageUtil.getImageNameFromPart(image);
+		String formattedImageUrl = ImageUtil.formatImageUrl(imageUrl);
         
         
         // Create model and persist user
@@ -88,13 +79,13 @@ public class RegisterController extends HttpServlet {
             email,
             address,
             password,
-            imageUrl
+            formattedImageUrl
         );
         
         
         RegisterService registerService = new RegisterService();
         
-        Boolean ImageUpload = uploadImage(request);
+        Boolean ImageUpload = ImageUtil.uploadImage(image, formattedImageUrl, request.getServletContext().getRealPath("/"), "user_profile");
         
         if(ImageUpload) {
         	registerService.addUser(userModel);
@@ -107,11 +98,6 @@ public class RegisterController extends HttpServlet {
         
     }
     
-	private boolean uploadImage(HttpServletRequest req) throws IOException, ServletException {
-		Part image = req.getPart("image");
-		return ImageUtil.uploadImage(image, req.getServletContext().getRealPath("/"), "user_profile");
-	}
-
     
     private String validateRegistrationForm(HttpServletRequest request) {
         String firstname = request.getParameter("first_name");

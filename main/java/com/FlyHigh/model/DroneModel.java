@@ -5,8 +5,10 @@ public class DroneModel {
     private String name;
     private String description;
     private float price;
+    private int quantity;
+    
     private CategoryModel category;
-
+    
     private float weight;
     private float flightTime;
     private float range;
@@ -15,25 +17,27 @@ public class DroneModel {
 
     private String imageUrl;
 
-    // Constructors
+
     public DroneModel() {}
 
     public DroneModel(String name, String description, float price, CategoryModel category,
-                   float weight, float flightTime, float range,
-                   String cameraQuality, String dimension, String imageUrl) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.category = category;
-        this.weight = weight;
-        this.flightTime = flightTime;
-        this.range = range;
-        this.cameraQuality = cameraQuality;
-        this.dimension = dimension;
-        this.imageUrl = imageUrl;
-    }
+            float weight, float flightTime, float range,
+            String cameraQuality, String dimension, String imageUrl, int quantity) {
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.category = category;
+		this.weight = weight;
+		this.flightTime = flightTime;
+		this.range = range;
+		this.cameraQuality = cameraQuality;
+		this.dimension = dimension;
+		this.imageUrl = imageUrl;
+		this.quantity = quantity;
+	}
 
-    // Getters and Setters
+
+
     public int getId() {
         return id;
     }
@@ -62,10 +66,16 @@ public class DroneModel {
         this.price = price;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public CategoryModel getCategory() {
         return category;
     }
-    
     public void setCategory(CategoryModel category) {
         this.category = category;
     }

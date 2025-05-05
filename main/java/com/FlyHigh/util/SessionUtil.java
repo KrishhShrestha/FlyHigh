@@ -18,6 +18,7 @@ public class SessionUtil {
      */
     public static void setAttribute(HttpServletRequest request, String key, Object value) {
         HttpSession session = request.getSession();
+        session.setMaxInactiveInterval(60 * 60); // 1 hour - 60 mins * 60 seconds
         session.setAttribute(key, value);
     }
 

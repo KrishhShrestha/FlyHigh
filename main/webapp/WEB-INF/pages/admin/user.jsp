@@ -4,13 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>User Management</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/user.css" />
+
 </head>
 <body>
 
-  
-  
     <!-- Sidebar -->
     <div class="sidebar">
       <div class="sidebar-header">
@@ -23,7 +22,6 @@
         <li class="nav-item"><i>📦</i> Product</li>
         <li class="nav-item active"><i>👥</i> Users</li>
       </ul>
-      
     </div>
 
     <!-- Main Content -->
@@ -51,7 +49,7 @@
               <td>John Doe</td>
               <td><span class="status admin">Admin</span></td>
               <td>
-                <button class="action-btn edit-btn">✏️</button>
+                <button class="action-btn edit-btn" data-id="001" data-name="John Doe" data-role="admin">✏️</button>
                 <button class="action-btn delete-btn">🗑️</button>
               </td>
             </tr>
@@ -60,37 +58,11 @@
               <td>Jane Smith</td>
               <td><span class="status user">User</span></td>
               <td>
-                <button class="action-btn edit-btn">✏️</button>
+                <button class="action-btn edit-btn" data-id="002" data-name="Jane Smith" data-role="user">✏️</button>
                 <button class="action-btn delete-btn">🗑️</button>
               </td>
             </tr>
-            <tr>
-              <td>003</td>
-              <td>Robert Johnson</td>
-              <td><span class="status user">User</span></td>
-              <td>
-                <button class="action-btn edit-btn">✏️</button>
-                <button class="action-btn delete-btn">🗑️</button>
-              </td>
-            </tr>
-            <tr>
-              <td>004</td>
-              <td>Emily Brown</td>
-              <td><span class="status admin">Admin</span></td>
-              <td>
-                <button class="action-btn edit-btn">✏️</button>
-                <button class="action-btn delete-btn">🗑️</button>
-              </td>
-            </tr>
-            <tr>
-              <td>005</td>
-              <td>Michael Wilson</td>
-              <td><span class="status user">User</span></td>
-              <td>
-                <button class="action-btn edit-btn">✏️</button>
-                <button class="action-btn delete-btn">🗑️</button>
-              </td>
-            </tr>
+            <!-- More rows... -->
           </tbody>
         </table>
 
@@ -103,6 +75,101 @@
         </div>
       </div>
     </div>
-  
+    
+    <!-- Edit User Overlay -->
+    <div class="overlay" id="editOverlay">
+      <div class="edit-form">
+        <h2>Edit User</h2>
+        <form id="userEditForm">
+          <div class="form-group">
+            <label for="userId">User ID</label>
+            <input type="text" id="userId" name="userId" readonly>
+          </div>
+          <div class="form-group">
+            <label for="userName">User Name</label>
+            <input type="text" id="userName" name="userName" required>
+          </div>
+          <div class="form-group">
+            <label for="userRole">Role</label>
+            <select id="userRole" name="userRole" required>
+              <option value="admin">Admin</option>
+              <option value="user">User</option>
+            </select>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="cancel-btn" id="cancelEdit">Cancel</button>
+            <button type="submit" class="save-btn">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Get all edit buttons
+        const editButtons = document.querySelectorAll('.edit-btn');
+        const editOverlay = document.getElementById('editOverlay');
+        const cancelEdit = document.getElementById('cancelEdit');
+        const userEditForm = document.getElementById('userEditForm');
+        
+        // Show edit overlay when edit button is clicked
+        editButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            const userId = this.getAttribute('data-id');
+            const userName = this.getAttribute('data-name');
+            const userRole = this.getAttribute('data-role');
+            
+            // Populate the form with user data
+            document.getElementById('userId').value = userId;
+            document.getElementById('userName').value = userName;
+            document.getElementById('userRole').value = userRole;
+            
+            // Show the overlay
+            editOverlay.style.display = 'flex';
+          });
+        });
+        
+        // Hide overlay when cancel button is clicked
+        cancelEdit.addEventListener('click', function() {
+          editOverlay.style.display = 'none';
+        });
+        
+        // Handle form submission
+        userEditForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          // Get form values
+          const userId = document.getElementById('userId').value;
+          const userName = document.getElementById('userName').value;
+          const userRole = document.getElementById('userRole').value;
+          
+          // Here you would typically send this data to the server via AJAX
+          console.log('Updating user:', { userId, userName, userRole });
+          
+          // For demo purposes, we'll just update the table directly
+          const row = document.querySelector(`.edit-btn[data-id="${userId}"]`).closest('tr');
+          row.cells[1].textContent = userName;
+          row.cells[2].innerHTML = `<span class="status ${userRole}">${userRole.charAt(0).toUpperCase() + userRole.slice(1)}</span>`;
+          
+          // Update the data attributes on the edit button
+          const editBtn = row.querySelector('.edit-btn');
+          editBtn.setAttribute('data-name', userName);
+          editBtn.setAttribute('data-role', userRole);
+          
+          // Hide the overlay
+          editOverlay.style.display = 'none';
+          
+          // Show success message (you could add this)
+          alert('User updated successfully!');
+        });
+        
+        // Close overlay when clicking outside the form
+        editOverlay.addEventListener('click', function(e) {
+          if (e.target === editOverlay) {
+            editOverlay.style.display = 'none';
+          }
+        });
+      });
+    </script>
 </body>
 </html>

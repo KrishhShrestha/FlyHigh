@@ -8,10 +8,15 @@
   overflow: hidden;
 }
 
-.add_drone_page_main .sidebar-sa {
-  background-color: rgb(229 231 235);
+
+.sidebar-sa {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 15vw;
+	  background-color: rgb(229 231 235);
   padding: 1rem;
-  position: relative;
 }
 
 .sidebar-sa ul {
@@ -85,6 +90,7 @@
 
 .sidebar-sa img {
   mix-blend-mode: multiply;
+  width: 10vw;
 }
 
 .add-drone-page {

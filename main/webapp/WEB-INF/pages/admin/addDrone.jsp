@@ -55,7 +55,7 @@
 			<%
     		}
 			%>
-        <form action="${pageContext.request.contextPath}/drone_add" method="post" enctype="multipart/form-data" class="form-wrapper">
+        <form action="${pageContext.request.contextPath}/add-drone" method="post" enctype="multipart/form-data" class="form-wrapper">
           <section class="section-wrapper">
             <h3>Basic Information</h3>
             <div class="form-section">
@@ -158,6 +158,23 @@
             </div>
 
             <p class="subtitle_text">Supported: .jpg images. max 2MB</p>
+          </section>
+          
+          
+          <section class="section-wrapper image-section">
+            <h3>Additional Information</h3>
+
+            <div class="form-section">
+              <div class="input-div">
+                <label for="quantity">Quantity/Stock</label>
+                <input
+                  type="number"
+                  id="quantity"
+                  name="quantity"
+                  placeholder="52"
+                />
+              </div>
+            </div>
           </section>
           
        

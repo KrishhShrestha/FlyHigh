@@ -134,8 +134,6 @@
 //		// Cleanup logic, if required
 //	}
 //}
-
-
 package com.FlyHigh.filter;
 
 import jakarta.servlet.Filter;
@@ -166,7 +164,7 @@ public class AuthenticationFilter implements Filter {
 
 	// Admin paths
 	private static final Set<String> ADMIN_PATHS = Set.of(
-		DASHBOARD, "/droneManage", "/drone_add", "/droneDetails", 
+		DASHBOARD, "/manage-drone", "/add-drone", "/drone-details", 
 		HOME, "/category", "/addcategory", "/editcategory", ROOT, "/userprofileadmin"
 	);
 
