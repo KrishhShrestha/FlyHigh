@@ -22,6 +22,7 @@
         </div>
         <div class="banner-controls">
         <img src="mavic-drone.png" alt="DJI Mavic Drone" />
+        </div>
       </section>
 
       <!-- Trending Products Section -->

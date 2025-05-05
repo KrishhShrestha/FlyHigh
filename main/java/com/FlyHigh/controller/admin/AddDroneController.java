@@ -21,7 +21,7 @@ import com.FlyHigh.util.ValidationUtil;
 /**
  * Servlet implementation class AddDroneController
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/drone_add" })
+@WebServlet(asyncSupported = true, urlPatterns = { "/add-drone" })
 @MultipartConfig(
     fileSizeThreshold = 1024 * 1024 * 2,  // 2MB
     maxFileSize = 1024 * 1024 * 10,       // 10MB

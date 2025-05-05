@@ -55,7 +55,7 @@
 			<%
     		}
 			%>
-        <form action="${pageContext.request.contextPath}/drone_add" method="post" enctype="multipart/form-data" class="form-wrapper">
+        <form action="${pageContext.request.contextPath}/add-drone" method="post" enctype="multipart/form-data" class="form-wrapper">
           <section class="section-wrapper">
             <h3>Basic Information</h3>
             <div class="form-section">

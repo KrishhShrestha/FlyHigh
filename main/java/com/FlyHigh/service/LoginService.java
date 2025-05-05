@@ -68,6 +68,11 @@ public class LoginService {
 	
 	
 	public String getUserRole(UserModel UserModel) {
+		if (isConnectionError) {
+			System.out.println("Connection Error!");
+			return null;
+		}
+		
 		String query = "SELECT `Role_Name` FROM `user` WHERE `User_email` = ?";
 		
 		try (PreparedStatement stmt = dbConn.prepareStatement(query)) {

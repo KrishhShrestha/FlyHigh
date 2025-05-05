@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class DroneManagementController
  */
-@WebServlet("/droneManage")
+@WebServlet(asyncSupported = true, urlPatterns = { "/manage-drone" })
 public class DroneManagementController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
