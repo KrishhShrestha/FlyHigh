@@ -167,7 +167,7 @@ public class AuthenticationFilter implements Filter {
 	// Admin paths
 	private static final Set<String> ADMIN_PATHS = Set.of(
 		DASHBOARD, "/droneManage", "/drone_add", "/droneDetails", 
-		HOME, "/category", "/addcategory", "/editcategory", ROOT
+		HOME, "/category", "/addcategory", "/editcategory", ROOT, "/userprofileadmin"
 	);
 
 	// Customer paths
