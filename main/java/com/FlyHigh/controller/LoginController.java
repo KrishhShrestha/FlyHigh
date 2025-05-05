@@ -69,6 +69,7 @@ public class LoginController extends HttpServlet {
 
 		UserModel userModel = new UserModel(email, password);
 		
+		
 		String UserRole = loginService.getUserRole(userModel);
 		userModel.setRole(UserRole);
 		

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2025 at 10:28 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: May 05, 2025 at 11:57 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,7 +42,29 @@ CREATE TABLE `cart_item` (
 
 CREATE TABLE `category` (
   `Category_id` int(11) NOT NULL,
-  `Category_name` varchar(50) NOT NULL
+  `Category_name` varchar(50) NOT NULL,
+  `Description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`Category_id`, `Category_name`, `Description`) VALUES
+(3, 'Speed', 'Top speed= 110 km/hr');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contact`
+--
+
+CREATE TABLE `contact` (
+  `ContactID` int(11) NOT NULL,
+  `fname` varchar(20) NOT NULL,
+  `lname` varchar(20) NOT NULL,
+  `message` text NOT NULL,
+  `UserID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -56,6 +78,7 @@ CREATE TABLE `drone` (
   `Drone_name` varchar(255) NOT NULL,
   `Drone_description` varchar(255) NOT NULL,
   `Drone_price` double NOT NULL,
+  `Drone_quantity` int(10) NOT NULL,
   `Weight_grams` float DEFAULT NULL,
   `Flight_time_minutes` float DEFAULT NULL,
   `Range_meter` float DEFAULT NULL,
@@ -104,7 +127,9 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`User_id`, `User_name`, `User_phone`, `Gender`, `User_DOB`, `User_email`, `User_password`, `User_address`, `Role_Name`, `User_image`) VALUES
 (3, 'Aakrist', '9800000000', 'male', '2025-04-08', 'a@Thapa.com', 'XFsZmFliwIrZhKR470fWP8kjglftVkDGU/T+cvAoNT9u9NziANLwH1b1V6RleaCBbseA1A==', 'kamalpokhar', 'admin', ''),
-(4, 'Ram', '9855555554', 'male', '2025-04-03', 'fly@high.com', 'gOoHjwKAGKhNQ6f/OBG3VpMux7Ybhh3NJrMeZIdgZrZmEAt63ESqcTzsa+gJU+40o/PNHQ==', 'kammal', 'customer', '');
+(4, 'Ram', '9855555554', 'male', '2025-04-03', 'fly@high.com', 'gOoHjwKAGKhNQ6f/OBG3VpMux7Ybhh3NJrMeZIdgZrZmEAt63ESqcTzsa+gJU+40o/PNHQ==', 'kammal', 'customer', ''),
+(5, 'fly', '9818902021', 'male', '2025-05-06', 'flyhigh@gmail.com', '9EhN42ogAVpZ2xQSrUShV4Jeb8yTlFHMCsrooYctPXzRJ0cU865dF+ZR8lRCtTxy6AjpRgHf', 'kamalpokhari', 'admin', 'Screenshot_2025-03-20-17-41-50-542_com.facebook.katana_dd8f1a01.jpg'),
+(6, 'hello', '9818909031', 'male', '2025-05-26', 'hello@gmail.com', 'Jw0HXyVvCQXHyfW1a2fEqDabzZXHulnKOK0afqReC3mm08YsrSnQACCvVYarmHom7dZE6TLZ', 'kamalpokharii', 'customer', 'Screenshot 2024-01-04 195856_39d7b7b9.png');
 
 -- --------------------------------------------------------
 
@@ -136,6 +161,13 @@ ALTER TABLE `cart_item`
 ALTER TABLE `category`
   ADD PRIMARY KEY (`Category_id`),
   ADD UNIQUE KEY `unique_category_name` (`Category_name`);
+
+--
+-- Indexes for table `contact`
+--
+ALTER TABLE `contact`
+  ADD PRIMARY KEY (`ContactID`),
+  ADD KEY `UserID` (`UserID`);
 
 --
 -- Indexes for table `drone`
@@ -174,7 +206,13 @@ ALTER TABLE `user_drone_order`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `Category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `contact`
+--
+ALTER TABLE `contact`
+  MODIFY `ContactID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `drone`
@@ -192,7 +230,7 @@ ALTER TABLE `order_table`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `User_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `User_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
@@ -204,6 +242,12 @@ ALTER TABLE `user`
 ALTER TABLE `cart_item`
   ADD CONSTRAINT `drone_user_category_drone_cart_item_fk` FOREIGN KEY (`Drone_id`) REFERENCES `drone` (`Drone_id`),
   ADD CONSTRAINT `user_user_category_drone_cart_item_fk` FOREIGN KEY (`User_id`) REFERENCES `user` (`User_id`);
+
+--
+-- Constraints for table `contact`
+--
+ALTER TABLE `contact`
+  ADD CONSTRAINT `contact_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`User_id`);
 
 --
 -- Constraints for table `drone`
