@@ -31,9 +31,8 @@
 		  </div>
 		  
 		</section>
-		        
-        
-        
+	        
+      
         <!-- Search, filter and table section -->
         <div class="card">
             <table>
@@ -59,7 +58,6 @@
                 				 <a href="${pageContext.request.contextPath}/drone-details?id=${drone.id}">View</a>
                 			</td>
                 		</tr>
-                		
                 	</c:forEach>
 
                 </tbody>

@@ -36,13 +36,12 @@ public class DroneManagementController extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		List<DroneModel> droneList = droneService.getAllDrones();
-		
+	
 		if (droneList == null || droneList.isEmpty()) {
 		    request.setAttribute("errorMessage", "No drones found or an error occurred.");
 		}
 		
 		request.setAttribute("DroneData", droneList);
-
 		
 		request.getRequestDispatcher("WEB-INF/pages/admin/droneManagement.jsp").forward(request, response);
 	}

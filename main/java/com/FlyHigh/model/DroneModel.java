@@ -41,6 +41,7 @@ public class DroneModel {
     public int getId() {
         return id;
     }
+    
     public void setId(int id) {
         this.id = id;
     }
@@ -62,6 +63,7 @@ public class DroneModel {
     public float getPrice() {
         return price;
     }
+    
     public void setPrice(float price) {
         this.price = price;
     }
