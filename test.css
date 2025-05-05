@@ -1,0 +1,27 @@
+.section_wrapper {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: rgb(212 212 212);
+}
+
+.cols-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.cols-2 .end_col {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.start_col {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.start_col > input {
+  flex: 1;
+}

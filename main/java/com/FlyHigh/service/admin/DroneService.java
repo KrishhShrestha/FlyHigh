@@ -1,5 +1,7 @@
 package com.FlyHigh.service.admin;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -7,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.FlyHigh.config.DbConfig;
+import com.FlyHigh.model.CategoryModel;
 import com.FlyHigh.model.DroneModel;
 import com.FlyHigh.model.UserModel;
 
@@ -74,6 +77,64 @@ public class DroneService {
 	        e.printStackTrace();
 	        return null;
 	    }
+	}
+	
+	
+	public List<DroneModel> getAllDrones() {
+	    if (dbConn == null) {
+	        System.err.println("Database connection Error while fetching drones.");
+	        return null;
+	    }
+
+	    String query = "SELECT `Drone_id`, `Drone_name`, `Drone_description`, `Drone_price`, `Drone_quantity`, `Weight_grams`, `Flight_time_minutes`, `Range_meter`, `Camera_quality`, `Dimension`, `Drone_image`, `Category_id` FROM `drone`";
+
+	    List<DroneModel> droneList = new ArrayList<>();
+
+	    try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
+	        ResultSet result = stmt.executeQuery();
+
+	        while (result.next()) {
+	            int categoryId = result.getInt("Category_id");
+
+	            // Correct SQL for selecting a specific category by ID
+	            String categoryQuery = "SELECT `Category_id`, `Category_name`, `Description` FROM `category` WHERE `Category_id` = ?";
+	            CategoryModel categoryModel = new CategoryModel();
+
+	            try (PreparedStatement categoryStmt = dbConn.prepareStatement(categoryQuery)) {
+	                categoryStmt.setInt(1, categoryId);
+	                ResultSet categoryResult = categoryStmt.executeQuery();
+
+	                if (categoryResult.next()) {
+	                    categoryModel.setId(categoryResult.getInt("Category_id"));
+	                    categoryModel.setName(categoryResult.getString("Category_name"));
+	                    categoryModel.setDescription(categoryResult.getString("Description"));
+	                }
+	            }
+
+	            // Create and populate the DroneModel
+	            DroneModel droneModel = new DroneModel();
+	            droneModel.setId(result.getInt("Drone_id"));
+	            droneModel.setName(result.getString("Drone_name"));
+	            droneModel.setDescription(result.getString("Drone_description"));
+	            droneModel.setPrice(result.getFloat("Drone_price"));
+	            droneModel.setQuantity(result.getInt("Drone_quantity"));
+	            droneModel.setWeight(result.getFloat("Weight_grams"));
+	            droneModel.setFlightTime(result.getFloat("Flight_time_minutes"));
+	            droneModel.setRange(result.getFloat("Range_meter"));
+	            droneModel.setCameraQuality(result.getString("Camera_quality"));
+	            droneModel.setDimension(result.getString("Dimension"));
+	            droneModel.setImageUrl(result.getString("Drone_image"));
+	            droneModel.setCategory(categoryModel);
+
+	            droneList.add(droneModel);
+	        }
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+
+	    return droneList;
 	}
 
 }

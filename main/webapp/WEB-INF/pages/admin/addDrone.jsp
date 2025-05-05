@@ -166,7 +166,7 @@
 
             <div class="form-section">
               <div class="input-div">
-                <label for="quantity">Quantity</label>
+                <label for="quantity">Quantity/Stock</label>
                 <input
                   type="number"
                   id="quantity"
@@ -175,8 +175,6 @@
                 />
               </div>
             </div>
-
-            <p class="subtitle_text">Supported: .jpg images. max 2MB</p>
           </section>
           
        
