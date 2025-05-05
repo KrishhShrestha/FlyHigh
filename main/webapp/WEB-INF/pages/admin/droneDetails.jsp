@@ -40,6 +40,12 @@
                         <!-- Product specifications -->
                         <div class="product-specs">
                             <!-- Price information -->
+                            
+                            <div class="spec-group">
+                                <div class="spec-label">ID:</div>
+                                <div class="spec-value">${drone.id}</div>
+                            </div>
+                            
                             <div class="spec-group">
                                 <div class="spec-label">Price:</div>
                                 <div class="spec-value">${drone.price}</div>
@@ -92,8 +98,15 @@
 
                 </div>
                 
-				<div style="display:flex; align-items:center; gap: 8px">
-					<button class="btn btn-error"> Delete </button>
+				<div style="display:flex; align-items:center; gap: 8px; margin-top: 1rem;">
+						
+									<form action="${pageContext.request.contextPath}/drone-details" method="post"
+										style="display: inline;">
+										<input type="hidden" name="droneId" value="${drone.id}">
+										<input type="hidden" name="action" value="delete">
+										<button class="btn btn-error" type="submit">Delete</button>
+									</form>
+									
 					<button class="btn btn-secondary"> Edit </button>
 				</div>
             </div>

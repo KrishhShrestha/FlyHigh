@@ -114,6 +114,7 @@ public class DroneService {
 
 	            // Create and populate the DroneModel
 	            DroneModel droneModel = new DroneModel();
+	            
 	            droneModel.setId(result.getInt("Drone_id"));
 	            droneModel.setName(result.getString("Drone_name"));
 	            droneModel.setDescription(result.getString("Drone_description"));
@@ -194,11 +195,25 @@ public class DroneService {
 	    return droneModel;
 	}
 
-    public boolean deleteDroneById(int id) {
-    	
-    	
-    	
-    	return false;
-    }
+	public boolean deleteDrone(int droneId) {
+	    if (dbConn == null) {
+	        System.err.println("Database connection Error!");
+	        return false;
+	    }
+
+
+		String deleteQuery = "DELETE FROM `drone` WHERE Drone_id = ?";
+		
+		try (PreparedStatement stmt = dbConn.prepareStatement(deleteQuery)) {
+			stmt.setInt(1, droneId);
+
+			int rowsDeleted = stmt.executeUpdate();
+			return rowsDeleted > 0;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 
 }
