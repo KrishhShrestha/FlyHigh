@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -35,48 +36,21 @@
                 <th>Description</th>
                 <th>Action</th>
               </tr>
-              <tr>
-                <td>1</td>
-                <td>Speed</td>
-                <td>Babbal Kudcha hai</td>
-
-                <td>
-                  <button class="editbtn">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                  </button>
-                  <button class="delbtn">
-                    <i class="fa-solid fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Agriculture</td>
-                <td>Kheti</td>
-
-                <td>
-                  <button class="editbtn">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                  </button>
-                  <button class="delbtn">
-                    <i class="fa-solid fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>4K</td>
-                <td>Quality</td>
-
-                <td>
-                  <button class="editbtn">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                  </button>
-                  <button class="delbtn">
-                    <i class="fa-solid fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
+              <c:forEach var="category" items="${CategoryData}">
+                		<tr>
+                			<td>${category.id}</td>
+                			<td>${category.name}</td>
+                			<td>${category.description} </td>
+                			<td>
+                  			<button class="editbtn">
+                    		<i class="fa-solid fa-pen-to-square"></i>
+                  			</button>
+                  			<button class="delbtn">
+                    		<i class="fa-solid fa-trash"></i>
+                  			</button>
+                			</td>
+                		</tr>                		
+                	</c:forEach>          
             </table>
           </div>
         </div>
