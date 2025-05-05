@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -44,24 +45,19 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>001</td>
-              <td>John Doe</td>
-              <td><span class="status admin">Admin</span></td>
-              <td>
-                <button class="action-btn edit-btn" data-id="001" data-name="John Doe" data-role="admin">✏️</button>
-                <button class="action-btn delete-btn">🗑️</button>
-              </td>
-            </tr>
-            <tr>
-              <td>002</td>
-              <td>Jane Smith</td>
-              <td><span class="status user">User</span></td>
-              <td>
-                <button class="action-btn edit-btn" data-id="002" data-name="Jane Smith" data-role="user">✏️</button>
-                <button class="action-btn delete-btn">🗑️</button>
-              </td>
-            </tr>
+         <c:forEach var="User" items="${UserData}">
+		    <tr>
+		        <td>${User.id}</td>
+		        <td>${User.firstname}</td>
+		        <td>${User.role}</td>
+		        <td>  <button class="action-btn edit-btn">✏️</button>
+                <button class="action-btn delete-btn">🗑️</button> </td>
+		    </tr>
+		</c:forEach>
+		               
+             
+            
+            
             <!-- More rows... -->
           </tbody>
         </table>

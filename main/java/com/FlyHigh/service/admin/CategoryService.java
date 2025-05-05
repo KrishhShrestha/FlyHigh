@@ -43,6 +43,7 @@ public class CategoryService {
 			return null;
 		}
 	}
+	
 	public List<CategoryModel> getAllCategory() {
 	    if (dbConn == null) {
 	        System.err.println("Database connection Error while fetching categories.");

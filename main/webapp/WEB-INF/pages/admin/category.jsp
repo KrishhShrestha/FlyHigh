@@ -11,7 +11,9 @@
 </head>
 <body>
 <main>
-      <div class="container">
+	<jsp:include page="sidebar.jsp" />
+	
+      <div style='margin-left: 15vw; padding-inline: 2rem; padding-top: 2rem' class="">
         <div class="heading">
           <p>Category</p>
         </div>
@@ -24,9 +26,11 @@
               placeholder="Search for categories"
             />
 
-            <button class="addbtn">
+<a href="${pageContext.request.contextPath}/addcategory">
+            <button class="btn btn-primary">
               <i class="fa-solid fa-plus"></i> Add Category
             </button>
+</a>
           </div>
           <div class="info">
             <table class="infotable">

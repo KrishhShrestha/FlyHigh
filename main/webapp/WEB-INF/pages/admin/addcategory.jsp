@@ -11,9 +11,11 @@
 </head>
 <body>
 <main>
-      <div class="crudcontainer">
-        <div class="heading">
-          <p>Add New Category</p>
+	<jsp:include page="sidebar.jsp" />
+	
+      <div style='margin-left: 15vw; padding-inline: 2rem; padding-top: 2rem' class="">
+        <div class="">
+          <h1>Add New Category</h1>
         </div>
 
         <form action="${pageContext.request.contextPath}/addcategory" method="post" class="category">
@@ -34,7 +36,7 @@
                 required
               />
             </div>
-            <button class="addbtn" type="submit">
+            <button class="btn btn-primary" type="submit">
               <i class="fa-solid fa-plus"></i> Add Category
             </button>
           </div>

@@ -9,10 +9,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.FlyHigh.model.CategoryModel;
 import com.FlyHigh.model.DroneModel;
 import com.FlyHigh.service.RegisterService;
+import com.FlyHigh.service.admin.CategoryService;
 import com.FlyHigh.service.admin.DroneService;
 import com.FlyHigh.util.ImageUtil;
 import com.FlyHigh.util.ValidationUtil;
@@ -30,12 +32,13 @@ import com.FlyHigh.util.ValidationUtil;
 
 public class AddDroneController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    CategoryService categoryService;
     /**
      * @see HttpServlet#HttpServlet()
      */
     public AddDroneController() {
         super();
+        this.categoryService = new CategoryService();
         // TODO Auto-generated constructor stub
     }
 
@@ -43,6 +46,11 @@ public class AddDroneController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		List<CategoryModel> categoryList = categoryService.getAllCategory();
+		
+		request.setAttribute("categoryList", categoryList);
+		
 		// TODO Auto-generated method stub
 		request.getRequestDispatcher("WEB-INF/pages/admin/addDrone.jsp").forward(request, response);
 	}
@@ -59,7 +67,7 @@ public class AddDroneController extends HttpServlet {
         if (errorMessage != null) {
             System.out.println(errorMessage);
             request.setAttribute("errorMessage", errorMessage);
-            request.getRequestDispatcher("WEB-INF/pages/admin/addDrone.jsp").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/add-drone");
             return;
         }
         		

@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -55,6 +58,7 @@
 			<%
     		}
 			%>
+			
         <form action="${pageContext.request.contextPath}/add-drone" method="post" enctype="multipart/form-data" class="form-wrapper">
           <section class="section-wrapper">
             <h3>Basic Information</h3>
@@ -88,10 +92,10 @@
               <div class="input-div">
                 <label for="category">Category</label>
                 <select id="category" name="category">
-                  <option value="">Select a category</option>
-                  <option value="1">Photography</option>
-                  <option value="2">Racing</option>
-                  <option value="3">Toy</option>
+                   <option value="">Select a category</option>
+	                <c:forEach items="${categoryList}" var="category">
+		                  <option value="${category.id}">${category.name}</option>
+	                   </c:forEach>
                 </select>
               </div>
             </div>
