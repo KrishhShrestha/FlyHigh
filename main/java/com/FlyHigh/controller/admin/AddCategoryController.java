@@ -47,7 +47,7 @@ public class AddCategoryController extends HttpServlet {
 
 		Boolean success = categoryService.addCategory(categoryModel);
 		if (success != null && success) {
-			request.getRequestDispatcher("WEB-INF/pages/admin/category.jsp").forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/category");
 
 		} else {
 			request.setAttribute("errorMessage", "Failed to add category. Please try again.");

@@ -175,7 +175,7 @@ public class AuthenticationFilter implements Filter {
 	);
 
 	// Public access paths
-	private static final Set<String> PUBLIC_PATHS = Set.of(LOGIN, REGISTER, HOME, ROOT);
+	private static final Set<String> PUBLIC_PATHS = Set.of(LOGIN, REGISTER, HOME, ROOT, "/product/*");
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -191,11 +191,18 @@ public class AuthenticationFilter implements Filter {
 
 		String uri = req.getRequestURI().substring(req.getContextPath().length());
 
-		// Allow static resources
-		if (uri.matches(".*(\\.png|\\.jpg|\\.css|\\.js|\\.woff2?|\\.ttf|\\.svg)$")) {
-			chain.doFilter(request, response);
-			return;
+		if (uri.startsWith("/product/")) {
+		    chain.doFilter(request, response);
+		    return;
 		}
+
+		
+		// Allow static resources
+		if (uri.matches(".*(\\.png|\\.jpg|\\.jpeg|\\.gif|\\.css|\\.js|\\.woff2?|\\.ttf|\\.svg)$")) {
+		    chain.doFilter(request, response);
+		    return;
+		}
+
 
 		// Allow logout request
 		if (uri.equals(LOGOUT)) {

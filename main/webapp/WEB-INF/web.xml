@@ -21,6 +21,16 @@
     	<servlet-name>default</servlet-name>
     	<url-pattern>/images/*</url-pattern>
 	</servlet-mapping>
+	
+	<servlet-mapping>
+    	<servlet-name>default</servlet-name>
+    	<url-pattern>/product/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+    	<servlet-name>default</servlet-name>
+    	<url-pattern>/user_profile/*</url-pattern>
+	</servlet-mapping>
 
 	<servlet-mapping>
     	<servlet-name>default</servlet-name>

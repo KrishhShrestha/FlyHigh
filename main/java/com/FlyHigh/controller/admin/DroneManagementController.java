@@ -42,7 +42,6 @@ public class DroneManagementController extends HttpServlet {
 		}
 		
 		request.setAttribute("DroneData", droneList);
-
 		
 		request.getRequestDispatcher("WEB-INF/pages/admin/droneManagement.jsp").forward(request, response);
 	}

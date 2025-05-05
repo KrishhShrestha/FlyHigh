@@ -2,10 +2,14 @@ package com.FlyHigh.service.admin;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.FlyHigh.config.DbConfig;
 import com.FlyHigh.model.CategoryModel;
+import com.FlyHigh.model.DroneModel;
 
 public class CategoryService {
 
@@ -38,5 +42,33 @@ public class CategoryService {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public List<CategoryModel> getAllCategory() {
+	    if (dbConn == null) {
+	        System.err.println("Database connection Error while fetching categories.");
+	        return null;
+	    }
+
+	    List<CategoryModel> categoryList = new ArrayList<>();
+	    String categoryQuery = "SELECT `Category_id`, `Category_name`, `Description` FROM `category`";
+
+	    try (PreparedStatement categoryStmt = dbConn.prepareStatement(categoryQuery)) {
+	        ResultSet categoryResult = categoryStmt.executeQuery();
+
+	        while (categoryResult.next()) {
+	            CategoryModel categoryModel = new CategoryModel();
+	            categoryModel.setId(categoryResult.getInt("Category_id"));
+	            categoryModel.setName(categoryResult.getString("Category_name"));
+	            categoryModel.setDescription(categoryResult.getString("Description"));
+	            categoryList.add(categoryModel);
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+
+	    return categoryList;
 	}
 }
