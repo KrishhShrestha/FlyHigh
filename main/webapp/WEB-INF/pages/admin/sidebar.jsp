@@ -16,10 +16,10 @@
               <a href="${pageContext.request.contextPath}/manage-drone"> <i class="fa-solid fa-box"></i> Drones</a>
             </li>
             <li>
-              <a href=""><i class="fa-solid fa-icons"></i> Categories</a>
+              <a href="${pageContext.request.contextPath}/category"><i class="fa-solid fa-icons"></i> Categories</a>
             </li>
             <li>
-              <a href=""><i class="fa-solid fa-user"></i> Users</a>
+              <a href="${pageContext.request.contextPath}/dashboard"><i class="fa-solid fa-user"></i> Users</a>
             </li>
           </ul>
         </section>
@@ -33,4 +33,4 @@
             <i class="fa-solid fa-right-from-bracket"></i> Logout
           </button>
         </form>
-      </section>
+</section>
