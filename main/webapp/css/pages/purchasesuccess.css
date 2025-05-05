@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap");
+
+*{
+    font-family: Poppins;
+   
+    
+}
+
+.container-x{
+    
+    margin: 3rem auto;
+    height: 100vh;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: rgb(248, 248, 248);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.msg {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.msg h1{
+    color: #5cb85c;
+    margin: 5px;
+    
+}
+
+.msg p{
+    margin: 0;
+    color: #7e7c7c;
+    font-size: large;
+    
+}
+
+.butn{
+    margin: 2rem;
+}
+
+.butn button{
+    padding:10px;
+    height: 3rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 10px;
+    font-weight: 450;
+    background-color:  rgb(249, 152, 68);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.butn button:hover {
+    background-color: rgb(230, 130, 50); /* Slightly darker orange */
+}

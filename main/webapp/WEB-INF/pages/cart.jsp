@@ -103,10 +103,14 @@
               <td>Total</td>
               <td>$10000</td>
             </tr>
-          </table>
-        </div>
-        <div class="btn">
+            <tr>
+            <td colspan="2">
+            <a href="${pageContext.request.contextPath}/purchasesuccess">
           <button class="paybtn">PROCEED TO PAY</button>
+          </a>
+          </td>
+            </tr>
+          </table>
         </div>
       </div>
     </main>
