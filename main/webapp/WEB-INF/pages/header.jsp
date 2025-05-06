@@ -31,7 +31,7 @@
     </div>
     
     <ul class="header_ul cart_ul">
-      <li><i class="fa-solid fa-magnifying-glass"></i> Search</li>
+      <li><a href="${contextPath}/search"> <i class="fa-solid fa-magnifying-glass"></i> Search</a></li>
     
       <c:choose>
       	<c:when test="${empty currentUser}">
