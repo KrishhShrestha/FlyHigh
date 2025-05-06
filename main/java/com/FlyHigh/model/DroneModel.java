@@ -19,6 +19,23 @@ public class DroneModel {
 
 
     public DroneModel() {}
+    
+    public DroneModel(int id,String name, String description, float price, CategoryModel category,
+            float weight, float flightTime, float range,
+            String cameraQuality, String dimension, String imageUrl, int quantity) {
+    	this.id = id;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.category = category;
+		this.weight = weight;
+		this.flightTime = flightTime;
+		this.range = range;
+		this.cameraQuality = cameraQuality;
+		this.dimension = dimension;
+		this.imageUrl = imageUrl;
+		this.quantity = quantity;
+	}
 
     public DroneModel(String name, String description, float price, CategoryModel category,
             float weight, float flightTime, float range,

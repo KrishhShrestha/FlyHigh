@@ -173,9 +173,6 @@
 
 .form-wrapper .submit-section {
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  padding: 1rem;
   gap: 0.5rem;
 }
 

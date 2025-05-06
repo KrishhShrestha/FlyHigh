@@ -55,7 +55,8 @@
                 			<td>${drone.price}</td>
                 			<td>${drone.quantity}</td>
                 			<td>
-                				 <a href="${pageContext.request.contextPath}/drone-details?id=${drone.id}">View</a>
+                				 <a href="${pageContext.request.contextPath}/drone-details?id=${drone.id}"><i class="fa-solid fa-eye"></i></a>
+                				 <a href="${pageContext.request.contextPath}/edit-drone?id=${drone.id}"><i class="fa-solid fa-pen-to-square"></i></a>
                 			</td>
                 		</tr>
                 	</c:forEach>

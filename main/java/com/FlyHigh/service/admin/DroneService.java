@@ -138,6 +138,39 @@ public class DroneService {
 	    return droneList;
 	}
 	
+	public Boolean editDrone(int editID, DroneModel droneModel) {
+	    if (dbConn == null) {
+	        System.err.println("Database connection is not available.");
+	        return false;
+	    }
+
+	    String updateQuery = "UPDATE `drone` SET `Drone_name` = ?, `Drone_description` = ?, `Drone_price` = ?, " +
+	            "`Drone_quantity` = ?, `Weight_grams` = ?, `Flight_time_minutes` = ?, `Range_meter` = ?, " +
+	            "`Camera_quality` = ?, `Dimension` = ?, `Drone_image` = ?, `Category_id` = ? WHERE `Drone_id` = ?";
+
+	    try (PreparedStatement stmt = dbConn.prepareStatement(updateQuery)) {
+	        stmt.setString(1, droneModel.getName());
+	        stmt.setString(2, droneModel.getDescription());
+	        stmt.setFloat(3, droneModel.getPrice());
+	        stmt.setInt(4, droneModel.getQuantity());
+	        stmt.setFloat(5, droneModel.getWeight());
+	        stmt.setFloat(6, droneModel.getFlightTime());
+	        stmt.setFloat(7, droneModel.getRange());
+	        stmt.setString(8, droneModel.getCameraQuality());
+	        stmt.setString(9, droneModel.getDimension());
+	        stmt.setString(10, droneModel.getImageUrl()); 
+	        stmt.setInt(11, droneModel.getCategory().getId());
+	        
+	        stmt.setInt(12, editID);
+
+	        return stmt.executeUpdate() > 0;
+	    } catch (SQLException e) {
+	        System.err.println("Error updating drone: " + e.getMessage());
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
+
 	
 	public DroneModel getDroneById(int droneId) {
 	    if (dbConn == null) {
