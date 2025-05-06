@@ -52,7 +52,31 @@ public class CategoryController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+		String action = request.getParameter("action");
+        int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+
+        switch (action) {
+            case "delete":
+                handleDelete(request, response, categoryId);
+                break;
+            default:
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unknown action: " + action);
+        }
+    }
+
+    private void handleDelete(HttpServletRequest request, HttpServletResponse response, int id) throws ServletException, IOException {
+        boolean success = categoryService.deleteCategory(id);
+
+        if (success) {
+            System.out.println("Deletion successful");
+            // Redirect after deletion
+            response.sendRedirect(request.getContextPath() + "/category");
+        } else {
+            System.out.println("Deletion failed");
+            // Handle deletion failure (you can forward to an error page or show an error message)
+            request.setAttribute("errorMessage", "Failed to delete drone.");
+            request.getRequestDispatcher("WEB-INF/pages/admin/category.jsp").forward(request, response);
+        }
+    }
 
 }

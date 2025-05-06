@@ -118,11 +118,9 @@ public class AddDroneController extends HttpServlet {
         	System.out.println("Drone added to db");
         	
         	response.sendRedirect(request.getContextPath() + "/dashboard");
-        }else {
+        } else {
         	System.out.println("Failed Adding Image");
         }
-
-		
 	}
 	
 

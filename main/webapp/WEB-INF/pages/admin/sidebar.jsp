@@ -19,7 +19,7 @@
               <a href="${pageContext.request.contextPath}/category"><i class="fa-solid fa-icons"></i> Categories</a>
             </li>
             <li>
-              <a href="${pageContext.request.contextPath}/dashboard"><i class="fa-solid fa-user"></i> Users</a>
+              <a href="${pageContext.request.contextPath}/manage-user"><i class="fa-solid fa-user"></i> Users</a>
             </li>
           </ul>
         </section>

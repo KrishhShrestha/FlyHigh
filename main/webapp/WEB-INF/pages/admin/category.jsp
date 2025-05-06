@@ -49,9 +49,14 @@
                   			<button class="editbtn">
                     		<i class="fa-solid fa-pen-to-square"></i>
                   			</button>
-                  			<button class="delbtn">
+                  			<form action="${pageContext.request.contextPath}/category" method="post"
+										style="display: inline;">
+										<input type="hidden" name="categoryId" value="${category.id}">
+										<input type="hidden" name="action" value="delete">	
+                  			<button class="delbtn" type="submit">
                     		<i class="fa-solid fa-trash"></i>
                   			</button>
+                  			</form>
                 			</td>
                 		</tr>                		
                 	</c:forEach>          

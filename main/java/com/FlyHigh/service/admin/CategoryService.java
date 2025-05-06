@@ -71,4 +71,25 @@ public class CategoryService {
 
 	    return categoryList;
 	}
+	
+	public boolean deleteCategory(int categoryId) {
+	    if (dbConn == null) {
+	        System.err.println("Database connection Error!");
+	        return false;
+	    }
+
+
+		String deleteQuery = "DELETE FROM `category` WHERE Category_id = ?";
+		
+		try (PreparedStatement stmt = dbConn.prepareStatement(deleteQuery)) {
+			stmt.setInt(1, categoryId);
+
+			int rowsDeleted = stmt.executeUpdate();
+			return rowsDeleted > 0;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

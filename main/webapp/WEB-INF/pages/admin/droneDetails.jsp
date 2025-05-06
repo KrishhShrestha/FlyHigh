@@ -17,7 +17,7 @@
 
         <!-- Display error message if available -->
         <c:if test="${not empty errorMessage}">
-            <div class='toast'>
+            <div class='toast error'>
                 ${errorMessage}
             </div>
         </c:if>
@@ -107,7 +107,9 @@
 										<button class="btn btn-error" type="submit">Delete</button>
 									</form>
 									
-					<button class="btn btn-secondary"> Edit </button>
+					<a href="${pageContext.request.contextPath}/edit-drone?id=${drone.id}">
+						<button class="btn btn-secondary"> Edit </button>
+					 </a>
 				</div>
             </div>
         </c:if>

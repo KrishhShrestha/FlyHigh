@@ -11,22 +11,10 @@
 </head>
 <body>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <div class="sidebar-header">
-        <h2>Admin Panel</h2>
-        <p>Welcome Admin</p>
-      </div>
-      <ul class="nav-menu">
-        <li class="nav-item"><i>📊</i> Dashboard</li>
-        <li class="nav-item"><i>🗂️</i> Category</li>
-        <li class="nav-item"><i>📦</i> Product</li>
-        <li class="nav-item active"><i>👥</i> Users</li>
-      </ul>
-    </div>
+    <jsp:include page="sidebar.jsp" />
 
     <!-- Main Content -->
-    <div class="main-content">
+    <div class="main-content" style="margin-left:15vw;padding-inline: 2rem">
       <h1 class="page-title">FlyHigh</h1>
 
       <div class="card">
