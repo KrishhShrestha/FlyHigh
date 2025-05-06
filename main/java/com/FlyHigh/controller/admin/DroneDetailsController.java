@@ -34,15 +34,15 @@ public class DroneDetailsController extends HttpServlet {
                     request.getRequestDispatcher("WEB-INF/pages/admin/droneDetails.jsp").forward(request, response);
                 } else {
                     request.setAttribute("errorMessage", "Drone not found for the provided ID.");
-                    request.getRequestDispatcher("WEB-INF/pages/admin/droneDetails.jsp").forward(request, response);
+                    request.getRequestDispatcher("WEB-INF/pages/admin/NotFound.jsp").forward(request, response);
                 }
             } catch (NumberFormatException e) {
                 request.setAttribute("errorMessage", "Invalid drone ID format.");
-                request.getRequestDispatcher("WEB-INF/pages/admin/droneDetails.jsp").forward(request, response);
+                request.getRequestDispatcher("WEB-INF/pages/admin/NotFound.jsp").forward(request, response);
             }
         } else {
             request.setAttribute("errorMessage", "Drone ID is required.");
-            request.getRequestDispatcher("WEB-INF/pages/admin/droneDetails.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/pages/admin/NotFound.jsp").forward(request, response);
         }
     }
 

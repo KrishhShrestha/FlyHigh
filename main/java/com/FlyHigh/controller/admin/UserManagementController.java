@@ -15,7 +15,7 @@ import com.FlyHigh.service.admin.UserService;
 /**
  * Servlet implementation class UserManagementController
  */
-@WebServlet("/UserManagementController")
+@WebServlet("/manage-user")
 public class UserManagementController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
