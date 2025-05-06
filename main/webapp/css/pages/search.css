@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+.section_main_search {
+  width: 20rem;
+  height: 100vh;
+  position: fixed;
+  background-color: rgb(245 245 245);
+  padding: 4;
+}
+
+.section_main_search {
+  padding: 1rem;
+}
+
+.section {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.main_body_search .search_bar,
+.main_body_search input {
+  width: 100%;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-radius: 0.25rem;
+  border: 0;
+  outline: 0;
+}
+
+
+.main_body_search .range_wrapper {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}

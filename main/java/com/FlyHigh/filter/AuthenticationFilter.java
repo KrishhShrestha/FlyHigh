@@ -171,7 +171,7 @@ public class AuthenticationFilter implements Filter {
 	// Customer paths
 	private static final Set<String> CUSTOMER_PATHS = Set.of(
 		HOME, ROOT, "/about", "/userprofile", "/edituserprofile", "/contact",
-		"/cart", "/orderlist", "/cartlist", "/drone", "/purchasesuccess"
+		"/cart", "/orderlist", "/cartlist", "/drone", "/purchasesuccess", "/search"
 	);
 
 	// Public access paths
