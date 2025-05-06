@@ -82,5 +82,26 @@ public class UserService {
 
 	    return UserList;
 	}
+	
+	 // 🔥 NEW METHOD
+    public boolean deleteUserById(int id) {
+        if (dbConn == null) {
+            System.err.println("Database connection error while deleting user.");
+            return false;
+        }
+
+        String query = "DELETE FROM `user` WHERE `User_id` = ?";
+        try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
+            stmt.setInt(1, id);
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+   
+
+	
 
 }
