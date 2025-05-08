@@ -15,7 +15,7 @@ import com.FlyHigh.service.admin.UserService;
 /**
  * Servlet implementation class UserManagementController
  */
-@WebServlet("/manage-user")
+@WebServlet("/UserManagementController")
 public class UserManagementController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -75,11 +75,10 @@ public class UserManagementController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 	
 
 }

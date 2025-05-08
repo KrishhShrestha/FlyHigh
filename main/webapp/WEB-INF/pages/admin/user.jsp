@@ -7,14 +7,25 @@
 <meta charset="UTF-8">
 <title>User Management</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/user.css" />
-
 </head>
 <body>
 
-    <jsp:include page="sidebar.jsp" />
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h2>Admin Panel</h2>
+        <p>Welcome Admin</p>
+      </div>
+      <ul class="nav-menu">
+        <li class="nav-item"><i>📊</i> Dashboard</li>
+        <li class="nav-item"><i>🗂️</i> Category</li>
+        <li class="nav-item"><i>📦</i> Product</li>
+        <li class="nav-item active"><i>👥</i> Users</li>
+      </ul>
+    </div>
 
     <!-- Main Content -->
-    <div class="main-content" style="margin-left:15vw;padding-inline: 2rem">
+    <div class="main-content">
       <h1 class="page-title">FlyHigh</h1>
 
       <div class="card">
@@ -33,29 +44,22 @@
             </tr>
           </thead>
           <tbody>
-         <c:forEach var="User" items="${UserData}">
-		    <tr>
-		        <td>${User.id}</td>
-		        <td>${User.firstname}</td>
-		        <td>${User.role}</td>
-		       <td>  
-				    <button class="action-btn edit-btn"
-				        data-id="${User.id}"
-				        data-name="${User.firstname}"
-				        data-role="${User.role}">✏️</button>
-				<a href="${pageContext.request.contextPath}/UserManagementController?action=delete&id=${User.id}"
-				       onclick="return confirm('Are you sure you want to delete this user?');"
-				       class="action-btn delete-btn">🗑️</a>
-				    
-			   </td>
-                
-		   </tr>
-		 </c:forEach>
-		               
-             
-            
-            
-            <!-- More rows... -->
+            <c:forEach var="User" items="${UserData}">
+              <tr>
+                <td>${User.id}</td>
+                <td>${User.firstname}</td>
+                <td>${User.role}</td>
+                <td>
+                  <button class="action-btn edit-btn"
+                      data-id="${User.id}"
+                      data-name="${User.firstname}"
+                      data-role="${User.role}">✏️</button>
+                  <a href="${pageContext.request.contextPath}/UserManagementController?action=delete&id=${User.id}"
+                      onclick="return confirm('Are you sure you want to delete this user?');"
+                      class="action-btn delete-btn">🗑️</a>
+                </td>
+              </tr>
+            </c:forEach>
           </tbody>
         </table>
 
@@ -108,6 +112,7 @@
         // Show edit overlay when edit button is clicked
         editButtons.forEach(button => {
           button.addEventListener('click', function() {
+            console.log('Edit button clicked'); // Debugging log
             const userId = this.getAttribute('data-id');
             const userName = this.getAttribute('data-name');
             const userRole = this.getAttribute('data-role');
@@ -140,9 +145,9 @@
           console.log('Updating user:', { userId, userName, userRole });
           
           // For demo purposes, we'll just update the table directly
-          const row = document.querySelector(.edit-btn[data-id="${userId}"]).closest('tr');
+          const row = document.querySelector(`.edit-btn[data-id="${userId}"]`).closest('tr');
           row.cells[1].textContent = userName;
-          row.cells[2].innerHTML = <span class="status ${userRole}">${userRole.charAt(0).toUpperCase() + userRole.slice(1)}</span>;
+          row.cells[2].innerHTML = `<span class="status ${userRole}">${userRole.charAt(0).toUpperCase() + userRole.slice(1)}</span>`;
           
           // Update the data attributes on the edit button
           const editBtn = row.querySelector('.edit-btn');

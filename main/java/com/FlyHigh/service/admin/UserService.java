@@ -48,7 +48,7 @@ public class UserService {
 	        return null;
 	    }
 
-	    String query = "SELECT `User_id`, `User_name`, `User_phone`, `Gender`, `User_DOB`, `User_email`, `User_password`, `User_address`, `Role_Name`, `User_image` FROM `user`";
+	    String query = "SELECT User_id, User_name, User_phone, Gender, User_DOB, User_email, User_password, User_address, Role_Name, User_image FROM user";
 
 	    List<UserModel> UserList = new ArrayList<>();
 
@@ -90,7 +90,7 @@ public class UserService {
             return false;
         }
 
-        String query = "DELETE FROM `user` WHERE `User_id` = ?";
+        String query = "DELETE FROM user WHERE User_id = ?";
         try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
             stmt.setInt(1, id);
             int rowsAffected = stmt.executeUpdate();
@@ -100,8 +100,6 @@ public class UserService {
             return false;
         }
     }
-   
-
 	
 
 }
