@@ -45,10 +45,10 @@
                 			<td>${category.id}</td>
                 			<td>${category.name}</td>
                 			<td>${category.description} </td>
-                			<td>
+                			<td><a href="${pageContext.request.contextPath}/editcategory?id=${category.id}">
                   			<button class="editbtn">
                     		<i class="fa-solid fa-pen-to-square"></i>
-                  			</button>
+                  			</button></a>
                   			<form action="${pageContext.request.contextPath}/category" method="post"
 										style="display: inline;">
 										<input type="hidden" name="categoryId" value="${category.id}">
