@@ -9,30 +9,14 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/user.css" />
 </head>
 <body>
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <div class="sidebar-header">
-        <h2>Admin Panel</h2>
-        <p>Welcome Admin</p>
-      </div>
-      <ul class="nav-menu">
-        <li class="nav-item"><i>📊</i> Dashboard</li>
-        <li class="nav-item"><i>🗂️</i> Category</li>
-        <li class="nav-item"><i>📦</i> Product</li>
-        <li class="nav-item active"><i>👥</i> Users</li>
-      </ul>
-    </div>
+    <jsp:include page="sidebar.jsp" />
 
     <!-- Main Content -->
-    <div class="main-content">
+    <div style="margin-left:15vw;padding-inline: 2rem" class="main-content">
       <h1 class="page-title">FlyHigh</h1>
 
       <div class="card">
-        <div class="card-header">
-          <input type="text" class="search-bar" placeholder="Search users..." />
-          <button class="add-btn"><i>➕</i> Add New User</button>
-        </div>
+
 
         <table class="user-table">
           <thead>
@@ -53,10 +37,24 @@
                   <button class="action-btn edit-btn"
                       data-id="${User.id}"
                       data-name="${User.firstname}"
-                      data-role="${User.role}">✏️</button>
-                  <a href="${pageContext.request.contextPath}/UserManagementController?action=delete&id=${User.id}"
+                      data-role="${User.role}" onclick="toggleRoleForm(${User.id})">📝 Change Role</button>
+                  <a href="${pageContext.request.contextPath}/manage-user?action=delete&id=${User.id}"
                       onclick="return confirm('Are you sure you want to delete this user?');"
                       class="action-btn delete-btn">🗑️</a>
+
+                  <!-- Role Update Form -->
+                  <div class="role-update-form" id="roleForm-${User.id}" style="display: none;">
+                    <form action="${pageContext.request.contextPath}/manage-user" method="POST">
+                      <input type="hidden" name="action" value="updateRole">
+                      <input type="hidden" name="id" value="${User.id}">
+                      <select name="role">
+                        <option value="admin" ${User.role == 'admin' ? 'selected' : ''}>Admin</option>
+                        <option value="customer" ${User.role == 'customer' ? 'selected' : ''}>Customer</option>
+                      </select>
+                      <button type="submit" class="action-btn">Update Role</button>
+                      <button type="button" class="action-btn" onclick="toggleRoleForm(${User.id})">Cancel</button>
+                    </form>
+                  </div>
                 </td>
               </tr>
             </c:forEach>
@@ -72,102 +70,18 @@
         </div>
       </div>
     </div>
-    
-    <!-- Edit User Overlay -->
-    <div class="overlay" id="editOverlay">
-      <div class="edit-form">
-        <h2>Edit User</h2>
-        <form id="userEditForm">
-          <div class="form-group">
-            <label for="userId">User ID</label>
-            <input type="text" id="userId" name="userId" readonly>
-          </div>
-          <div class="form-group">
-            <label for="userName">User Name</label>
-            <input type="text" id="userName" name="userName" required>
-          </div>
-          <div class="form-group">
-            <label for="userRole">Role</label>
-            <select id="userRole" name="userRole" required>
-              <option value="admin">Admin</option>
-              <option value="user">User</option>
-            </select>
-          </div>
-          <div class="form-actions">
-            <button type="button" class="cancel-btn" id="cancelEdit">Cancel</button>
-            <button type="submit" class="save-btn">Save Changes</button>
-          </div>
-        </form>
-      </div>
-    </div>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        // Get all edit buttons
-        const editButtons = document.querySelectorAll('.edit-btn');
-        const editOverlay = document.getElementById('editOverlay');
-        const cancelEdit = document.getElementById('cancelEdit');
-        const userEditForm = document.getElementById('userEditForm');
-        
-        // Show edit overlay when edit button is clicked
-        editButtons.forEach(button => {
-          button.addEventListener('click', function() {
-            console.log('Edit button clicked'); // Debugging log
-            const userId = this.getAttribute('data-id');
-            const userName = this.getAttribute('data-name');
-            const userRole = this.getAttribute('data-role');
-            
-            // Populate the form with user data
-            document.getElementById('userId').value = userId;
-            document.getElementById('userName').value = userName;
-            document.getElementById('userRole').value = userRole;
-            
-            // Show the overlay
-            editOverlay.style.display = 'flex';
-          });
-        });
-        
-        // Hide overlay when cancel button is clicked
-        cancelEdit.addEventListener('click', function() {
-          editOverlay.style.display = 'none';
-        });
-        
-        // Handle form submission
-        userEditForm.addEventListener('submit', function(e) {
-          e.preventDefault();
-          
-          // Get form values
-          const userId = document.getElementById('userId').value;
-          const userName = document.getElementById('userName').value;
-          const userRole = document.getElementById('userRole').value;
-          
-          // Here you would typically send this data to the server via AJAX
-          console.log('Updating user:', { userId, userName, userRole });
-          
-          // For demo purposes, we'll just update the table directly
-          const row = document.querySelector(`.edit-btn[data-id="${userId}"]`).closest('tr');
-          row.cells[1].textContent = userName;
-          row.cells[2].innerHTML = `<span class="status ${userRole}">${userRole.charAt(0).toUpperCase() + userRole.slice(1)}</span>`;
-          
-          // Update the data attributes on the edit button
-          const editBtn = row.querySelector('.edit-btn');
-          editBtn.setAttribute('data-name', userName);
-          editBtn.setAttribute('data-role', userRole);
-          
-          // Hide the overlay
-          editOverlay.style.display = 'none';
-          
-          // Show success message (you could add this)
-          alert('User updated successfully!');
-        });
-        
-        // Close overlay when clicking outside the form
-        editOverlay.addEventListener('click', function(e) {
-          if (e.target === editOverlay) {
-            editOverlay.style.display = 'none';
-          }
-        });
-      });
-    </script>
+<script type="text/javascript">
+  // Toggle visibility of the role update form
+  function toggleRoleForm(userId) {
+    var form = document.getElementById('roleForm-' + userId);
+    if (form.style.display === 'none') {
+      form.style.display = 'block';  // Show the form
+    } else {
+      form.style.display = 'none';   // Hide the form
+    }
+  }
+</script>
+
 </body>
 </html>

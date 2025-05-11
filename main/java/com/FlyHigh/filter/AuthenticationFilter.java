@@ -165,13 +165,13 @@ public class AuthenticationFilter implements Filter {
 	// Admin paths
 	private static final Set<String> ADMIN_PATHS = Set.of(
 		DASHBOARD, "/manage-drone", "/add-drone", "/drone-details", "/edit-drone",
-		HOME, "/category", "/addcategory", "/editcategory", ROOT, "/UserManagementController"
+		HOME, "/category", "/addcategory", "/editcategory", ROOT, "/manage-user"
 	);
 
 	// Customer paths
 	private static final Set<String> CUSTOMER_PATHS = Set.of(
 		HOME, ROOT, "/about", "/userprofile", "/edituserprofile", "/contact",
-		"/cart", "/orderlist", "/cartlist", "/drone", "/purchasesuccess", "/search"
+		"/cart", "/orderlist", "/cartlist", "/drones", "/purchasesuccess", "/search"
 	);
 
 	// Public access paths
