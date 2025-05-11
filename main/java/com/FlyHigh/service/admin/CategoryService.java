@@ -92,4 +92,57 @@ public class CategoryService {
 			return false;
 		}
 	}
+	
+	public boolean updateCategoryById(CategoryModel categoryModel) {
+	    if (dbConn == null) {
+	        System.err.println("Database connection is not available.");
+	        return false;
+	    }
+	    System.out.println(categoryModel.getName()+categoryModel.getDescription()+categoryModel.getId());
+	    String updateQuery = "UPDATE category SET Category_name = ?, Description = ? WHERE Category_id = ?";
+
+	    try (PreparedStatement updateStmt = dbConn.prepareStatement(updateQuery)) {
+	        updateStmt.setString(1, categoryModel.getName());
+	        updateStmt.setString(2, categoryModel.getDescription());
+	        updateStmt.setInt(3, categoryModel.getId());
+
+	        int rowsUpdated = updateStmt.executeUpdate();
+	        return rowsUpdated > 0;
+	    } catch (SQLException e) {
+	        System.err.println("Error during category update: " + e.getMessage());
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
+	
+	public CategoryModel getCategoryById(int categoryId) {
+	    if (dbConn == null) {
+	        System.err.println("Database connection is not available.");
+	        return null;
+	    }
+
+	    String query = "SELECT Category_id, Category_name, Description FROM category WHERE Category_id = ?";
+
+	    try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
+	        stmt.setInt(1, categoryId);
+	        ResultSet result = stmt.executeQuery();
+
+	        if (result.next()) {
+	            CategoryModel categoryModel = new CategoryModel();
+	            categoryModel.setId(result.getInt("Category_id"));
+	            categoryModel.setName(result.getString("Category_name"));
+	            categoryModel.setDescription(result.getString("Description"));
+	            return categoryModel;
+	        } else {
+	            return null; // No category found with the given ID
+	        }
+
+	    } catch (SQLException e) {
+	        System.err.println("Error fetching category by ID: " + e.getMessage());
+	        e.printStackTrace();
+	        return null;
+	    }
+	}
+
+	
 }
