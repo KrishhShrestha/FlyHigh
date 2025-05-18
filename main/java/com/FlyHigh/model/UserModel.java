@@ -12,6 +12,7 @@ public class UserModel {
     private String password;
     private String role;
     private String imageUrl;
+	
 
     // 1. Empty constructor
     public UserModel() {
@@ -67,6 +68,7 @@ public class UserModel {
         this.password = password;
         this.imageUrl = imageUrl;
     }
+    
 
     public int getId() {
         return id;
