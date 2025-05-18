@@ -43,9 +43,23 @@
 
             <label for="msg">Message</label>
             <textarea rows="4" cols="50" name="message" placeholder="Enter your message here..."></textarea>
-
+			<div>
+			  <%
+			    String error = (String) request.getAttribute("errorMessage");
+			    String success = (String) request.getAttribute("successMessage");
+			    if (error != null) {
+			  %>
+			    <div class="toast error"><i class="fa-solid fa-xmark"></i> <%= error %></div>
+			  <%
+			    } else if (success != null) {
+			  %>
+			    <div class="toast success"><i class="fa-solid fa-check"></i> <%= success %></div>
+			  <%
+			    }
+			  %>
             <div class="btn">
               <button>Send Message</button>
+            </div>
             </div>
           </form>
         </div>
