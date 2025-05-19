@@ -24,8 +24,9 @@
             ><i class="fa-solid fa-location-dot"></i>Kamalpokhari,Kathmandu</a
           >
         </div>
+        
         <div class="msg">
-          <form class="log" id="form">
+          <form class="log" action="${pageContext.request.contextPath}/contact" method="post" >
             <div class="namefield">
               <div class="field">
                 <label for="fname">First Name</label>
@@ -41,11 +42,24 @@
             <input type="email" name="email" id="email" />
 
             <label for="msg">Message</label>
-            <textarea rows="4" cols="50" name="message" form="form">
-			Enter text here</textarea
-            >
+            <textarea rows="4" cols="50" name="message" placeholder="Enter your message here..."></textarea>
+			<div>
+			  <%
+			    String error = (String) request.getAttribute("errorMessage");
+			    String success = (String) request.getAttribute("successMessage");
+			    if (error != null) {
+			  %>
+			    <div class="toast error"><i class="fa-solid fa-xmark"></i> <%= error %></div>
+			  <%
+			    } else if (success != null) {
+			  %>
+			    <div class="toast success"><i class="fa-solid fa-check"></i> <%= success %></div>
+			  <%
+			    }
+			  %>
             <div class="btn">
               <button>Send Message</button>
+            </div>
             </div>
           </form>
         </div>

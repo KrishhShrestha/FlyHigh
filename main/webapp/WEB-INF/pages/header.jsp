@@ -20,7 +20,7 @@
   <div class="container">
     <ul class="header_ul">
       <li><a href="${contextPath}/home">Home</a></li>
-      <li><a href="${contextPath}/drone">Drones</a></li>
+      <li><a href="${contextPath}/drones">Drones</a></li>
       <li><a href="${contextPath}/about">About Us</a></li>
       <li><a href="${contextPath}/contact">Contact Us</a></li>
     </ul>

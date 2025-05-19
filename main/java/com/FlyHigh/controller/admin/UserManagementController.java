@@ -15,7 +15,7 @@ import com.FlyHigh.service.admin.UserService;
 /**
  * Servlet implementation class UserManagementController
  */
-@WebServlet("/UserManagementController")
+@WebServlet("/manage-user")
 public class UserManagementController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -59,6 +59,11 @@ public class UserManagementController extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/UserManagementController");
             return;
         }
+        
+        
+        
+        
+        
 
         // Default action: load users
         List<UserModel> UserList = userService.getAllUser();
@@ -76,8 +81,39 @@ public class UserManagementController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+        String action = request.getParameter("action");
+
+        if ("updateRole".equals(action)) {
+            String userIdParam = request.getParameter("id");
+            String newRole = request.getParameter("role");
+
+            if (userIdParam != null && newRole != null) {
+                try {
+                    int userId = Integer.parseInt(userIdParam);
+                    boolean updated = userService.updateUserRole(userId, newRole);
+                    if (updated) {
+                        System.out.println("User role updated successfully.");
+                    } else {
+                        System.out.println("Failed to update user role.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.err.println("Invalid user ID: " + userIdParam);
+                }
+            }
+            // Redirect to refresh the user list and avoid resubmission
+            response.sendRedirect(request.getContextPath() + "/UserManagementController");
+        } else {
+            // Call doGet method for other actions
+            doGet(request, response);
+        }
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 	
 

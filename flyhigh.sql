@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2025 at 11:57 AM
+-- Generation Time: May 18, 2025 at 06:33 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -51,7 +51,8 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`Category_id`, `Category_name`, `Description`) VALUES
-(3, 'Speed', 'Top speed= 110 km/hr');
+(10, 'Speed', 'Top speed= 120 km/hr'),
+(12, 'Agriculture', 'Water proof');
 
 -- --------------------------------------------------------
 
@@ -60,12 +61,20 @@ INSERT INTO `category` (`Category_id`, `Category_name`, `Description`) VALUES
 --
 
 CREATE TABLE `contact` (
-  `ContactID` int(11) NOT NULL,
+  `ContactID` int(20) NOT NULL,
   `fname` varchar(20) NOT NULL,
   `lname` varchar(20) NOT NULL,
-  `message` text NOT NULL,
-  `UserID` int(11) NOT NULL
+  `email` varchar(50) NOT NULL,
+  `message` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `contact`
+--
+
+INSERT INTO `contact` (`ContactID`, `fname`, `lname`, `email`, `message`) VALUES
+(1, 'Nowal', 'Jung', 'flyhigh@gmail.com', 'hello\r\n'),
+(2, 'ahaha', 'okak', 'nowalbaidwarf5@gmail.com', 'hahaha\r\n');
 
 -- --------------------------------------------------------
 
@@ -129,7 +138,8 @@ INSERT INTO `user` (`User_id`, `User_name`, `User_phone`, `Gender`, `User_DOB`, 
 (3, 'Aakrist', '9800000000', 'male', '2025-04-08', 'a@Thapa.com', 'XFsZmFliwIrZhKR470fWP8kjglftVkDGU/T+cvAoNT9u9NziANLwH1b1V6RleaCBbseA1A==', 'kamalpokhar', 'admin', ''),
 (4, 'Ram', '9855555554', 'male', '2025-04-03', 'fly@high.com', 'gOoHjwKAGKhNQ6f/OBG3VpMux7Ybhh3NJrMeZIdgZrZmEAt63ESqcTzsa+gJU+40o/PNHQ==', 'kammal', 'customer', ''),
 (5, 'fly', '9818902021', 'male', '2025-05-06', 'flyhigh@gmail.com', '9EhN42ogAVpZ2xQSrUShV4Jeb8yTlFHMCsrooYctPXzRJ0cU865dF+ZR8lRCtTxy6AjpRgHf', 'kamalpokhari', 'admin', 'Screenshot_2025-03-20-17-41-50-542_com.facebook.katana_dd8f1a01.jpg'),
-(6, 'hello', '9818909031', 'male', '2025-05-26', 'hello@gmail.com', 'Jw0HXyVvCQXHyfW1a2fEqDabzZXHulnKOK0afqReC3mm08YsrSnQACCvVYarmHom7dZE6TLZ', 'kamalpokharii', 'customer', 'Screenshot 2024-01-04 195856_39d7b7b9.png');
+(6, 'hello', '9818909031', 'male', '2025-05-26', 'hello@gmail.com', 'Jw0HXyVvCQXHyfW1a2fEqDabzZXHulnKOK0afqReC3mm08YsrSnQACCvVYarmHom7dZE6TLZ', 'kamalpokharii', 'customer', 'Screenshot 2024-01-04 195856_39d7b7b9.png'),
+(7, 'Sayuj', '9818909033', 'male', '2025-05-15', 'np01cp4a230138@islingtoncollege.edu.np', 'w14McxsYa2mAvWkfD8XmMAvViL3M1+g3N3SAqTcMXF7IYALhbI5e8TOCmA1c4nWr84Cey5w=', 'kamalpokharia', 'customer', 'Screenshot 2024-01-04 195856_ae2eb6b9.png');
 
 -- --------------------------------------------------------
 
@@ -166,8 +176,7 @@ ALTER TABLE `category`
 -- Indexes for table `contact`
 --
 ALTER TABLE `contact`
-  ADD PRIMARY KEY (`ContactID`),
-  ADD KEY `UserID` (`UserID`);
+  ADD PRIMARY KEY (`ContactID`);
 
 --
 -- Indexes for table `drone`
@@ -206,13 +215,13 @@ ALTER TABLE `user_drone_order`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `Category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `ContactID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ContactID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `drone`
@@ -230,7 +239,7 @@ ALTER TABLE `order_table`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `User_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `User_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
@@ -242,12 +251,6 @@ ALTER TABLE `user`
 ALTER TABLE `cart_item`
   ADD CONSTRAINT `drone_user_category_drone_cart_item_fk` FOREIGN KEY (`Drone_id`) REFERENCES `drone` (`Drone_id`),
   ADD CONSTRAINT `user_user_category_drone_cart_item_fk` FOREIGN KEY (`User_id`) REFERENCES `user` (`User_id`);
-
---
--- Constraints for table `contact`
---
-ALTER TABLE `contact`
-  ADD CONSTRAINT `contact_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`User_id`);
 
 --
 -- Constraints for table `drone`

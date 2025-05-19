@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class ProductPageController
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/drone"})
+@WebServlet(asyncSupported = true, urlPatterns = { "/ooooooooooooo"})
 public class ProductPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -83,7 +83,7 @@ public class UserService {
 	    return UserList;
 	}
 	
-	 // 🔥 NEW METHOD
+	
     public boolean deleteUserById(int id) {
         if (dbConn == null) {
             System.err.println("Database connection error while deleting user.");
@@ -93,6 +93,25 @@ public class UserService {
         String query = "DELETE FROM user WHERE User_id = ?";
         try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
             stmt.setInt(1, id);
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    
+    public boolean updateUserRole(int userId, String newRole) {
+        if (dbConn == null) {
+            System.err.println("Database connection error while updating user role.");
+            return false;
+        }
+
+        String query = "UPDATE user SET Role_Name = ? WHERE User_id = ?";
+        try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
+            stmt.setString(1, newRole);
+            stmt.setInt(2, userId);
             int rowsAffected = stmt.executeUpdate();
             return rowsAffected > 0;
         } catch (SQLException e) {

@@ -15,7 +15,7 @@ import com.FlyHigh.service.admin.DroneService;
 /**
  * Servlet implementation class Search
  */
-@WebServlet(asyncSupported = true, name = "search", urlPatterns = { "/search" })
+@WebServlet(asyncSupported = true, name = "search", urlPatterns = { "/search", "/drones" })
 public class SearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	SearchService searchService;
