@@ -73,10 +73,12 @@ public class LoginController extends HttpServlet {
 			SessionUtil.setAttribute(req, "email", email);
 
 			if (userModel.getRole().equals("admin")) {
-				CookieUtil.addCookie(resp, "role", "admin", 30 * 60);
+//				CookieUtil.addCookie(resp, "role", "admin", 30 * 60);
+				SessionUtil.setAttribute(req, "role", "admin");
 				resp.sendRedirect(req.getContextPath() + "/dashboard");
 			} else {
-				CookieUtil.addCookie(resp, "role", "customer", 30 * 60);
+//				CookieUtil.addCookie(resp, "role", "customer", 30 * 60);
+				SessionUtil.setAttribute(req, "role", "customer");
 				resp.sendRedirect(req.getContextPath() + "/home");
 			}
 		} else {

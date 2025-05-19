@@ -46,21 +46,25 @@
     	
 		<c:if test="${not empty drones}">
 		<div class="product-grid">
-
+	
 <c:forEach items="${drones}" var="drone">
-  <div class="product-card">
-    <div class="product-image">
-      <img src="${pageContext.request.contextPath}/product/${drone.imageUrl}" alt="${drone.name}" />
-    </div>
-    <div class="product-details">
-      <h3>${drone.name}</h3>
-      <p>${drone.description}</p>
-      <div class="product-price">
-        <span>Rs ${drone.price}</span>
-      </div>
-      <button class="btn btn-secondary">Add to Cart</button>
-    </div>
-  </div>
+          <div class="product-card">
+            <div class="product-image">
+              <img src="${pageContext.request.contextPath}/product/${drone.imageUrl}" alt="${drone.name}" />
+            </div>
+            <div class="product-details">
+              <h3>${drone.name}</h3>
+              <p>${drone.description}</p>
+              <div class="product-price">
+                <span>Rs ${drone.price}</span>
+              </div>
+              <form action="${pageContext.request.contextPath}/cart" method="post">
+                <input type="hidden" name="productId" value="${drone.id}" />
+                <input type="hidden" name="action" value="add" />
+                <button type="submit" class="btn btn-secondary">Add to Cart</button>
+              </form>
+            </div>
+          </div>
 </c:forEach>
 
 

@@ -212,9 +212,12 @@ public class AuthenticationFilter implements Filter {
 
 		boolean isLoggedIn = SessionUtil.getAttribute(req, "email") != null;
 		
-		String userRole = CookieUtil.getCookie(req, "role") != null
-				? CookieUtil.getCookie(req, "role").getValue()
-				: null;
+//		String userRole = CookieUtil.getCookie(req, "role") != null
+//				? CookieUtil.getCookie(req, "role").getValue()
+//				: null;
+		
+		String userRole = (String) SessionUtil.getAttribute(req, "role");
+
 
 		if ("admin".equals(userRole)) {
 			if (uri.equals(LOGIN) || uri.equals(REGISTER)) {

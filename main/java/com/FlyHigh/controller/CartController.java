@@ -22,47 +22,54 @@ public class CartController extends HttpServlet {
 
         // Get or create cart from session
         Map<Integer, Integer> cart = (Map<Integer, Integer>) SessionUtil.getAttribute(request, "cart");
-        
+        String email = (String) SessionUtil.getAttribute(request, "email");
+
         if (cart == null) {
             cart = new HashMap<>();
         }
 
-        // Handle actions
         if ("add".equalsIgnoreCase(action)) {
             int droneId = Integer.parseInt(request.getParameter("productId"));
             int currentQty = cart.getOrDefault(droneId, 0);
             if (currentQty < MAX_QUANTITY) {
                 cart.put(droneId, currentQty + 1);
             }
+            SessionUtil.setAttribute(request, "cart", cart);
+            response.sendRedirect(request.getContextPath() + "/cart");
+            return;
         } else if ("remove".equalsIgnoreCase(action)) {
             int droneId = Integer.parseInt(request.getParameter("productId"));
             cart.remove(droneId);
+            SessionUtil.setAttribute(request, "cart", cart);
+            response.sendRedirect(request.getContextPath() + "/cart");
+            return;
         } else if ("updateQuantity".equalsIgnoreCase(action)) {
             int droneId = Integer.parseInt(request.getParameter("productId"));
             int quantity = Integer.parseInt(request.getParameter("quantity"));
+            
             if (quantity <= 0) {
                 cart.remove(droneId);
             } else if (quantity <= MAX_QUANTITY) {
                 cart.put(droneId, quantity);
             }
+            
+            SessionUtil.setAttribute(request, "cart", cart);
+            response.sendRedirect(request.getContextPath() + "/cart");
+            return;
         } else if ("checkout".equalsIgnoreCase(action)) {
-        	String email = (String) SessionUtil.getAttribute(request, "email");
-        	
-        	RegisterService registerService = new RegisterService();
-        	String id = registerService.getIdByEmail(email);
+            CartService cartService = new CartService();
+            String errorMessage = cartService.handleCheckout(email, cart);
 
-        	
-        	System.out.println(email + " " + id);
-        	
+            if (errorMessage == null) {
+                SessionUtil.setAttribute(request, "cart", null);
+                response.sendRedirect(request.getContextPath() + "/purchasesuccess");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/cart?error=" + java.net.URLEncoder.encode(errorMessage, "UTF-8"));
+            }
 
-//        	CartService cartService = new CartService();
-//        	cartService.handleCheckout(id,cart);
         }
-
-        // Save cart to session
-        SessionUtil.setAttribute(request, "cart", cart);
-        response.sendRedirect(request.getContextPath() + "/cart");
     }
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -70,8 +77,9 @@ public class CartController extends HttpServlet {
         Map<Integer, Integer> cart = (Map<Integer, Integer>) SessionUtil.getAttribute(request, "cart");
         
         List<DroneModel> cartItems = new ArrayList<>();
-        Map<Integer, Integer> quantityMap = new HashMap<>(); // can also be changed to Map
-
+        Map<Integer, Integer> quantityMap = new HashMap<>();
+        
+       
         if (cart != null && !cart.isEmpty()) {
             DroneService droneService = new DroneService();
             Iterator<Map.Entry<Integer, Integer>> iterator = cart.entrySet().iterator();
@@ -90,7 +98,8 @@ public class CartController extends HttpServlet {
 
             SessionUtil.setAttribute(request, "cart", cart);
         }
-
+        
+        request.setAttribute("errorMessage", request.getParameter("error"));
         request.setAttribute("cartItems", cartItems);
         request.setAttribute("quantityMap", quantityMap);
         request.getRequestDispatcher("WEB-INF/pages/cart.jsp").forward(request, response);

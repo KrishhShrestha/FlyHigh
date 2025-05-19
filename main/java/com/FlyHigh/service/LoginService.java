@@ -73,7 +73,7 @@ public class LoginService {
 			return null;
 		}
 		
-		String query = "SELECT `Role_Name` FROM `user` WHERE `User_email` = ?";
+		String query = "SELECT `User_id`, `Role_Name` FROM `user` WHERE `User_email` = ?";
 		
 		try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
 			stmt.setString(1, UserModel.getEmail());
@@ -83,7 +83,7 @@ public class LoginService {
 			
 			if (result.next()) {
 				String Role_Name = result.getString("Role_Name");
-				
+							
 				return Role_Name;
 			}
 			

@@ -67,29 +67,4 @@ public class RegisterService {
 			return null;
 		}
 	}
-	
-	public String getIdByEmail(String email) {
-		if (dbConn == null) {
-			System.err.println("Database connection is not available.");
-			return null;
-		}
-		
-		String query = "SELECT `User_id`,  FROM `user` WHERE `User_email` = ? ";
-		try(PreparedStatement queryStmt = dbConn.prepareStatement(query)){
-			queryStmt.setString(1, email);
-			
-			var resultSet = queryStmt.executeQuery();
-			
-			if(resultSet.next()) {
-				 return resultSet.getString("User_id");
-			}
-			
-			return null;
-			
-		} catch (SQLException e) {
-			System.err.println("Error during student registration: " + e.getMessage());
-			e.printStackTrace();
-			return null;
-		}
-	}
 }

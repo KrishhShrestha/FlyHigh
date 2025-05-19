@@ -1,6 +1,8 @@
+<%@ page session="true" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +21,13 @@
     <div class="heading">
       <h1>My Cart</h1>
     </div>
-
+    
+        <c:if test="${not empty errorMessage}">
+            <div class='toast error'>
+                ${errorMessage}
+            </div>
+        </c:if>
+        
     <c:if test="${empty cartItems}">
       <p>Your cart is empty.</p>
     </c:if>
