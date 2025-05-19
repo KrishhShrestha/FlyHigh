@@ -1,14 +1,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Home</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/pages/home.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/global/HeaderFooter.css" />
+  <meta charset="UTF-8">
+  <title>Home</title>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pages/home.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/global/HeaderFooter.css" />
 </head>
 <body>
 <jsp:include page="header.jsp" />
@@ -43,7 +41,11 @@
               <div class="product-price">
                 <span>Rs ${drone.price}</span>
               </div>
-              <button class="btn btn-secondary">Add to Cart</button>
+              <form action="${pageContext.request.contextPath}/cart" method="post">
+                <input type="hidden" name="productId" value="${drone.id}" />
+                <input type="hidden" name="action" value="add" />
+                <button type="submit" class="btn btn-secondary">Add to Cart</button>
+              </form>
             </div>
           </div>
         </c:forEach>
@@ -81,7 +83,11 @@
               <div class="product-price">
                 <span>Rs ${drone.price}</span>
               </div>
-              <button class="btn btn-secondary">Add to Cart</button>
+              <form action="${pageContext.request.contextPath}/cart" method="post">
+                <input type="hidden" name="productId" value="${drone.id}" />
+                <input type="hidden" name="action" value="add" />
+                <button type="submit" class="btn btn-secondary">Add to Cart</button>
+              </form>
             </div>
           </div>
         </c:forEach>
@@ -100,19 +106,16 @@
         <h3 class="service-title">Free Shipping</h3>
         <p class="service-description">Free Shipping Within Kathmandu Valley</p>
       </div>
-
       <div class="service-item">
         <i class="fas fa-headset service-icon"></i>
         <h3 class="service-title">24/7 Service</h3>
         <p class="service-description">24/7 On Time Service</p>
       </div>
-
       <div class="service-item">
         <i class="fas fa-certificate service-icon"></i>
         <h3 class="service-title">Company Authorized</h3>
         <p class="service-description">100% Genuine Products</p>
       </div>
-
       <div class="service-item">
         <i class="fas fa-map-marked-alt service-icon"></i>
         <h3 class="service-title">All Over Nepal</h3>
