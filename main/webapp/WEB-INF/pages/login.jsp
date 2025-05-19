@@ -17,6 +17,10 @@
   </head>
 
   <body>
+	  <c:if test="${not empty success}">
+	  	<div class="toast success">${success}</div>
+	  </c:if>
+  
     <main class="main">
       <section class="register-wrapper login-wrapper">
         <div class="image-container">
@@ -32,7 +36,7 @@
             <div class="input-div">
               <label for="email">Email</label>
               <input
-                type="email"
+                type="text"
                 id="email"
                 name="email"
                 placeholder="ram.thapa@flyhigh.com.np"

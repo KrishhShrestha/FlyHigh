@@ -55,6 +55,7 @@ public class AddDroneController extends HttpServlet {
 		request.getRequestDispatcher("WEB-INF/pages/admin/addDrone.jsp").forward(request, response);
 	}
 
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -93,7 +94,6 @@ public class AddDroneController extends HttpServlet {
 		String formattedImageUrl = ImageUtil.formatImageUrl(imageUrl);
 		
 
-		// create models
 		CategoryModel categoryModel = new CategoryModel(category);
 		DroneModel droneModel = new DroneModel(
 			    name,

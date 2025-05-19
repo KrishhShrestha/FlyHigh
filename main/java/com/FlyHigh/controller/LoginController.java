@@ -1,9 +1,6 @@
 package com.FlyHigh.controller;
 
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import com.FlyHigh.model.UserModel;
 import com.FlyHigh.service.LoginService;
@@ -18,8 +15,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * LoginController is responsible for handling login requests. It interacts with
- * the LoginService to authenticate users.
+ * LoginController is responsible for handling login requests.
+ * It interacts with the LoginService to authenticate users.
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/login" })
 public class LoginController extends HttpServlet {
@@ -36,72 +33,81 @@ public class LoginController extends HttpServlet {
 
 	/**
 	 * Handles GET requests to the login page.
-	 *
-	 * @param request  HttpServletRequest object
-	 * @param response HttpServletResponse object
-	 * @throws ServletException if a servlet-specific error occurs
-	 * @throws IOException      if an I/O error occurs
 	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setAttribute("success", request.getParameter("success"));
 		request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
 	}
 
 	/**
 	 * Handles POST requests for user login.
-	 *
-	 * @param request  HttpServletRequest object
-	 * @param response HttpServletResponse object
-	 * @throws ServletException if a servlet-specific error occurs
-	 * @throws IOException      if an I/O error occurs
 	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String email = req.getParameter("email");
-		String password = req.getParameter("password");
-	
-		if (email == null || email.trim().isEmpty() || !ValidationUtil.isValidEmail(email) || password == null || password.trim().isEmpty()) {
-			req.setAttribute("errorMessage", "Email and password are required.");
+		String errorMessage = validateLoginFields(req);
+
+		if (errorMessage != null) {
+			req.setAttribute("errorMessage", errorMessage);
 			req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
 			return;
 		}
 
+		String email = req.getParameter("email").trim();
+		String password = req.getParameter("password").trim();
+
 		UserModel userModel = new UserModel(email, password);
-		
-		
-		String UserRole = loginService.getUserRole(userModel);
-		userModel.setRole(UserRole);
-		
+		String userRole = loginService.getUserRole(userModel);
+
+		if (userRole == null || userRole.trim().isEmpty()) {
+			req.setAttribute("errorMessage", "User not found.");
+			req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
+			return;
+		}
+
+		userModel.setRole(userRole);
 		Boolean loginStatus = loginService.loginUser(userModel);
-		
 
 		if (loginStatus != null && loginStatus) {
 			SessionUtil.setAttribute(req, "email", email);
-			
+
 			if (userModel.getRole().equals("admin")) {
-				CookieUtil.addCookie(resp, "role", "admin", 5 * 30);
+				CookieUtil.addCookie(resp, "role", "admin", 30 * 60);
 				resp.sendRedirect(req.getContextPath() + "/dashboard");
 			} else {
-				CookieUtil.addCookie(resp, "role", "customer", 5 * 30);
-				resp.sendRedirect(req.getContextPath() + "/home"); 
+				CookieUtil.addCookie(resp, "role", "customer", 30 * 60);
+				resp.sendRedirect(req.getContextPath() + "/home");
 			}
 		} else {
 			handleLoginFailure(req, resp, loginStatus);
 		}
 	}
-	
-	
 
 	/**
-	 * Handles login failures by setting attributes and forwarding to the login
-	 * page.
-	 *
-	 * @param req         HttpServletRequest object
-	 * @param resp        HttpServletResponse object
-	 * @param loginStatus Boolean indicating the login status
-	 * @throws ServletException if a servlet-specific error occurs
-	 * @throws IOException      if an I/O error occurs
+	 * Validates login input fields.
+	 */
+	private String validateLoginFields(HttpServletRequest req) {
+		String email = req.getParameter("email");
+		String password = req.getParameter("password");
+
+		if (ValidationUtil.isNullOrEmpty(email)) {
+			return "Email is required.";
+		}
+
+		if (!ValidationUtil.isValidEmail(email)) {
+			return "Please enter a valid email address.";
+		}
+
+		if (ValidationUtil.isNullOrEmpty(password)) {
+			return "Password is required.";
+		}
+
+		return null; // No errors
+	}
+
+	/**
+	 * Handles login failures by setting error message and forwarding back to login.
 	 */
 	private void handleLoginFailure(HttpServletRequest req, HttpServletResponse resp, Boolean loginStatus)
 			throws ServletException, IOException {
@@ -109,11 +115,10 @@ public class LoginController extends HttpServlet {
 		if (loginStatus == null) {
 			errorMessage = "Our server is under maintenance. Please try again later!";
 		} else {
-			errorMessage = "Invalid Email or password!";
+			errorMessage = "Invalid email or password!";
 		}
-		
+
 		req.setAttribute("errorMessage", errorMessage);
 		req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
 	}
-
 }

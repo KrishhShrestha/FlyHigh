@@ -93,7 +93,7 @@ public class LoginService {
 		}
 		
 		// Returning as customer if no role found
-		return "customer";
+		return null;
 		
 	}
 	

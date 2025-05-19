@@ -1,14 +1,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Cart</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/pages/cart.css" />
-<script src="https://kit.fontawesome.com/385a42cb55.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cart</title>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pages/cart.css" />
+  <script src="https://kit.fontawesome.com/385a42cb55.js"></script>
 </head>
 <body>
 
@@ -32,30 +32,36 @@
           <th>SUBTOTAL</th>
         </tr>
 
-        <c:set var="totalPrice" value="0" />
+        <c:set var="totalPrice" value="0.0" />
         <c:forEach var="drone" items="${cartItems}">
+          <c:set var="qty" value="${quantityMap[drone.id]}" />
           <tr>
             <td>
               <div class="cart-info">
-                <img src="${pageContext.request.contextPath}/product/${drone.imageUrl}" alt="${drone.name}" style="width:100px;"/>
+                <img src="${pageContext.request.contextPath}/product/${drone.imageUrl}" alt="${drone.name}" style="width:100px;" />
                 <div>
                   <p style="font-weight: 550">${drone.name}</p>
-                  <small>Price: $${drone.price}</small>
-                  <br />
-                  <a href="${pageContext.request.contextPath}/CartController?action=remove&productId=${drone.id}">Remove</a>
+                  <small>Price: <fmt:formatNumber value="${drone.price}" type="currency" currencySymbol="$" /></small><br />
+                  
+              <form action="${pageContext.request.contextPath}/cart" method="post">
+                <input type="hidden" name="action" value="remove" />
+                <input type="hidden" name="productId" value="${drone.id}" />
+                <button type="submit" class="btn btn-error">Remove</button>
+              </form>
                 </div>
               </div>
             </td>
             <td>
-              <div class="wrapper">
-                <span class="minus">-</span>
-                <span class="num">1</span>
-                <span class="plus">+</span>
-              </div>
+              <form action="${pageContext.request.contextPath}/cart" method="post">
+                <input type="hidden" name="action" value="updateQuantity" />
+                <input type="hidden" name="productId" value="${drone.id}" />
+                <input type="number" name="quantity" value="${qty}" min="1" max="10" style="width: 80px;" />
+                <button type="submit" class="update-btn">Update</button>
+              </form>
             </td>
             <td>
-              $${drone.price}
-              <c:set var="totalPrice" value="${totalPrice + drone.price}" />
+              <fmt:formatNumber value="${drone.price * qty}" type="currency" currencySymbol="$" />
+              <c:set var="totalPrice" value="${totalPrice + (drone.price * qty)}" />
             </td>
           </tr>
         </c:forEach>
@@ -64,22 +70,15 @@
       <div class="total-price">
         <table>
           <tr>
-            <td>Subtotal</td>
-            <td>$${totalPrice}</td>
-          </tr>
-          <tr>
-            <td>Tax (4%)</td>
-            <td>$<c:out value="${(totalPrice * 0.04)}" /></td>
-          </tr>
-          <tr>
             <td>Total</td>
-            <td>$<c:out value="${totalPrice + (totalPrice * 0.04)}" /></td>
+            <td><fmt:formatNumber value="${totalPrice}" type="currency" currencySymbol="$" /></td>
           </tr>
           <tr>
             <td colspan="2">
-              <a href="${pageContext.request.contextPath}/purchasesuccess">
-                <button class="paybtn">PROCEED TO PAY</button>
-              </a>
+              <form action="${pageContext.request.contextPath}/cart" method="post">
+                <input type="hidden" name="action" value="checkout" />
+                <button type="submit" class="paybtn">PROCEED TO PAY</button>
+              </form>
             </td>
           </tr>
         </table>
@@ -89,31 +88,6 @@
 </main>
 
 <jsp:include page="footer.jsp" />
-
-<script>
-  const wrappers = document.querySelectorAll(".wrapper");
-  wrappers.forEach((wrapper) => {
-    const plus = wrapper.querySelector(".plus");
-    const minus = wrapper.querySelector(".minus");
-    const num = wrapper.querySelector(".num");
-
-    let count = parseInt(num.innerText);
-
-    plus.addEventListener("click", () => {
-      count++;
-      num.innerText = count;
-      // TODO: Implement quantity update in session & recalc subtotal
-    });
-
-    minus.addEventListener("click", () => {
-      if (count > 1) {
-        count--;
-        num.innerText = count;
-        // TODO: Implement quantity update in session & recalc subtotal
-      }
-    });
-  });
-</script>
 
 </body>
 </html>
