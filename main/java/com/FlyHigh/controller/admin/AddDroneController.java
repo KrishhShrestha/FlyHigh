@@ -64,13 +64,17 @@ public class AddDroneController extends HttpServlet {
 		
 		String errorMessage = validateFields(request);
 		
-        if (errorMessage != null) {
-            System.out.println(errorMessage);
-            request.setAttribute("errorMessage", errorMessage);
-            response.sendRedirect(request.getContextPath() + "/add-drone");
-            return;
-        }
-        		
+		if (errorMessage != null) {
+		    System.out.println(errorMessage);
+		    request.setAttribute("errorMessage", errorMessage);
+
+		    // Fetch category list again
+		    List<CategoryModel> categoryList = categoryService.getAllCategory();
+		    request.setAttribute("categoryList", categoryList);
+
+		    request.getRequestDispatcher("WEB-INF/pages/admin/addDrone.jsp").forward(request, response);
+		    return;
+		}
 
 		String name = request.getParameter("drone_name");
 		String description = request.getParameter("description");
@@ -117,7 +121,7 @@ public class AddDroneController extends HttpServlet {
         	droneService.addDrone(droneModel);
         	System.out.println("Drone added to db");
         	
-        	response.sendRedirect(request.getContextPath() + "/dashboard");
+        	response.sendRedirect(request.getContextPath() + "/manage-drone?success=Drone added successfully");
         } else {
         	System.out.println("Failed Adding Image");
         }

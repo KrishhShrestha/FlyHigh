@@ -15,7 +15,7 @@ import com.FlyHigh.service.admin.DroneService;
  * Servlet implementation class DroneManagementController
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/manage-drone" })
-public class DroneManagementController extends HttpServlet {
+public class ManageDroneController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private DroneService droneService;
@@ -23,7 +23,7 @@ public class DroneManagementController extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DroneManagementController() {
+    public ManageDroneController() {
         super();
         // TODO Auto-generated constructor stub
         this.droneService = new DroneService();
@@ -36,6 +36,9 @@ public class DroneManagementController extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		List<DroneModel> droneList = droneService.getAllDrones();
+		
+		
+		request.setAttribute("success", request.getParameter("success"));
 		
 		if (droneList == null || droneList.isEmpty()) {
 		    request.setAttribute("errorMessage", "No drones found or an error occurred.");

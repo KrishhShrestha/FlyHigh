@@ -14,15 +14,17 @@
 <body>
 	<jsp:include page="sidebar.jsp" />
 	
-	
+
+	<c:if test="${not empty success}">
+		<div class="toast success">${success} </div>
+	</c:if>
 
     <div style='margin-left: 15vw' class='main'>
         <h1>Drones</h1>        
         
 		<section class="section_wrapper cols-2">
 		  <div class="start_col">
-		    <input type="search" name="search" placeholder='Type here to search..' id="search">
-		    <button class='btn btn-secondary'> search</button>
+		 
 		  </div>
 		  
 		  <div class="end_col">
@@ -65,8 +67,5 @@
             </table>
         </div>
     </div>
-
-    <!-- Add Drone Modal using CSS-only approach with :target pseudo-class -->
-
 </body>
 </html>

@@ -65,7 +65,7 @@ public class DroneDetailsController extends HttpServlet {
         if (success) {
             System.out.println("Deletion successful");
             // Redirect after deletion
-            response.sendRedirect(request.getContextPath() + "/manage-drone");
+            response.sendRedirect(request.getContextPath() + "/manage-drone?success=Drone Deleted successfully");
         } else {
             System.out.println("Deletion failed");
             // Handle deletion failure (you can forward to an error page or show an error message)

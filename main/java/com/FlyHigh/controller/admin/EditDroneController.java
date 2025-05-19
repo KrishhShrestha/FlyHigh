@@ -96,11 +96,11 @@ public class EditDroneController extends HttpServlet {
             return;
         }
 
-        // Validate other fields
+        
         String errorMessage = validateFields(request);
         if (errorMessage != null) {
             request.setAttribute("errorMessage", errorMessage);
-            // Re-populate form with existing drone data
+            
             DroneModel drone = droneService.getDroneById(droneId);
             List<CategoryModel> categoryList = categoryService.getAllCategory();
             request.setAttribute("drone", drone);
@@ -121,22 +121,22 @@ public class EditDroneController extends HttpServlet {
         String dimension = request.getParameter("dimension");
         int quantity = Integer.parseInt(request.getParameter("quantity"));
         
-        // Handle image
+        
         String imageUrl;
         Part imagePart = request.getPart("image");
         String existingImageUrl = request.getParameter("existingImageUrl");
         
         
-        
-        System.out.println("Image Part: " + (imagePart != null ? imagePart.getSubmittedFileName() : "null"));
-        System.out.println("Image Part Size: " + (imagePart != null ? imagePart.getSize() : "null"));
-        System.out.println("Existing Image URL: " + existingImageUrl);
+//        System.out.println("Image Part: " + (imagePart != null ? imagePart.getSubmittedFileName() : "null"));
+//        System.out.println("Image Part Size: " + (imagePart != null ? imagePart.getSize() : "null"));
+//        System.out.println("Existing Image URL: " + existingImageUrl);
         
         
         if (imagePart != null && imagePart.getSize() > 0) {
             // New image uploaded
             imageUrl = ImageUtil.getImageNameFromPart(imagePart);
             imageUrl = ImageUtil.formatImageUrl(imageUrl);
+            
             // Upload new image
             if (!ImageUtil.uploadImage(imagePart, imageUrl, request.getServletContext().getRealPath("/"), "product")) {
                 request.setAttribute("errorMessage", "Failed to upload image.");
@@ -174,7 +174,7 @@ public class EditDroneController extends HttpServlet {
         boolean success = droneService.editDrone(droneId, droneModel);
         
         if (success) {
-            response.sendRedirect(request.getContextPath() + "/dashboard?success=Drone updated successfully");
+            response.sendRedirect(request.getContextPath() + "/manage-drone?success=Drone updated successfully");
         } else {
             request.setAttribute("errorMessage", "Failed to update drone.");
             DroneModel drone = droneService.getDroneById(droneId);
