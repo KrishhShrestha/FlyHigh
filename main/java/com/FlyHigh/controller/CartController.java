@@ -13,7 +13,15 @@ import java.util.*;
 
 @WebServlet("/cart")
 public class CartController extends HttpServlet {
-    private static final int MAX_QUANTITY = 10;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private static final int MAX_QUANTITY = 10;
+    
+    public CartController() {
+    	super();
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -21,7 +29,7 @@ public class CartController extends HttpServlet {
         String action = request.getParameter("action");
 
         // Get or create cart from session
-        Map<Integer, Integer> cart = (Map<Integer, Integer>) SessionUtil.getAttribute(request, "cart");
+		Map<Integer, Integer> cart = (Map<Integer, Integer>) SessionUtil.getAttribute(request, "cart");
         String email = (String) SessionUtil.getAttribute(request, "email");
 
         if (cart == null) {
@@ -29,6 +37,7 @@ public class CartController extends HttpServlet {
         }
 
         if ("add".equalsIgnoreCase(action)) {
+        	
             int droneId = Integer.parseInt(request.getParameter("productId"));
             int currentQty = cart.getOrDefault(droneId, 0);
             if (currentQty < MAX_QUANTITY) {
@@ -37,13 +46,16 @@ public class CartController extends HttpServlet {
             SessionUtil.setAttribute(request, "cart", cart);
             response.sendRedirect(request.getContextPath() + "/cart");
             return;
+            
         } else if ("remove".equalsIgnoreCase(action)) {
             int droneId = Integer.parseInt(request.getParameter("productId"));
             cart.remove(droneId);
             SessionUtil.setAttribute(request, "cart", cart);
             response.sendRedirect(request.getContextPath() + "/cart");
             return;
+            
         } else if ("updateQuantity".equalsIgnoreCase(action)) {
+        	
             int droneId = Integer.parseInt(request.getParameter("productId"));
             int quantity = Integer.parseInt(request.getParameter("quantity"));
             
@@ -57,6 +69,7 @@ public class CartController extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/cart");
             return;
         } else if ("checkout".equalsIgnoreCase(action)) {
+        	
             CartService cartService = new CartService();
             String errorMessage = cartService.handleCheckout(email, cart);
 
@@ -64,7 +77,7 @@ public class CartController extends HttpServlet {
                 SessionUtil.setAttribute(request, "cart", null);
                 response.sendRedirect(request.getContextPath() + "/purchasesuccess");
             } else {
-                response.sendRedirect(request.getContextPath() + "/cart?error=" + java.net.URLEncoder.encode(errorMessage, "UTF-8"));
+                response.sendRedirect(request.getContextPath() + "/cart?error=An error occoured while checkout!" );
             }
 
         }
@@ -105,23 +118,3 @@ public class CartController extends HttpServlet {
         request.getRequestDispatcher("WEB-INF/pages/cart.jsp").forward(request, response);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

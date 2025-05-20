@@ -1,64 +1,64 @@
 package com.FlyHigh.model;
 
+/**
+ * Model class representing a drone in the FlyHigh system.
+ */
 public class DroneModel {
-    private int id; // optional, for database identity
+    private int id;
     private String name;
     private String description;
     private float price;
     private int quantity;
-    
     private CategoryModel category;
-    
     private float weight;
     private float flightTime;
     private float range;
     private String cameraQuality;
     private String dimension;
-
     private String imageUrl;
 
-
+    // Default constructor
     public DroneModel() {}
-    
-    public DroneModel(int id,String name, String description, float price, CategoryModel category,
-            float weight, float flightTime, float range,
-            String cameraQuality, String dimension, String imageUrl, int quantity) {
-    	this.id = id;
-		this.name = name;
-		this.description = description;
-		this.price = price;
-		this.category = category;
-		this.weight = weight;
-		this.flightTime = flightTime;
-		this.range = range;
-		this.cameraQuality = cameraQuality;
-		this.dimension = dimension;
-		this.imageUrl = imageUrl;
-		this.quantity = quantity;
-	}
 
+    // Constructor with all fields including ID
+    public DroneModel(int id, String name, String description, float price, CategoryModel category,
+                      float weight, float flightTime, float range,
+                      String cameraQuality, String dimension, String imageUrl, int quantity) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.category = category;
+        this.weight = weight;
+        this.flightTime = flightTime;
+        this.range = range;
+        this.cameraQuality = cameraQuality;
+        this.dimension = dimension;
+        this.imageUrl = imageUrl;
+        this.quantity = quantity;
+    }
+
+    // Constructor without ID 
     public DroneModel(String name, String description, float price, CategoryModel category,
-            float weight, float flightTime, float range,
-            String cameraQuality, String dimension, String imageUrl, int quantity) {
-		this.name = name;
-		this.description = description;
-		this.price = price;
-		this.category = category;
-		this.weight = weight;
-		this.flightTime = flightTime;
-		this.range = range;
-		this.cameraQuality = cameraQuality;
-		this.dimension = dimension;
-		this.imageUrl = imageUrl;
-		this.quantity = quantity;
-	}
+                      float weight, float flightTime, float range,
+                      String cameraQuality, String dimension, String imageUrl, int quantity) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.category = category;
+        this.weight = weight;
+        this.flightTime = flightTime;
+        this.range = range;
+        this.cameraQuality = cameraQuality;
+        this.dimension = dimension;
+        this.imageUrl = imageUrl;
+        this.quantity = quantity;
+    }
 
-
-
+    // Getters and setters for all fields
     public int getId() {
         return id;
     }
-    
     public void setId(int id) {
         this.id = id;
     }
@@ -80,7 +80,6 @@ public class DroneModel {
     public float getPrice() {
         return price;
     }
-    
     public void setPrice(float price) {
         this.price = price;
     }

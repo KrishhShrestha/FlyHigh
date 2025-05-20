@@ -20,42 +20,45 @@ public class SearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	SearchService searchService;
 	DroneService droneService;
+	
     /**
-     * @see HttpServlet#HttpServlet()
+     * Used to create the object of searchService and Droneservice when the controller is initalized
      */
     public SearchController() {
         super();
-        // TODO Auto-generated constructor stub
+        // Initialize the services
         this.searchService = new SearchService();
         this.droneService = new DroneService();
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Used to fetch all drones from the database and redirect to the user
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// Fetch all drones from the database
 		 List<DroneModel> results = droneService.getAllDrones();
-		 
+		 // Set the results to the attribute in results
 		 request.setAttribute("drones", results);
+		 // Returns the jsp file to the user
 		 request.getRequestDispatcher("WEB-INF/pages/search.jsp").forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * Used to handle the search functionality
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// extract the search from the parameter
 	    String keyword = request.getParameter("search");
-	    Float min = request.getParameter("from") != null && !request.getParameter("from").isEmpty() 
-	                    ? Float.parseFloat(request.getParameter("from")) : 0;
-	    Float max = request.getParameter("to") != null && !request.getParameter("to").isEmpty() 
-	                    ? Float.parseFloat(request.getParameter("to")) : 99999;
-
-	    
+	    // extract the min value from the parameter
+	    Float min = request.getParameter("from") != null && !request.getParameter("from").isEmpty() ? Float.parseFloat(request.getParameter("from")) : 0;
+	    // extract the max value from the parameter
+	    Float max = request.getParameter("to") != null && !request.getParameter("to").isEmpty() ? Float.parseFloat(request.getParameter("to")) : 99999;
+	    // use the searchservice to fetch searched drones
 	    List<DroneModel> results = searchService.searchDrones(keyword, min, max);
-
+	    // set the results attribute to the request
 	    request.setAttribute("drones", results);
+	    // returns the jsp file to the user
 	    request.getRequestDispatcher("WEB-INF/pages/search.jsp").forward(request, response);
 	}
 

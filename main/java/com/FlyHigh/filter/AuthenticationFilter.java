@@ -177,10 +177,6 @@ public class AuthenticationFilter implements Filter {
 	// Public access paths
 	private static final Set<String> PUBLIC_PATHS = Set.of(LOGIN, REGISTER, HOME, ROOT, "/product/*");
 
-	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {
-		// Initialization logic, if needed
-	}
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -212,10 +208,7 @@ public class AuthenticationFilter implements Filter {
 
 		boolean isLoggedIn = SessionUtil.getAttribute(req, "email") != null;
 		
-//		String userRole = CookieUtil.getCookie(req, "role") != null
-//				? CookieUtil.getCookie(req, "role").getValue()
-//				: null;
-		
+	
 		String userRole = (String) SessionUtil.getAttribute(req, "role");
 
 
@@ -243,10 +236,5 @@ public class AuthenticationFilter implements Filter {
 				res.sendRedirect(req.getContextPath() + LOGIN);
 			}
 		}
-	}
-
-	@Override
-	public void destroy() {
-		// Cleanup logic, if needed
 	}
 }
