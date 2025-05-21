@@ -83,7 +83,8 @@ public class LoginService {
 			
 			if (result.next()) {
 				String Role_Name = result.getString("Role_Name");
-							
+				
+				// returning the role based on the email
 				return Role_Name;
 			}
 			
@@ -92,7 +93,7 @@ public class LoginService {
 			return null;
 		}
 		
-		// Returning as customer if no role found
+		// Returning null if no user is found
 		return null;
 		
 	}

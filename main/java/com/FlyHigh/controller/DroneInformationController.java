@@ -20,7 +20,7 @@ public class DroneInformationController extends HttpServlet {
     private DroneService droneService;
 
     /**
-     * Initializes the DroneDetailsController and the DroneService
+     * Initializes the DroneInfromationController and the DroneService
      */
     public DroneInformationController() {
         super();
@@ -57,44 +57,6 @@ public class DroneInformationController extends HttpServlet {
         } else {
             // Redirect to /home if ID is missing
             response.sendRedirect(request.getContextPath() + "/home?error=An error Occurred");
-        }
-    }
-
-    /**
-     * Handles POST requests for actions like delete
-     */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Get action and drone ID from the form
-        String action = request.getParameter("action");
-        int droneId = Integer.parseInt(request.getParameter("droneId"));
-
-        switch (action) {
-            case "delete":
-                // Handle deletion
-                handleDelete(request, response, droneId);
-                break;
-            default:
-                // If action is unknown, send a 400 error
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unknown action: " + action);
-        }
-    }
-
-    /**
-     * Handles drone deletion
-     */
-    private void handleDelete(HttpServletRequest request, HttpServletResponse response, int id) throws ServletException, IOException {
-        // Attempt to delete the drone using service
-        boolean success = droneService.deleteDrone(id);
-
-        if (success) {
-            System.out.println("Deletion successful");
-            // Redirect to manage page with success message
-            response.sendRedirect(request.getContextPath() + "/manage-drone?success=Drone Deleted successfully");
-        } else {
-            System.out.println("Deletion failed");
-            // If deletion fails, return to detail page with error
-            request.setAttribute("errorMessage", "Failed to delete drone.");
-            request.getRequestDispatcher("WEB-INF/pages/admin/droneDetails.jsp").forward(request, response);
         }
     }
 }

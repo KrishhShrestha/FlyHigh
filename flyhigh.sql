@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 21, 2025 at 07:44 AM
+-- Generation Time: May 21, 2025 at 05:59 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,19 +24,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cart_item`
---
-
-CREATE TABLE `cart_item` (
-  `User_id` int(11) NOT NULL,
-  `Drone_id` int(11) NOT NULL,
-  `Cart_item_id` int(10) NOT NULL,
-  `Cart_item_quantity` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `category`
 --
 
@@ -51,8 +38,10 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`Category_id`, `Category_name`, `Description`) VALUES
-(10, 'Speed', 'Top speed= 120 km/hr'),
-(12, 'Agriculture', 'Water proof');
+(1, 'Photography Drones', 'Drones equipped with high-quality cameras for aerial photography and videography'),
+(2, 'Racing Drones', 'High-speed drones designed for racing and agility'),
+(3, 'Beginner Drones', 'Entry-level drones suitable for new users and hobbyists'),
+(4, 'Industrial Drones', 'Heavy-duty drones used for surveying, inspection, and delivery tasks');
 
 -- --------------------------------------------------------
 
@@ -73,9 +62,11 @@ CREATE TABLE `contact` (
 --
 
 INSERT INTO `contact` (`ContactID`, `fname`, `lname`, `email`, `message`) VALUES
-(1, 'Nowal', 'Jung', 'flyhigh@gmail.com', 'hello\r\n'),
-(2, 'ahaha', 'okak', 'nowalbaidwarf5@gmail.com', 'hahaha\r\n'),
-(3, 'Gary', 'Mcneil', 'tynuw@mailinator.com', 'Aut deserunt ut et m');
+(1, 'Suman', 'Shrestha', 'suman.shrestha@example.com', 'Hi! '),
+(2, 'Anita', 'Thapa', 'anita.thapa@gmail.com', 'What are the delivery options like?'),
+(3, 'Rajesh', 'Koirala', 'rajesh.koirala@yahoo.com', 'I have a question about the delivery time.'),
+(4, 'Pooja', 'Gurung', 'pooja.gurung@outlook.com', 'Please send me the product details'),
+(5, 'Dipak', 'Basnet', 'dipak.basnet@mail.com', 'Any discounts available?');
 
 -- --------------------------------------------------------
 
@@ -103,10 +94,16 @@ CREATE TABLE `drone` (
 --
 
 INSERT INTO `drone` (`Drone_id`, `Drone_name`, `Drone_description`, `Drone_price`, `Drone_quantity`, `Weight_grams`, `Flight_time_minutes`, `Range_meter`, `Camera_quality`, `Dimension`, `Drone_image`, `Category_id`) VALUES
-(5, 'Kaye Rasmussen', 'Et blanditiis sed ne', 788, 685, 10, 20, 10, 'Qui quibusdam est a', 'Laudantium repudian', 'Screenshot 2025-04-09 222509_6cdf6c9a.png', 12),
-(6, 'Thaddeus Holden', 'Cumque eos impedit', 55, 224, 42, 58, 72, 'Enim amet tempora e', 'Quia cumque aspernat', 'Screenshot 2025-04-09 222509_e14cbfe5.png', 10),
-(7, 'Kennan Finley', 'Omnis ratione omnis ', 978, 295, 15, 90, 64, 'In et aut tempore p', 'Non deserunt dolores', 'Screenshot 2025-04-09 222509_47865229.png', 12),
-(8, 'Cally Mitchell', 'Ab totam modi et mol', 120, 287, 73, 93, 55, 'Eos irure ipsam ab q', 'Ullamco perspiciatis', 'Screenshot 2025-04-09 222631_25007ef5.png', 12);
+(1, 'SkyRider X1', 'High-end drone for aerial photography', 899.99, 4, 1200, 25, 4000, '4K', '30x30x10 cm', 'drone.jpg', 1),
+(2, 'Falcon Z3', 'Lightweight drone with long flight range', 649.5, 7, 850, 30, 5000, '1080p', '25x25x8 cm', 'drone.jpg', 2),
+(3, 'AeroSnap Pro', 'Professional drone with image stabilization', 1199, 0, 1350, 28, 4500, '4K', '32x32x12 cm', 'drone.jpg', 1),
+(4, 'HawkEye Mini', 'Compact drone for beginners', 299.99, 12, 600, 15, 2000, '720p', '20x20x5 cm', 'drone.jpg', 3),
+(5, 'BuzzFly 360', '360-degree camera drone with stable flight', 749, 5, 950, 22, 3800, '1080p', '28x28x9 cm', 'drone.jpg', 2),
+(6, 'Nimbus V2', 'All-weather drone with GPS', 999, 4, 1250, 26, 4200, '4K', '31x31x11 cm', 'drone.jpg', 1),
+(7, 'Stealth Aero', 'Silent motor drone for stealth operations', 829, 7, 1000, 24, 3700, '1080p', '27x27x8 cm', 'drone.jpg', 2),
+(8, 'DriftSurfer', 'Wind-resistant drone for beach and coastal areas', 589, 9, 890, 20, 3400, '1080p', '26x26x8 cm', 'drone.jpg', 3),
+(9, 'PhotonEdge', 'Drone with night vision camera', 1299.99, 2, 1400, 32, 4600, '4K Night Vision', '34x34x13 cm', 'drone.jpg', 1),
+(10, 'Eagle Pro Max', 'Top-tier drone with obstacle detection', 1399, 1, 1500, 35, 4800, '5K', '35x35x14 cm', 'drone.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -126,9 +123,9 @@ CREATE TABLE `order_table` (
 --
 
 INSERT INTO `order_table` (`Order_id`, `Order_date`, `Total_amount`, `status`) VALUES
-(3, '2025-05-21', 598, 'canceled'),
-(4, '2025-05-09', 799, 'processing'),
-(5, '2025-05-07', 533, 'success');
+(6, '2025-05-21', 4496.99, 'pending'),
+(7, '2025-05-21', 649.5, 'pending'),
+(8, '2025-05-21', 749, 'pending');
 
 -- --------------------------------------------------------
 
@@ -154,11 +151,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`User_id`, `User_name`, `User_phone`, `Gender`, `User_DOB`, `User_email`, `User_password`, `User_address`, `Role_Name`, `User_image`) VALUES
-(3, 'Aakrist', '9800000000', 'male', '2025-04-08', 'a@Thapa.com', 'XFsZmFliwIrZhKR470fWP8kjglftVkDGU/T+cvAoNT9u9NziANLwH1b1V6RleaCBbseA1A==', 'kamalpokhar', 'customer', ''),
-(8, 'Clinton', '9839953995', 'female', '2015-04-28', 'sayuj@gmail.com', 'RTJ01ynE5w7Og6QZPZmDGgvW5kL4bfcQsX0lazIj7ZP0LuIvbU7WUEKwa+zGYSFklFCVVtQ=', 'Eligendi voluptate u', 'admin', 'agile-wbs-final(1)_455cc45e.jpg'),
-(9, 'Nash', '9862766276', 'female', '1996-08-14', 'ram@mail.com', 'gTmiX2jpPoBYo5S1AdBog+I+uIkE3jZZ5uKqL4Yp9kamjKx7ol6GaHnIRw2NbV5INRSCyxI=', 'Cillum tempore sint', 'customer', 'Screenshot 2025-04-06 205953_e01a97cb.png'),
-(10, 'Ram', '9844555789', 'male', '2025-05-01', 'ram99@high.com', 'vpfXI4HoEHyUijg2YV0qn5ij2/w76oQR6EWd+mGtwkE7dX1tf63vjodfu2tA6yZttzMlKlI=', 'kammalll', 'customer', '11_e16cbaf9.png'),
-(13, 'Ram', '9844555790', 'male', '2025-05-01', 'ram91@flyhigh.com.np', 'yS1ebUFt5Ed6jXoHotgXS47DkthzanKuN2OazTEiIVQiukP38uPZZLQIxbxX2DzDMAkaMhk=', 'jhapa', 'admin', '11_cde9d147.png');
+(14, 'sayuj', '9800000000', 'male', '1999-10-01', 'sayuj@gmail.com', 'O2T2yaoLqRhhzTwQe1uqL275Hfu28PNxPo9SZ+cu5pxggih+x8uq8aQiOhfdSftaDZ4v4Q0=', 'Kathmandu', 'admin', 'user_77955da9.jpg'),
+(15, 'Ram', '9800000011', 'male', '2025-05-14', 'ram@mail.com', 'BsI11Vtmqir/ClACzfIdZFzGLuynI0ocYiN8dtEfZ16UPrWsPhxjMK9mKNtDvGZzTd+AyHo=', 'ktm', 'customer', 'ramphoto_91754f27.jpg');
 
 -- --------------------------------------------------------
 
@@ -178,20 +172,14 @@ CREATE TABLE `user_drone_order` (
 --
 
 INSERT INTO `user_drone_order` (`User_id`, `Drone_id`, `Order_id`, `quantity`) VALUES
-(13, 5, 4, 4),
-(13, 6, 4, 7);
+(15, 1, 6, 1),
+(15, 3, 6, 3),
+(15, 2, 7, 1),
+(15, 5, 8, 1);
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `cart_item`
---
-ALTER TABLE `cart_item`
-  ADD PRIMARY KEY (`Cart_item_id`),
-  ADD KEY `user_user_category_drone_cart_item_fk` (`User_id`),
-  ADD KEY `drone_user_category_drone_cart_item_fk` (`Drone_id`);
 
 --
 -- Indexes for table `category`
@@ -249,36 +237,29 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `ContactID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ContactID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `drone`
 --
 ALTER TABLE `drone`
-  MODIFY `Drone_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `Drone_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `order_table`
 --
 ALTER TABLE `order_table`
-  MODIFY `Order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `User_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `User_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `cart_item`
---
-ALTER TABLE `cart_item`
-  ADD CONSTRAINT `drone_user_category_drone_cart_item_fk` FOREIGN KEY (`Drone_id`) REFERENCES `drone` (`Drone_id`),
-  ADD CONSTRAINT `user_user_category_drone_cart_item_fk` FOREIGN KEY (`User_id`) REFERENCES `user` (`User_id`);
 
 --
 -- Constraints for table `drone`
