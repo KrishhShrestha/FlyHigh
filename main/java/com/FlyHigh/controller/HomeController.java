@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Collections;
 
 import com.FlyHigh.model.DroneModel;
 import com.FlyHigh.service.admin.DroneService;
@@ -33,6 +34,9 @@ public class HomeController extends HttpServlet {
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<DroneModel> allDrones = droneService.getAllDrones();
+        if (allDrones == null) {
+            allDrones = Collections.emptyList();  // Import java.util.Collections;
+        }
 
         int mid = allDrones.size() / 2;
         List<DroneModel> topDrones = allDrones.subList(0, mid);

@@ -1,307 +1,262 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/dashboard.css" />
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/admin/dashboard.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-<jsp:include page="sidebar.jsp" />
+	<jsp:include page="sidebar.jsp" />
 
-    <div  style='margin-left: 15vw' class="dashboard-container">
-        <!-- Main Content -->
-        <main class="main-content">
-            <div class="dashboard-title">
-                <h1>Dashboard Overview</h1>
-                <p>Welcome back! Here's what's happening with your drone store today.</p>
-            </div>
+	<div style="margin-left: 15vw" class="dashboard-container">
+		<main class="main-content">
+			<!-- Title -->
+			<div class="dashboard-title">
+				<h1>Dashboard Overview</h1>
+				<p>Welcome back! Here's what's happening with your drone store
+					today.</p>
+			</div>
 
-            <!-- Sales Summary Cards -->
-            <section class="sales-summary">
-                <div class="summary-card teal">
-                    <div class="card-icon">
-                        <i class="fas fa-shopping-bag"></i>
-                    </div>
-                    <div class="card-content">
-                        <h3>Today's Sales</h3>
-                        <p class="amount">$2,456.78</p>
-                        <p class="trend positive">+15% from yesterday</p>
-                    </div>
-                </div>
-                
-                <div class="summary-card orange">
-                    <div class="card-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="card-content">
-                        <h3>Total Customers</h3>
-                        <p class="amount">24</p>
-  
-                    </div>
-                </div>
-                
-                <div class="summary-card blue">
-                    <div class="card-icon">
-                        <i class="fas fa-box"></i>
-                    </div>
-                    <div class="card-content">
-                        <h3>Total Products</h3>
-                        <p class="amount">156</p>
-                        <p class="trend neutral">No change</p>
-                    </div>
-                </div>
-                
-                <div class="summary-card green">
-                    <div class="card-icon">
-                        <i class="fas fa-dollar-sign"></i>
-                    </div>
-                    <div class="card-content">
-                        <h3>Monthly Revenue</h3>
-                        <p class="amount">$45,892.34</p>
-                        <p class="trend positive">+22% from last month</p>
-                    </div>
-                </div>
-            </section>
+			<!-- Sales Summary Cards -->
+			<section class="sales-summary">
+				<div class="summary-card teal">
+					<div class="card-icon">
+						<i class="fas fa-shopping-bag"></i>
+					</div>
+					<div class="card-content">
+						<h3>Today's Sales</h3>
+						<p class="amount">$${todaysSales}</p>
+					</div>
+				</div>
 
-            <!-- Order Management Section -->
-            <section class="order-management">
-                <div class="section-header">
-                    <h2>Order Management</h2>
-                    <button class="view-all-btn">View All</button>
-                </div>
-                
-                <div class="order-status-cards">
-                    <div class="status-card">
-                        <div class="status-icon pending">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="status-content">
-                            <h3>Orders Pending</h3>
-                            <p class="status-count">42</p>
-                        </div>
-                    </div>
-                    
-                    <div class="status-card">
-                        <div class="status-icon processing">
-                            <i class="fas fa-cog"></i>
-                        </div>
-                        <div class="status-content">
-                            <h3>Orders Processing</h3>
-                            <p class="status-count">28</p>
-                        </div>
-                    </div>
-                    
-                    <div class="status-card">
-                        <div class="status-icon delivered">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                        <div class="status-content">
-                            <h3>Orders Delivered</h3>
-                            <p class="status-count">156</p>
-                        </div>
-                    </div>
-                    
-                    <div class="status-card">
-                        <div class="status-icon canceled">
-                            <i class="fas fa-times-circle"></i>
-                        </div>
-                        <div class="status-content">
-                            <h3>Orders Canceled</h3>
-                            <p class="status-count">8</p>
-                        </div>
-                    </div>
-                </div>
+				<div class="summary-card orange">
+					<div class="card-icon">
+						<i class="fas fa-users"></i>
+					</div>
+					<div class="card-content">
+						<h3>Total Customers</h3>
+						<p class="amount">${totalCustomers}</p>
+					</div>
+				</div>
 
-                <!-- Recent Orders Table -->
-                <div class="recent-orders">
-                    <h3>Recent Orders</h3>
-                    <div class="table-container">
-                        <table class="orders-table">
-                            <thead>
-                                <tr>
-                                    <th>Order ID</th>
-                                    <th>Customer</th>
-                                    <th>Product</th>
-                                    <th>Date</th>
-                                    <th>Amount</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>#ORD-5642</td>
-                                    <td>John Smith</td>
-                                    <td>DJI Mini 3 Pro</td>
-                                    <td>Apr 22, 2025</td>
-                                    <td>$759.00</td>
-                                    <td><span class="status-badge processing">Processing</span></td>
-                                    <td class="actions">
-                                        <button class="action-btn view"><i class="fas fa-eye"></i></button>
-                                        <button class="action-btn edit"><i class="fas fa-edit"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#ORD-5641</td>
-                                    <td>Sarah Johnson</td>
-                                    <td>Autel EVO II Pro</td>
-                                    <td>Apr 22, 2025</td>
-                                    <td>$1,495.00</td>
-                                    <td><span class="status-badge delivered">Delivered</span></td>
-                                    <td class="actions">
-                                        <button class="action-btn view"><i class="fas fa-eye"></i></button>
-                                        <button class="action-btn edit"><i class="fas fa-edit"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#ORD-5640</td>
-                                    <td>Michael Brown</td>
-                                    <td>Skydio 2+</td>
-                                    <td>Apr 21, 2025</td>
-                                    <td>$999.00</td>
-                                    <td><span class="status-badge pending">Pending</span></td>
-                                    <td class="actions">
-                                        <button class="action-btn view"><i class="fas fa-eye"></i></button>
-                                        <button class="action-btn edit"><i class="fas fa-edit"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#ORD-5639</td>
-                                    <td>Emily Davis</td>
-                                    <td>DJI Mavic 3</td>
-                                    <td>Apr 21, 2025</td>
-                                    <td>$2,049.00</td>
-                                    <td><span class="status-badge canceled">Canceled</span></td>
-                                    <td class="actions">
-                                        <button class="action-btn view"><i class="fas fa-eye"></i></button>
-                                        <button class="action-btn edit"><i class="fas fa-edit"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#ORD-5638</td>
-                                    <td>Robert Wilson</td>
-                                    <td>Autel Nano+</td>
-                                    <td>Apr 20, 2025</td>
-                                    <td>$659.00</td>
-                                    <td><span class="status-badge delivered">Delivered</span></td>
-                                    <td class="actions">
-                                        <button class="action-btn view"><i class="fas fa-eye"></i></button>
-                                        <button class="action-btn edit"><i class="fas fa-edit"></i></button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
+				<div class="summary-card blue">
+					<div class="card-icon">
+						<i class="fas fa-box"></i>
+					</div>
+					<div class="card-content">
+						<h3>Total Products</h3>
+						<p class="amount">${totalProducts}</p>
+					</div>
+				</div>
 
-            <!-- Two Column Layout for Products and Weekly Sales Chart -->
-            <section class="two-column-section">
-                <!-- Product Listings -->
-                <div class="column product-listings">
-                    <div class="section-header">
-                        <h2>Top Selling Products</h2>
-                        <button class="view-all-btn">View All</button>
-                    </div>
-                    <div class="product-list">
-                        <div class="product-item">
-                            <div class="product-image">
-                                <div class="placeholder-image">
-                                    <i class="fas fa-drone-alt"></i>
-                                </div>
-                            </div>
-                            <div class="product-details">
-                                <h4>DJI Mini 3 Pro</h4>
-                                <p class="product-category">Consumer Drones</p>
-                                <div class="product-stats">
-                                    <span class="stock">In Stock: 24</span>
-                                    <span class="price">$759.00</span>
-                                </div>
-                                <p class="products-sold">Total Sold: 128 units</p>
-                            </div>
-                        </div>
-                        
-                        <div class="product-item">
-                            <div class="product-image">
-                                <div class="placeholder-image">
-                                    <i class="fas fa-drone-alt"></i>
-                                </div>
-                            </div>
-                            <div class="product-details">
-                                <h4>DJI Mavic 3</h4>
-                                <p class="product-category">Professional Drones</p>
-                                <div class="product-stats">
-                                    <span class="stock">In Stock: 12</span>
-                                    <span class="price">$2,049.00</span>
-                                </div>
-                                <p class="products-sold">Total Sold: 86 units</p>
-                            </div>
-                        </div>
-                        
-                        <div class="product-item">
-                            <div class="product-image">
-                                <div class="placeholder-image">
-                                    <i class="fas fa-drone-alt"></i>
-                                </div>
-                            </div>
-                            <div class="product-details">
-                                <h4>Autel EVO II Pro</h4>
-                                <p class="product-category">Professional Drones</p>
-                                <div class="product-stats">
-                                    <span class="stock">In Stock: 8</span>
-                                    <span class="price">$1,495.00</span>
-                                </div>
-                                <p class="products-sold">Total Sold: 64 units</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Weekly Sales Chart -->
-                <div class="column weekly-sales">
-                    <div class="section-header">
-                        <h2>Weekly Sales</h2>
-                        <button class="view-all-btn">View Report</button>
-                    </div>
-                    <div class="chart-container">
-                        <div class="chart-y-axis">
-                            <span>$3000</span>
-                            <span>$2500</span>
-                            <span>$2000</span>
-                            <span>$1500</span>
-                            <span>$1000</span>
-                            <span>$500</span>
-                            <span>$0</span>
-                        </div>
-                        <div class="chart">
-                            <div class="chart-line">
-                                <div class="chart-point" style="--point-height: 60%;" data-value="$1800"></div>
-                                <div class="chart-point" style="--point-height: 75%;" data-value="$2250"></div>
-                                <div class="chart-point" style="--point-height: 90%;" data-value="$2700"></div>
-                                <div class="chart-point" style="--point-height: 70%;" data-value="$2100"></div>
-                                <div class="chart-point" style="--point-height: 80%;" data-value="$2400"></div>
-                                <div class="chart-point" style="--point-height: 50%;" data-value="$1500"></div>
-                                <div class="chart-point" style="--point-height: 65%;" data-value="$1950"></div>
-                            </div>
-                        </div>
-                        <div class="chart-x-axis">
-                            <span>Mon</span>
-                            <span>Tue</span>
-                            <span>Wed</span>
-                            <span>Thu</span>
-                            <span>Fri</span>
-                            <span>Sat</span>
-                            <span>Sun</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-    </div>
+				<div class="summary-card green">
+					<div class="card-icon">
+						<i class="fas fa-dollar-sign"></i>
+					</div>
+					<div class="card-content">
+						<h3>Monthly Revenue</h3>
+						<p class="amount">$${monthlyRevenue}</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- Order Management Section -->
+			<section class="order-management">
+				<div class="section-header">
+					<h2>Order Management</h2>
+					<button class="view-all-btn">View All</button>
+				</div>
+
+				<div class="order-status-cards">
+					<div class="status-card">
+						<div class="status-icon pending">
+							<i class="fas fa-clock"></i>
+						</div>
+						<div class="status-content">
+							<h3>Orders Pending</h3>
+							<p class="status-count">
+								<c:choose>
+									<c:when test="${not empty statusCounts['pending']}">${statusCounts['pending']}</c:when>
+									<c:otherwise>0</c:otherwise>
+								</c:choose>
+							</p>
+						</div>
+					</div>
+
+					<div class="status-card">
+						<div class="status-icon processing">
+							<i class="fas fa-cog"></i>
+						</div>
+						<div class="status-content">
+							<h3>Orders Processing</h3>
+							<p class="status-count">
+								<c:choose>
+									<c:when test="${not empty statusCounts['processing']}">${statusCounts['processing']}</c:when>
+									<c:otherwise>0</c:otherwise>
+								</c:choose>
+							</p>
+						</div>
+					</div>
+
+					<div class="status-card">
+						<div class="status-icon delivered">
+							<i class="fas fa-check-circle"></i>
+						</div>
+						<div class="status-content">
+							<h3>Orders Delivered</h3>
+							<p class="status-count">
+								<c:choose>
+									<c:when test="${not empty statusCounts['success']}">${statusCounts['success']}</c:when>
+									<c:otherwise>0</c:otherwise>
+								</c:choose>
+							</p>
+						</div>
+					</div>
+
+					<div class="status-card">
+						<div class="status-icon canceled">
+							<i class="fas fa-times-circle"></i>
+						</div>
+						<div class="status-content">
+							<h3>Orders Canceled</h3>
+							<p class="status-count">
+								<c:choose>
+									<c:when test="${not empty statusCounts['']}">${statusCounts['']}</c:when>
+									<c:otherwise>0</c:otherwise>
+								</c:choose>
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- Recent Orders Table -->
+				<div class="recent-orders">
+					<h3>Recent Orders</h3>
+					<div class="table-container">
+						<table class="orders-table">
+							<thead>
+								<tr>
+									<th>Order ID</th>
+									<th>Date</th>
+									<th>Amount</th>
+									<th>Status</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="order" items="${orderData}">
+									<tr>
+										<td>${order.id}</td>
+										<td>${order.order_date}</td>
+										<td>$${order.total_amount}</td>
+										<td><span class="status-badge ${order.status}">${order.status}</span></td>
+										<td>
+											<button class="action-btn view"
+												onclick="openOrderModal('${order.id}','${order.order_date}','${order.total_amount}','${order.status}')">
+												View</button>
+										</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</section>
+
+			<!-- Order Details Modal -->
+			<div id="orderModal" class="modal" style="display: none;">
+				<div class="modal-content">
+					<span class="close-btn" onclick="closeModal()">&times;</span>
+					<h2>Order Details</h2>
+					<p>
+						<strong>ID:</strong> <span id="modalOrderId"></span>
+					</p>
+					<p>
+						<strong>Date:</strong> <span id="modalOrderDate"></span>
+					</p>
+					<p>
+						<strong>Amount:</strong> $<span id="modalTotalAmount"></span>
+					</p>
+					<p>
+						<strong>Status:</strong> <span id="modalStatus"></span>
+					</p>
+				</div>
+			</div>
+			<script>
+				function openOrderModal(id, date, amt, status) {
+					document.getElementById('modalOrderId').innerText = id;
+					document.getElementById('modalOrderDate').innerText = date;
+					document.getElementById('modalTotalAmount').innerText = amt;
+					document.getElementById('modalStatus').innerText = status;
+					document.getElementById('orderModal').style.display = 'block';
+				}
+				function closeModal() {
+					document.getElementById('orderModal').style.display = 'none';
+				}
+			</script>
+
+			<!-- Top Selling Products & Weekly Sales Chart -->
+			<section class="two-column-section">
+				<!-- Top Selling Products -->
+				<div class="column product-listings">
+					<div class="section-header">
+						<h2>Top Selling Products</h2>
+						<button class="view-all-btn">View All</button>
+					</div>
+					<div class="product-list">
+						<c:forEach var="drone" items="${topProducts}">
+							<div class="product-item">
+								<img src="${pageContext.request.contextPath}/${drone.imageUrl}"
+									alt="${drone.name}" />
+								<div class="product-details">
+									<h4>${drone.name}</h4>
+									<p>Sold: ${drone.quantity} units</p>
+									<p>Price: $${drone.price}</p>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+
+				<!-- Weekly Sales Chart -->
+				<div class="column weekly-sales">
+					<div class="section-header">
+						<h2>Weekly Sales</h2>
+						<button class="view-all-btn">View Report</button>
+					</div>
+					<div class="chart-container">
+						<div class="chart-y-axis">
+							<c:forEach var="i" begin="0" end="6">
+								<span>$${(maxWeeklySale/6)*(6-i)}</span>
+							</c:forEach>
+						</div>
+						<div class="chart">
+							<div class="chart-line">
+								<c:set var="scale" value="${maxWeeklySale}" />
+								<c:forEach var="entry" items="${weeklySales.entrySet()}">
+									<div class="chart-point"
+										style="--point-height: ${ (entry.value/scale)*100 }%;"
+										title="$${entry.value}"></div>
+								</c:forEach>
+							</div>
+						</div>
+						<div class="chart-x-axis">
+							<c:forEach var="entry" items="${weeklySales.entrySet()}">
+								<span>${entry.key.dayOfWeek.name().substring(0,3)}</span>
+							</c:forEach>
+						</div>
+					</div>
+				</div>
+			</section>
+
+		</main>
+	</div>
 </body>
 </html>
