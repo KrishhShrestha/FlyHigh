@@ -13,48 +13,50 @@ import com.FlyHigh.service.admin.DroneService;
 
 /**
  * Servlet implementation class DroneManagementController
+ * This controller is responsible for handling requests related to managing drones.
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/manage-drone" })
 public class ManageDroneController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
+	// Service class to handle business logic for drones
 	private DroneService droneService;
-       
+
     /**
-     * @see HttpServlet#HttpServlet() 
+     * Default constructor. Initializes the DroneService.
      */
     public ManageDroneController() {
         super();
-        // TODO Auto-generated constructor stub
         this.droneService = new DroneService();
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Handles the GET request to load and display all drones.
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
+		// Fetch all drones from the database
 		List<DroneModel> droneList = droneService.getAllDrones();
-		
-		
+
+		// Pass success message from the parameter
 		request.setAttribute("success", request.getParameter("success"));
-		
+
+		// If no drones are found, error message is sent
 		if (droneList == null || droneList.isEmpty()) {
 		    request.setAttribute("errorMessage", "No drones found or an error occurred.");
 		}
-		
+
+		// Set the fetched drone data in the request attribute to be used in JSP
 		request.setAttribute("DroneData", droneList);
-		
+
+		// Forward the jsp page to the user
 		request.getRequestDispatcher("WEB-INF/pages/admin/droneManagement.jsp").forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * Handles POST requests.
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// Call doGet to display updated list after a POST action
 		doGet(request, response);
 	}
-
 }

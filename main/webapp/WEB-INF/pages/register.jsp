@@ -55,7 +55,7 @@ pageEncoding="UTF-8"%>
                 type="text"
                 id="phone"
                 name="phone"
-                placeholder="+977 9860000011"
+                placeholder="9860000011"
               />
             </div>
             <div class="input-div">

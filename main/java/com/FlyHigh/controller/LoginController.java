@@ -25,7 +25,7 @@ public class LoginController extends HttpServlet {
 	private final LoginService loginService;
 
 	/**
-	 * Constructor initializes the LoginService.
+	 * This Constructor initializes the LoginService.
 	 */
 	public LoginController() {
 		this.loginService = new LoginService();
@@ -73,11 +73,9 @@ public class LoginController extends HttpServlet {
 			SessionUtil.setAttribute(req, "email", email);
 
 			if (userModel.getRole().equals("admin")) {
-//				CookieUtil.addCookie(resp, "role", "admin", 30 * 60);
 				SessionUtil.setAttribute(req, "role", "admin");
 				resp.sendRedirect(req.getContextPath() + "/dashboard");
 			} else {
-//				CookieUtil.addCookie(resp, "role", "customer", 30 * 60);
 				SessionUtil.setAttribute(req, "role", "customer");
 				resp.sendRedirect(req.getContextPath() + "/home");
 			}
@@ -87,7 +85,7 @@ public class LoginController extends HttpServlet {
 	}
 
 	/**
-	 * Validates login input fields.
+	 * Validates login input fields like email and password
 	 */
 	private String validateLoginFields(HttpServletRequest req) {
 		String email = req.getParameter("email");

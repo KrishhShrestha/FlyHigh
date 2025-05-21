@@ -1,4 +1,4 @@
-package com.FlyHigh.controller.admin;
+package com.FlyHigh.controller;
 
 import com.FlyHigh.model.DroneModel;
 import com.FlyHigh.service.admin.DroneService;
@@ -12,8 +12,8 @@ import java.io.IOException;
 /**
  * Controller to handle viewing and deleting individual drone details
  */
-@WebServlet({ "/drone-details" })
-public class DroneDetailsController extends HttpServlet {
+@WebServlet({ "/drone-information" })
+public class DroneInformationController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     // Service used to perform operations on Drone data
@@ -22,7 +22,7 @@ public class DroneDetailsController extends HttpServlet {
     /**
      * Initializes the DroneDetailsController and the DroneService
      */
-    public DroneDetailsController() {
+    public DroneInformationController() {
         super();
         this.droneService = new DroneService(); 
     }
@@ -30,6 +30,7 @@ public class DroneDetailsController extends HttpServlet {
     /**
      * Handles GET requests to view drone details
      */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Get drone ID from the request parameter
         String idParam = request.getParameter("id");
@@ -44,21 +45,18 @@ public class DroneDetailsController extends HttpServlet {
                 if (drone != null) {
                     // If drone found, set it in the request and forward to details page
                     request.setAttribute("drone", drone);
-                    request.getRequestDispatcher("WEB-INF/pages/admin/droneDetails.jsp").forward(request, response);
+                    request.getRequestDispatcher("WEB-INF/pages/droneInformation.jsp").forward(request, response);
                 } else {
-                    // If drone not found, show not found page with message
-                    request.setAttribute("errorMessage", "Drone not found for the provided ID.");
-                    request.getRequestDispatcher("WEB-INF/pages/admin/NotFound.jsp").forward(request, response);
+                    // Redirect to /home if drone not found
+                    response.sendRedirect(request.getContextPath() + "/home?error=Drone not found");
                 }
             } catch (NumberFormatException e) {
-                // If ID is not a valid integer, show error
-                request.setAttribute("errorMessage", "Invalid drone ID format.");
-                request.getRequestDispatcher("WEB-INF/pages/admin/NotFound.jsp").forward(request, response);
+                // Redirect to /home if ID is not a valid integer
+                response.sendRedirect(request.getContextPath() + "/home?error=invalid id found");
             }
         } else {
-            // If ID is missing from the request, show error
-            request.setAttribute("errorMessage", "Drone ID is required.");
-            request.getRequestDispatcher("WEB-INF/pages/admin/NotFound.jsp").forward(request, response);
+            // Redirect to /home if ID is missing
+            response.sendRedirect(request.getContextPath() + "/home?error=An error Occurred");
         }
     }
 

@@ -95,23 +95,43 @@ public class ImageUtil {
 		}
 	}
 	
+	/**
+	 * Formats an image URL by appending a unique identifier to the filename.
+	 * 
+	 * <p>
+	 * This helps prevent file name collisions by ensuring each uploaded image has
+	 * a unique name.
+	 * </p>
+	 * 
+	 * @param imageUrl the original image file name or URL.
+	 * @return the formatted image name with a random 8-character UUID appended.
+	 */
 	public static String formatImageUrl(String imageUrl) {
-        // Ensure that the image URL has an extension
-        int dotIndex = imageUrl.lastIndexOf('.');
-        if (dotIndex > 0) {
-            String baseName = imageUrl.substring(0, dotIndex);  // Get the name without extension
-            String extension = imageUrl.substring(dotIndex);     // Get the extension
-            String uuid = UUID.randomUUID().toString().substring(0, 8);  // Generate random UUID (8 characters)
-            return baseName + "_" + uuid + extension;  // Append UUID to the base name and reattach the extension
-        } else {
-            // If the URL does not have an extension (for some reason), just append the UUID
-            return imageUrl + "_" + UUID.randomUUID().toString().substring(0, 8);
-        }
-    }
+		int dotIndex = imageUrl.lastIndexOf('.');
+		if (dotIndex > 0) {
+			String baseName = imageUrl.substring(0, dotIndex);
+			String extension = imageUrl.substring(dotIndex);
+			String uuid = UUID.randomUUID().toString().substring(0, 8);
+			return baseName + "_" + uuid + extension;
+		} else {
+			// If no extension is present, just append the UUID
+			return imageUrl + "_" + UUID.randomUUID().toString().substring(0, 8);
+		}
+	}
 	
+
+	/**
+	 * Constructs the full path to the folder where uploaded images will be saved.
+	 * 
+	 * <p>
+	 * This method uses a base path pointing to the FlyHigh project's `webapp` directory.
+	 * </p>
+	 * 
+	 * @param saveFolder the folder name inside the webapp directory (e.g., "images").
+	 * @return the absolute path to the folder where files should be saved.
+	 */
 	public static String getSavePath(String saveFolder) {
 		String BaseUrl = "C:/Users/sayuj/eclipse-workspace/";
-		
 		return BaseUrl + "FlyHigh/src/main/webapp/" + saveFolder + "/";
 	}
 }
