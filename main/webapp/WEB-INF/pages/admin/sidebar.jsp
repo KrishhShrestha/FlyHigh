@@ -21,6 +21,10 @@
             <li>
               <a href="${pageContext.request.contextPath}/manage-user"><i class="fa-solid fa-user"></i> Users</a>
             </li>
+            <li>
+            <a href="${pageContext.request.contextPath}/contact-messages"> <i class="fa-solid fa-envelope"></i> Contact Messages
+			</a>
+			</li>
           </ul>
         </section>
 
@@ -34,3 +38,5 @@
           </button>
         </form>
 </section>
+
+

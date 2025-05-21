@@ -149,7 +149,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Set;
 
-import com.FlyHigh.util.CookieUtil;
+//import com.FlyHigh.util.CookieUtil;
 import com.FlyHigh.util.SessionUtil;
 
 @WebFilter(asyncSupported = true, urlPatterns = "/*")
@@ -164,19 +164,23 @@ public class AuthenticationFilter implements Filter {
 
 	// Admin paths
 	private static final Set<String> ADMIN_PATHS = Set.of(
-		DASHBOARD, "/manage-drone", "/add-drone", "/drone-details", "/edit-drone",
+		DASHBOARD, "/manage-drone", "/add-drone", "/drone-details", "/edit-drone","/contact-messages",
 		HOME, "/category", "/addcategory", "/editcategory", ROOT, "/manage-user"
 	);
 
 	// Customer paths
 	private static final Set<String> CUSTOMER_PATHS = Set.of(
 		HOME, ROOT, "/about", "/userprofile", "/edituserprofile", "/contact",
-		"/cart", "/orderlist", "/cartlist", "/drones", "/purchasesuccess", "/search", "/drone-information"
+		"/cart", "/orderlist", "/cartlist", "/drones", "/purchasesuccess", "/search"
 	);
 
 	// Public access paths
 	private static final Set<String> PUBLIC_PATHS = Set.of(LOGIN, REGISTER, HOME, ROOT, "/product/*");
 
+	@Override
+	public void init(FilterConfig filterConfig) throws ServletException {
+		// Initialization logic, if needed
+	}
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -206,9 +210,12 @@ public class AuthenticationFilter implements Filter {
 			return;
 		}
 
-		boolean isLoggedIn = SessionUtil.getAttribute(req, "email") != null;
+//		boolean isLoggedIn = SessionUtil.getAttribute(req, "email") != null;
 		
-	
+//		String userRole = CookieUtil.getCookie(req, "role") != null
+//				? CookieUtil.getCookie(req, "role").getValue()
+//				: null;
+		
 		String userRole = (String) SessionUtil.getAttribute(req, "role");
 
 
@@ -236,5 +243,10 @@ public class AuthenticationFilter implements Filter {
 				res.sendRedirect(req.getContextPath() + LOGIN);
 			}
 		}
+	}
+
+	@Override
+	public void destroy() {
+		// Cleanup logic, if needed
 	}
 }

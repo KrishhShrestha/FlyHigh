@@ -1,0 +1,16 @@
+@charset "UTF-8";
+.messages-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 1rem;
+}
+
+.messages-table th, .messages-table td {
+	border: 1px solid #ddd;
+	padding: 0.5rem;
+}
+
+.messages-table th {
+	background: #f4f4f4;
+	text-align: left;
+}

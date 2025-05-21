@@ -1,14 +1,16 @@
 package com.FlyHigh.service;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
-
 import java.sql.SQLException;
-
+import java.util.ArrayList;
+import java.util.List;
 import com.FlyHigh.config.DbConfig;
 import com.FlyHigh.model.ContactModel;
-import com.FlyHigh.model.UserModel;
+import java.sql.*;
+
+
+
 
 /**
  * RegisterService handles the registration of new students. It manages database
@@ -44,7 +46,7 @@ public class ContactService {
 		}
 
 //		String programQuery = "SELECT program_id FROM program WHERE name = ?";
-		String insertQuery = "INSERT INTO `contact`(`fname`, `lname`, `email`, `message`)" + "VALUES (?,?,?,?)";
+		String insertQuery = "INSERT INTO contact(fname, lname, email, message)" + "VALUES (?,?,?,?)";
 
 		try (PreparedStatement insertStmt = dbConn.prepareStatement(insertQuery)) {
 
@@ -62,5 +64,22 @@ public class ContactService {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	public List<ContactModel> getAllMessages() {
+		String query = "SELECT ContactID, fname, lname, email, message FROM contact ORDER BY ContactID DESC";
+		List<ContactModel> list = new ArrayList<>();
+		try (PreparedStatement ps = dbConn.prepareStatement(query); ResultSet rs = ps.executeQuery()) {
+			while (rs.next()) {
+				ContactModel c = new ContactModel();
+				c.setFirstname(rs.getString("fname"));
+				c.setLastname(rs.getString("lname"));
+				c.setEmail(rs.getString("email"));
+				c.setMessage(rs.getString("message"));
+				list.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 }
