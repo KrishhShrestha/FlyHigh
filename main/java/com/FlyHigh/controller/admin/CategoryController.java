@@ -66,19 +66,25 @@ public class CategoryController extends HttpServlet {
         }
     }
 // for deletion
-    private void handleDelete(HttpServletRequest request, HttpServletResponse response, int id) throws ServletException, IOException {
-        boolean success = categoryService.deleteCategory(id);
-
-        if (success) {
-            System.out.println("Deletion successful");
-            // Redirect after deletion
-            response.sendRedirect(request.getContextPath() + "/category");
-        } else {
-            System.out.println("Deletion failed");
-            // Handle deletion failure
-            request.setAttribute("errorMessage", "Failed to delete drone.");
-            request.getRequestDispatcher("WEB-INF/pages/admin/category.jsp").forward(request, response);
-        }
-    }
+	private void handleDelete(HttpServletRequest request, HttpServletResponse response, int id) throws ServletException, IOException {
+	    try {
+	        boolean success = categoryService.deleteCategory(id);
+	        
+	        if (success) {
+	            System.out.println("Deletion successful");
+	            response.sendRedirect(request.getContextPath() + "/category");
+	        } else {
+	            System.out.println("Deletion failed");
+	            request.setAttribute("errorMessage", "Failed to delete category.");
+	            request.getRequestDispatcher("WEB-INF/pages/admin/category.jsp").forward(request, response);
+	        }
+	    } 
+	    catch (Exception e) {
+	        e.printStackTrace();
+	        request.setAttribute("errorMessage", "Failed to delete category due to an unexpected error.");
+	        request.getRequestDispatcher("WEB-INF/pages/admin/category.jsp").forward(request, response);
+	    }
+	}
+    	
 
 }

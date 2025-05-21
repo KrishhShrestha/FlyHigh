@@ -12,7 +12,11 @@
 <body>
 <main>
 	<jsp:include page="sidebar.jsp" />
-	
+	<c:if test="${not empty errorMessage}">
+    <div class="toast error">
+        <i class="fa-solid fa-xmark"></i> ${errorMessage}
+    </div>
+	</c:if>
       <div style='margin-left: 15vw; padding-inline: 2rem; padding-top: 2rem' class="">
         <div class="heading">
           <p>Category</p>
