@@ -60,10 +60,6 @@ public class UserManagementController extends HttpServlet {
             return;
         }
         
-        
-        
-        
-        
 
         // Default action: load users
         List<UserModel> UserList = userService.getAllUser();

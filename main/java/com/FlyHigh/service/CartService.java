@@ -32,6 +32,7 @@ public class CartService {
             }
 
             double totalAmount = calculateTotalAmount(cart);
+            
             dbConn.setAutoCommit(false);
 
             // Insert order
@@ -54,7 +55,8 @@ public class CartService {
             }
 
             // Insert into user_drone_order
-            String userOrderSql = "INSERT INTO user_drone_order (User_id, Drone_id, Order_id, quantity) VALUES (?, ?, ?, ?)";
+            String userOrderSql = "INSERT INTO user_drone_order (User_id, Drone_id, Order_id, quantity) "
+            		+ "VALUES (?, ?, ?, ?)";
             try (PreparedStatement userStmt = dbConn.prepareStatement(userOrderSql)) {
                 for (Map.Entry<Integer, Integer> entry : cart.entrySet()) {
                     userStmt.setInt(1, userId);

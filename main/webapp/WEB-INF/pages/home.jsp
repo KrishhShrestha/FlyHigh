@@ -21,7 +21,7 @@
       <button class="buy-now">Buy Now</button>
     </div>
     <div class="banner-controls">
-      <img src="mavic-drone.png" alt="DJI Mavic Drone" />
+      <img src="${pageContext.request.contextPath}/images/drone.png" alt="DJI Mavic Drone" />
     </div>
   </section>
 
@@ -63,11 +63,11 @@
   <!-- Brand Logos -->
   <section class="brand-logos">
     <div class="logo-container">
-      <img src="dji-logo.png" alt="DJI" />
-      <img src="autel-logo.png" alt="Autel" />
-      <img src="parrot-logo.png" alt="Parrot" />
-      <img src="skydio-logo.png" alt="Skydio" />
-      <img src="yuneec-logo.png" alt="Yuneec" />
+      <img src="${pageContext.request.contextPath}/images/dji.png" alt="Logo" class="DJI" />
+      <img src="${pageContext.request.contextPath}/images/Autel.png" alt="Autel" />
+      <img src="${pageContext.request.contextPath}/images/Parrot.png" alt="Parrot" />
+      <img src="${pageContext.request.contextPath}/images/SKY.png" alt="Skydio" />
+      <img src="${pageContext.request.contextPath}/images/Yuneek.png" alt="Yuneec" />
     </div>
   </section>
 

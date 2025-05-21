@@ -83,7 +83,9 @@ public class UserService {
 	    return UserList;
 	}
 	
-	
+	/**
+	 * method to delete the user from the database 
+	 */
     public boolean deleteUserById(int id) {
         if (dbConn == null) {
             System.err.println("Database connection error while deleting user.");
@@ -101,6 +103,9 @@ public class UserService {
         }
     }
     
+    /**
+	 * method to update the user's role 
+	 */
     
     public boolean updateUserRole(int userId, String newRole) {
         if (dbConn == null) {

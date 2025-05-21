@@ -28,10 +28,11 @@ public class CartController extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getParameter("action");
 
+        String email = (String) SessionUtil.getAttribute(request, "email");
+        
         // Get or create cart from session
 		Map<Integer, Integer> cart = (Map<Integer, Integer>) SessionUtil.getAttribute(request, "cart");
-        String email = (String) SessionUtil.getAttribute(request, "email");
-
+       
         if (cart == null) {
             cart = new HashMap<>();
         }
@@ -49,6 +50,7 @@ public class CartController extends HttpServlet {
             
         } else if ("remove".equalsIgnoreCase(action)) {
             int droneId = Integer.parseInt(request.getParameter("productId"));
+
             cart.remove(droneId);
             SessionUtil.setAttribute(request, "cart", cart);
             response.sendRedirect(request.getContextPath() + "/cart");
