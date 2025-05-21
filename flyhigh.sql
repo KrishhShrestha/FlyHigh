@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 21, 2025 at 05:59 PM
+-- Generation Time: May 21, 2025 at 06:41 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -101,9 +101,7 @@ INSERT INTO `drone` (`Drone_id`, `Drone_name`, `Drone_description`, `Drone_price
 (5, 'BuzzFly 360', '360-degree camera drone with stable flight', 749, 5, 950, 22, 3800, '1080p', '28x28x9 cm', 'drone.jpg', 2),
 (6, 'Nimbus V2', 'All-weather drone with GPS', 999, 4, 1250, 26, 4200, '4K', '31x31x11 cm', 'drone.jpg', 1),
 (7, 'Stealth Aero', 'Silent motor drone for stealth operations', 829, 7, 1000, 24, 3700, '1080p', '27x27x8 cm', 'drone.jpg', 2),
-(8, 'DriftSurfer', 'Wind-resistant drone for beach and coastal areas', 589, 9, 890, 20, 3400, '1080p', '26x26x8 cm', 'drone.jpg', 3),
-(9, 'PhotonEdge', 'Drone with night vision camera', 1299.99, 2, 1400, 32, 4600, '4K Night Vision', '34x34x13 cm', 'drone.jpg', 1),
-(10, 'Eagle Pro Max', 'Top-tier drone with obstacle detection', 1399, 1, 1500, 35, 4800, '5K', '35x35x14 cm', 'drone.jpg', 1);
+(8, 'DriftSurfer', 'Wind-resistant drone for beach and coastal areas', 589, 9, 890, 20, 3400, '1080p', '26x26x8 cm', 'drone.jpg', 3);
 
 -- --------------------------------------------------------
 
@@ -151,7 +149,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`User_id`, `User_name`, `User_phone`, `Gender`, `User_DOB`, `User_email`, `User_password`, `User_address`, `Role_Name`, `User_image`) VALUES
-(14, 'sayuj', '9800000000', 'male', '1999-10-01', 'sayuj@gmail.com', 'O2T2yaoLqRhhzTwQe1uqL275Hfu28PNxPo9SZ+cu5pxggih+x8uq8aQiOhfdSftaDZ4v4Q0=', 'Kathmandu', 'admin', 'user_77955da9.jpg'),
+(14, 'sayuj', '9800000000', 'male', '1999-10-01', 'sayuj@gmail.com', 'O2T2yaoLqRhhzTwQe1uqL275Hfu28PNxPo9SZ+cu5pxggih+x8uq8aQiOhfdSftaDZ4v4Q0=', 'Kathmandu', 'customer', 'user_77955da9.jpg'),
 (15, 'Ram', '9800000011', 'male', '2025-05-14', 'ram@mail.com', 'BsI11Vtmqir/ClACzfIdZFzGLuynI0ocYiN8dtEfZ16UPrWsPhxjMK9mKNtDvGZzTd+AyHo=', 'ktm', 'customer', 'ramphoto_91754f27.jpg');
 
 -- --------------------------------------------------------
