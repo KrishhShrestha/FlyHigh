@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2025 at 06:17 PM
+-- Generation Time: May 21, 2025 at 07:44 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -118,8 +118,17 @@ CREATE TABLE `order_table` (
   `Order_id` int(11) NOT NULL,
   `Order_date` date NOT NULL,
   `Total_amount` float NOT NULL,
-  `status` enum('pending','success','','') NOT NULL
+  `status` enum('pending','success','processing','canceled') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_table`
+--
+
+INSERT INTO `order_table` (`Order_id`, `Order_date`, `Total_amount`, `status`) VALUES
+(3, '2025-05-21', 598, 'canceled'),
+(4, '2025-05-09', 799, 'processing'),
+(5, '2025-05-07', 533, 'success');
 
 -- --------------------------------------------------------
 
@@ -147,7 +156,9 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`User_id`, `User_name`, `User_phone`, `Gender`, `User_DOB`, `User_email`, `User_password`, `User_address`, `Role_Name`, `User_image`) VALUES
 (3, 'Aakrist', '9800000000', 'male', '2025-04-08', 'a@Thapa.com', 'XFsZmFliwIrZhKR470fWP8kjglftVkDGU/T+cvAoNT9u9NziANLwH1b1V6RleaCBbseA1A==', 'kamalpokhar', 'customer', ''),
 (8, 'Clinton', '9839953995', 'female', '2015-04-28', 'sayuj@gmail.com', 'RTJ01ynE5w7Og6QZPZmDGgvW5kL4bfcQsX0lazIj7ZP0LuIvbU7WUEKwa+zGYSFklFCVVtQ=', 'Eligendi voluptate u', 'admin', 'agile-wbs-final(1)_455cc45e.jpg'),
-(9, 'Nash', '9862766276', 'female', '1996-08-14', 'ram@mail.com', 'gTmiX2jpPoBYo5S1AdBog+I+uIkE3jZZ5uKqL4Yp9kamjKx7ol6GaHnIRw2NbV5INRSCyxI=', 'Cillum tempore sint', 'customer', 'Screenshot 2025-04-06 205953_e01a97cb.png');
+(9, 'Nash', '9862766276', 'female', '1996-08-14', 'ram@mail.com', 'gTmiX2jpPoBYo5S1AdBog+I+uIkE3jZZ5uKqL4Yp9kamjKx7ol6GaHnIRw2NbV5INRSCyxI=', 'Cillum tempore sint', 'customer', 'Screenshot 2025-04-06 205953_e01a97cb.png'),
+(10, 'Ram', '9844555789', 'male', '2025-05-01', 'ram99@high.com', 'vpfXI4HoEHyUijg2YV0qn5ij2/w76oQR6EWd+mGtwkE7dX1tf63vjodfu2tA6yZttzMlKlI=', 'kammalll', 'customer', '11_e16cbaf9.png'),
+(13, 'Ram', '9844555790', 'male', '2025-05-01', 'ram91@flyhigh.com.np', 'yS1ebUFt5Ed6jXoHotgXS47DkthzanKuN2OazTEiIVQiukP38uPZZLQIxbxX2DzDMAkaMhk=', 'jhapa', 'admin', '11_cde9d147.png');
 
 -- --------------------------------------------------------
 
@@ -161,6 +172,14 @@ CREATE TABLE `user_drone_order` (
   `Order_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_drone_order`
+--
+
+INSERT INTO `user_drone_order` (`User_id`, `Drone_id`, `Order_id`, `quantity`) VALUES
+(13, 5, 4, 4),
+(13, 6, 4, 7);
 
 --
 -- Indexes for dumped tables
@@ -242,13 +261,13 @@ ALTER TABLE `drone`
 -- AUTO_INCREMENT for table `order_table`
 --
 ALTER TABLE `order_table`
-  MODIFY `Order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `User_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `User_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
