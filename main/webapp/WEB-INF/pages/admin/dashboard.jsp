@@ -1,16 +1,45 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" language="java"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dashboard</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/admin/dashboard.css" />
 <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<style>
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	display: none;
+	align-items: center;
+	justify-content: center;
+}
+
+.modal-content {
+	background: #fff;
+	padding: 1.5rem;
+	border-radius: 6px;
+	width: 90%;
+	max-width: 500px;
+	position: relative;
+}
+
+.close-btn {
+	position: absolute;
+	top: 0.5rem;
+	right: 1rem;
+	cursor: pointer;
+	font-size: 1.2rem;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="sidebar.jsp" />
@@ -67,11 +96,11 @@
 				</div>
 			</section>
 
+
 			<!-- Order Management Section -->
 			<section class="order-management">
 				<div class="section-header">
 					<h2>Order Management</h2>
-					<button class="view-all-btn">View All</button>
 				</div>
 
 				<div class="order-status-cards">
@@ -128,7 +157,7 @@
 							<h3>Orders Canceled</h3>
 							<p class="status-count">
 								<c:choose>
-									<c:when test="${not empty statusCounts['']}">${statusCounts['']}</c:when>
+									<c:when test="${not empty statusCounts['canceled']}">${statusCounts['canceled']}</c:when>
 									<c:otherwise>0</c:otherwise>
 								</c:choose>
 							</p>
@@ -136,9 +165,10 @@
 					</div>
 				</div>
 
-				<!-- Recent Orders Table -->
+
 				<div class="recent-orders">
 					<h3>Recent Orders</h3>
+
 					<div class="table-container">
 						<table class="orders-table">
 							<thead>
@@ -156,11 +186,31 @@
 										<td>${order.id}</td>
 										<td>${order.order_date}</td>
 										<td>$${order.total_amount}</td>
-										<td><span class="status-badge ${order.status}">${order.status}</span></td>
+										<td><span class="status-badge ${order.status}"> <c:choose>
+													<c:when test="${order.status=='pending'}">Pending</c:when>
+													<c:when test="${order.status=='processing'}">Processing</c:when>
+													<c:when test="${order.status=='success'}">Delivered</c:when>
+													<c:when test="${order.status=='canceled'}">Canceled</c:when>
+												</c:choose>
+										</span></td>
 										<td>
 											<button class="action-btn view"
-												onclick="openOrderModal('${order.id}','${order.order_date}','${order.total_amount}','${order.status}')">
-												View</button>
+												onclick="openOrderModal(${order.id})">View</button>
+											<form method="post" action="dashboard"
+												style="display: inline">
+												<input type="hidden" name="orderId" value="${order.id}" />
+												<select name="newStatus" required>
+													<option value="pending"
+														${order.status=='pending' ? 'selected':''}>pending</option>
+													<option value="processing"
+														${order.status=='processing' ? 'selected':''}>processing</option>
+													<option value="success"
+														${order.status=='success' ? 'selected':''}>success</option>
+													<option value="canceled"
+														${order.status=='canceled' ? 'selected':''}>canceled</option>
+												</select>
+												<button type="submit" class="action-btn update">Update</button>
+											</form>
 										</td>
 									</tr>
 								</c:forEach>
@@ -170,37 +220,55 @@
 				</div>
 			</section>
 
-			<!-- Order Details Modal -->
-			<div id="orderModal" class="modal" style="display: none;">
+			<!-- Hidden item lists for each order -->
+			<div style="display: hidden !important; height: 0px !important">
+				<c:forEach var="itm" items="${orderItems}">
+					<c:if test="${itm.orderId != null}">
+						<div id="items-${itm.orderId}" style="display: hidden !important;"
+							class="order-items">
+							<ul>
+								<strong>Customer:</strong> ${orderItems[0].userName}
+								<br />
+								<c:forEach var="sub" items="${orderItems}">
+									<c:if test="${sub.orderId == itm.orderId}">
+										<li><strong>Product:</strong> ${sub.droneName}<br /> <strong>Qty:</strong>
+											${sub.quantity}<br /></li>
+									</c:if>
+								</c:forEach>
+							</ul>
+						</div>
+					</c:if>
+				</c:forEach>
+			</div>
+
+			<!-- Modal -->
+			<div id="orderModal" class="modal">
 				<div class="modal-content">
 					<span class="close-btn" onclick="closeModal()">&times;</span>
-					<h2>Order Details</h2>
-					<p>
-						<strong>ID:</strong> <span id="modalOrderId"></span>
-					</p>
-					<p>
-						<strong>Date:</strong> <span id="modalOrderDate"></span>
-					</p>
-					<p>
-						<strong>Amount:</strong> $<span id="modalTotalAmount"></span>
-					</p>
-					<p>
-						<strong>Status:</strong> <span id="modalStatus"></span>
-					</p>
+					<h2>
+						Order #<span id="modalOrderId"></span> Details
+					</h2>
+					<div id="modalItemsContainer"></div>
 				</div>
 			</div>
+
 			<script>
-				function openOrderModal(id, date, amt, status) {
-					document.getElementById('modalOrderId').innerText = id;
-					document.getElementById('modalOrderDate').innerText = date;
-					document.getElementById('modalTotalAmount').innerText = amt;
-					document.getElementById('modalStatus').innerText = status;
-					document.getElementById('orderModal').style.display = 'block';
-				}
-				function closeModal() {
-					document.getElementById('orderModal').style.display = 'none';
-				}
-			</script>
+        function openOrderModal(orderId) {
+        	const modal = document.getElementById('orderModal');
+        	  modal.classList.add('show');
+          document.getElementById('modalOrderId').innerText = orderId;
+          const hidden = document.getElementById('items-' + orderId);
+          document.getElementById('modalItemsContainer').innerHTML = hidden
+            ? hidden.innerHTML
+            : '<p>No items found.</p>';
+          document.getElementById('orderModal').style.display = 'flex';
+        }
+        function closeModal() {
+          document.getElementById('orderModal').style.display = 'none';
+          const modal = document.getElementById('orderModal');
+          modal.classList.remove('show');
+        }
+      </script>
 
 			<!-- Top Selling Products & Weekly Sales Chart -->
 			<section class="two-column-section">
@@ -208,7 +276,6 @@
 				<div class="column product-listings">
 					<div class="section-header">
 						<h2>Top Selling Products</h2>
-						<button class="view-all-btn">View All</button>
 					</div>
 					<div class="product-list">
 						<c:forEach var="drone" items="${topProducts}">
@@ -229,33 +296,9 @@
 				<div class="column weekly-sales">
 					<div class="section-header">
 						<h2>Weekly Sales</h2>
-						<button class="view-all-btn">View Report</button>
-					</div>
-					<div class="chart-container">
-						<div class="chart-y-axis">
-							<c:forEach var="i" begin="0" end="6">
-								<span>$${(maxWeeklySale/6)*(6-i)}</span>
-							</c:forEach>
-						</div>
-						<div class="chart">
-							<div class="chart-line">
-								<c:set var="scale" value="${maxWeeklySale}" />
-								<c:forEach var="entry" items="${weeklySales.entrySet()}">
-									<div class="chart-point"
-										style="--point-height: ${ (entry.value/scale)*100 }%;"
-										title="$${entry.value}"></div>
-								</c:forEach>
-							</div>
-						</div>
-						<div class="chart-x-axis">
-							<c:forEach var="entry" items="${weeklySales.entrySet()}">
-								<span>${entry.key.dayOfWeek.name().substring(0,3)}</span>
-							</c:forEach>
-						</div>
 					</div>
 				</div>
 			</section>
-
 		</main>
 	</div>
 </body>

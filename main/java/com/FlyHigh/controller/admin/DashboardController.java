@@ -1,9 +1,6 @@
 package com.FlyHigh.controller.admin;
 
-import com.FlyHigh.model.DroneModel;
-import com.FlyHigh.model.OrderModel;
 import com.FlyHigh.service.admin.DashboardService;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -14,44 +11,47 @@ import java.util.Map;
 
 @WebServlet("/dashboard")
 public class DashboardController extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-    private final DashboardService service = new DashboardService();
+	private final DashboardService service = new DashboardService();
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        // 1) Recent orders
-        List<OrderModel> orders = service.getAllOrders();
-        request.setAttribute("orderData", orders);
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// 1) Orders list
+		request.setAttribute("orderData", service.getAllOrders());
 
-        // 2) Summary cards
-        request.setAttribute("todaysSales", service.getTodaysSales());
-        request.setAttribute("totalCustomers", service.getTotalCustomers());
-        request.setAttribute("totalProducts", service.getTotalProducts());
-        request.setAttribute("monthlyRevenue", service.getMonthlyRevenue());
+		// 2) Raw order-items for modal
+		request.setAttribute("orderItems", service.getAllOrderItemsWithInfo());
 
-        // 3) Status counts
-        Map<String,Integer> statusCounts = service.getOrderStatusCounts();
-        request.setAttribute("statusCounts", statusCounts);
+		// 3) Summary cards
+		request.setAttribute("todaysSales", service.getTodaysSales());
+		request.setAttribute("totalCustomers", service.getTotalCustomers());
+		request.setAttribute("totalProducts", service.getTotalProducts());
+		request.setAttribute("monthlyRevenue", service.getMonthlyRevenue());
 
-        // 4) Top products (limit 5)
-        List<DroneModel> topProducts = service.getTopSellingProducts(5);
-        request.setAttribute("topProducts", topProducts);
+		// 4) Status counts
+		request.setAttribute("statusCounts", service.getOrderStatusCounts());
 
-        // 5) Weekly sales and max value for chart scaling
-        Map<LocalDate,Double> weeklySales = service.getWeeklySales();
-        request.setAttribute("weeklySales", weeklySales);
-        double maxSale = weeklySales.values().stream().mapToDouble(Double::doubleValue).max().orElse(1.0);
-        request.setAttribute("maxWeeklySale", maxSale);
+		// 5) Top products
+		request.setAttribute("topProducts", service.getTopSellingProducts(5));
 
-        // Forward to JSP
-        request.getRequestDispatcher("/WEB-INF/pages/admin/dashboard.jsp")
-               .forward(request, response);
-    }
+		// 6) Weekly sales
+		Map<LocalDate, Double> weekly = service.getWeeklySales();
+		request.setAttribute("weeklySales", weekly);
+		double max = weekly.values().stream().mapToDouble(Double::doubleValue).max().orElse(1.0);
+		request.setAttribute("maxWeeklySale", max);
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        doGet(req, resp);
-    }
+		request.getRequestDispatcher("/WEB-INF/pages/admin/dashboard.jsp").forward(request, response);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String sId = req.getParameter("orderId");
+		String newStatus = req.getParameter("newStatus");
+		if (sId != null && newStatus != null) {
+			int orderId = Integer.parseInt(sId);
+			boolean ok = service.updateOrderStatus(orderId, newStatus);
+			req.setAttribute("statusMessage", ok ? "Status updated" : "Update failed");
+		}
+		doGet(req, resp);
+	}
 }
