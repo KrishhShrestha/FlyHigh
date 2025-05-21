@@ -5,12 +5,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
 
 @WebServlet("/dashboard")
 public class DashboardController extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final DashboardService service = new DashboardService();
 
 	@Override
@@ -34,11 +35,6 @@ public class DashboardController extends HttpServlet {
 		// 5) Top products
 		request.setAttribute("topProducts", service.getTopSellingProducts(5));
 
-		// 6) Weekly sales
-		Map<LocalDate, Double> weekly = service.getWeeklySales();
-		request.setAttribute("weeklySales", weekly);
-		double max = weekly.values().stream().mapToDouble(Double::doubleValue).max().orElse(1.0);
-		request.setAttribute("maxWeeklySale", max);
 
 		request.getRequestDispatcher("/WEB-INF/pages/admin/dashboard.jsp").forward(request, response);
 	}

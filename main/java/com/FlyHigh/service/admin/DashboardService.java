@@ -5,7 +5,6 @@ import com.FlyHigh.model.DroneModel;
 import com.FlyHigh.model.OrderModel;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.*;
 
 public class DashboardService {
@@ -132,27 +131,6 @@ public class DashboardService {
 	}
 
 	/** 8) Weekly sales for last 7 days */
-	public Map<LocalDate, Double> getWeeklySales() {
-		String sql = "SELECT Order_date, COALESCE(SUM(Total_amount),0) AS daily_sum " + "FROM order_table "
-				+ "WHERE Order_date >= DATE_SUB(CURDATE(), INTERVAL 6 DAY) "
-				+ "GROUP BY Order_date ORDER BY Order_date";
-		Map<LocalDate, Double> temp = new HashMap<>();
-		try (PreparedStatement ps = dbConn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
-			while (rs.next()) {
-				temp.put(rs.getDate("Order_date").toLocalDate(), rs.getDouble("daily_sum"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		// fill missing days
-		Map<LocalDate, Double> full = new LinkedHashMap<>();
-		LocalDate start = LocalDate.now().minusDays(6);
-		for (int i = 0; i < 7; i++) {
-			LocalDate d = start.plusDays(i);
-			full.put(d, temp.getOrDefault(d, 0.0));
-		}
-		return full;
-	}
 
 	public List<Map<String, Object>> getAllOrderItemsWithInfo() {
 		String sql = """

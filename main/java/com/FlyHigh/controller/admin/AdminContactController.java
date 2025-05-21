@@ -11,15 +11,16 @@ import java.util.List;
 
 @WebServlet("/contact-messages")
 public class AdminContactController extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ContactService svc = new ContactService();
 		List<ContactModel> messages = svc.getAllMessages();
 		request.setAttribute("contacts", messages);
 		request.getRequestDispatcher("/WEB-INF/pages/admin/adminContactMessages.jsp").forward(request, response);
-	}
-
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doGet(req, resp);
 	}
 }
