@@ -31,11 +31,11 @@
             <div class="subheading" style="flex-direction: column; align-items: flex-start; gap: 1rem">
                 <div class="form-group">
                     <label for="categoryname">Name: </label>
-                    <input type="text" name="category" value="${category.name}" required />
+                    <input type="text" name="category" value="${category.name}" />
                 </div>
                 <div class="form-group">
                     <label for="categorydescription">Description: </label>
-                    <input type="text" name="description" value="${category.description}" required />
+                    <input type="text" name="description" value="${category.description}" />
                 </div>
 
                 <button class="editbtn" type="submit"

@@ -37,7 +37,7 @@ public class RegisterController extends HttpServlet {
         request.getRequestDispatcher("WEB-INF/pages/register.jsp").forward(request, response);
     }
 
-    @Override
+    @Override	
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
@@ -69,7 +69,7 @@ public class RegisterController extends HttpServlet {
 		String formattedImageUrl = ImageUtil.formatImageUrl(imageUrl);
         
         
-        // Create model and persist user
+        // object of UserModel is created and then data are passed
         UserModel userModel = new UserModel(
             firstname,
             lastname,
@@ -82,7 +82,7 @@ public class RegisterController extends HttpServlet {
             formattedImageUrl
         );
         
-        
+        //object of RegisterService is created
         RegisterService registerService = new RegisterService();
         
         Boolean ImageUpload = ImageUtil.uploadImage(image, formattedImageUrl, request.getServletContext().getRealPath("/"), "user_profile");

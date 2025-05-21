@@ -110,7 +110,7 @@ public class ImageUtil {
     }
 	
 	public static String getSavePath(String saveFolder) {
-		String BaseUrl = "C:/Users/sayuj/eclipse-workspace/";
+		String BaseUrl = "C:/Users/nowal/eclipse-workspace/";
 		
 		return BaseUrl + "FlyHigh/src/main/webapp/" + saveFolder + "/";
 	}

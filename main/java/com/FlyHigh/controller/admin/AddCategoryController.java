@@ -16,20 +16,21 @@ import com.FlyHigh.util.ValidationUtil;
 public class AddCategoryController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public AddCategoryController() {
-		super();
+	public AddCategoryController() {   
+		super(); 
 	}
-
+// get method
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("WEB-INF/pages/admin/addcategory.jsp").forward(request, response);
 	}
-
+//post method
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String errorMessage = validateFields(request);
 
 		if (errorMessage != null) {
 			request.setAttribute("errorMessage", errorMessage);
-			request.getRequestDispatcher("WEB-INF/pages/admin/category.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/pages/admin/addcategory.jsp").forward(request, response);
+
 
 			return;
 		}

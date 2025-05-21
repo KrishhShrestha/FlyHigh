@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,11 @@
 <body>
 <main>
 	<jsp:include page="sidebar.jsp" />
-	
+	<c:if test="${not empty errorMessage}">
+    <div class="toast error">
+        <i class="fa-solid fa-xmark"></i> ${errorMessage}
+    </div>
+	</c:if>
       <div style='margin-left: 15vw; padding-inline: 2rem; padding-top: 2rem' class="">
         <div class="">
           <h1>Add New Category</h1>
@@ -25,7 +30,7 @@
           >
             <div class="form-group">
               <label for="categoryname">Name: </label>
-              <input type="text" name="categoryname" placeholder="" required />
+              <input type="text" name="categoryname" placeholder="" />
             </div>
             <div class="form-group">
               <label for="categorydescription">Description: </label>
@@ -33,7 +38,7 @@
                 type="text"
                 name="categorydescription"
                 placeholder=""
-                required
+               
               />
             </div>
             <button class="btn btn-primary" type="submit">

@@ -32,15 +32,16 @@ public class CategoryController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    //get method
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		List<CategoryModel> categoryList = categoryService.getAllCategory();
+		List<CategoryModel> categoryList = categoryService.getAllCategory(); //list created
 		
 		if (categoryList == null || categoryList.isEmpty()) {
 		    request.setAttribute("errorMessage", "No category found or an error occurred.");
 		}
 		
-		request.setAttribute("CategoryData", categoryList);
+		request.setAttribute("CategoryData", categoryList); //setting attributes
 
 		
 		request.getRequestDispatcher("WEB-INF/pages/admin/category.jsp").forward(request, response);
@@ -50,6 +51,7 @@ public class CategoryController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	//post method
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String action = request.getParameter("action");
@@ -63,7 +65,7 @@ public class CategoryController extends HttpServlet {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unknown action: " + action);
         }
     }
-
+// for deletion
     private void handleDelete(HttpServletRequest request, HttpServletResponse response, int id) throws ServletException, IOException {
         boolean success = categoryService.deleteCategory(id);
 
@@ -73,7 +75,7 @@ public class CategoryController extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/category");
         } else {
             System.out.println("Deletion failed");
-            // Handle deletion failure (you can forward to an error page or show an error message)
+            // Handle deletion failure
             request.setAttribute("errorMessage", "Failed to delete drone.");
             request.getRequestDispatcher("WEB-INF/pages/admin/category.jsp").forward(request, response);
         }

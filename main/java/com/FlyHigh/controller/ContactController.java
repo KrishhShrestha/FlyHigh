@@ -27,8 +27,8 @@ public class ContactController extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ContactController() {
-        super();
+    public ContactController() { // constructor called
+        super(); //superclass called
         // TODO Auto-generated constructor stub
     }
 
@@ -43,10 +43,11 @@ public class ContactController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	//post method
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
-        String errorMessage = validateRegistrationForm(request);
+        String errorMessage = validateRegistrationForm(request); //validates input
 
         if (errorMessage != null) {
             System.out.println(errorMessage);
@@ -67,7 +68,7 @@ public class ContactController extends HttpServlet {
         System.out.println("Email: " + email);
         System.out.println("Message: " + message);
         
-      
+        // object of contact model created
         ContactModel contactModel = new ContactModel(
             firstname,
             lastname,
@@ -75,7 +76,7 @@ public class ContactController extends HttpServlet {
             message
         );
         
-        
+        //object of contact service created
         ContactService contactService = new ContactService();
         boolean result = contactService.addMessage(contactModel);
         if (result) {
@@ -88,7 +89,7 @@ public class ContactController extends HttpServlet {
 
     }
 	    
-    
+    //validation
     private String validateRegistrationForm(HttpServletRequest request) {
         String firstname = request.getParameter("fname");
         String lastname = request.getParameter("lname");

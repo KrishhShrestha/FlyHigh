@@ -22,7 +22,7 @@ public class RegisterService {
 	 */
 	public RegisterService() {
 		try {
-			this.dbConn = DbConfig.getDbConnection();
+			this.dbConn = DbConfig.getDbConnection(); //check for database connection
 		} catch (SQLException | ClassNotFoundException ex) {
 			System.err.println("Database connection error: " + ex.getMessage());
 			ex.printStackTrace();
@@ -37,12 +37,12 @@ public class RegisterService {
 	 */
 	
 	public Boolean addUser(UserModel UserModel) {
-		if (dbConn == null) {
+		if (dbConn == null) {//check for database connection
 			System.err.println("Database connection is not available.");
 			return null;
 		}
 
-//		String programQuery = "SELECT program_id FROM program WHERE name = ?";
+// inserts into the database
 		String insertQuery = "INSERT INTO user(User_name, User_phone, Gender, User_DOB, User_email, User_address, User_password, Role_Name, User_image) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
  
@@ -58,7 +58,7 @@ public class RegisterService {
 			insertStmt.setString(6, UserModel.getAddress());             // User_address
 			insertStmt.setString(7, UserModel.getPassword());            // User_password
 			insertStmt.setString(8, "customer");                         // Role_Name — default role
-			insertStmt.setString(9, UserModel.getImageUrl());            // User_image — empty for now
+			insertStmt.setString(9, UserModel.getImageUrl());            // User_image
 			
 			return insertStmt.executeUpdate() > 0;
 		} catch (SQLException e) {

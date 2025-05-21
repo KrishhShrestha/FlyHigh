@@ -34,18 +34,22 @@ public class EditCategoryController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// Retrieve the "id" parameter from the request
 		String idParam = request.getParameter("id");
-
+		// Check if the id parameter is provided and not empt
         if (idParam != null && !idParam.isEmpty()) {
             try {
+            	// parsing id parameter to an integer
                 int categoryId = Integer.parseInt(idParam);
                 
                 CategoryModel category = categoryService.getCategoryById(categoryId);
 
                 if (category != null) {
+                	// If the category is found, set it as a request attribute
                     request.setAttribute("category", category);
                     request.getRequestDispatcher("WEB-INF/pages/admin/editcategory.jsp").forward(request, response);
                 } else {
+                	// If no category is found for the given ID, show an error message
                     request.setAttribute("errorMessage", "Drone not found for the provided ID.");
                     request.getRequestDispatcher("WEB-INF/pages/admin/category.jsp").forward(request, response);
                 }
@@ -54,8 +58,9 @@ public class EditCategoryController extends HttpServlet {
                 request.getRequestDispatcher("WEB-INF/pages/admin/category.jsp").forward(request, response);
             }
         } else {
+        	
             request.setAttribute("errorMessage", "Category ID is required.");
-            request.getRequestDispatcher("WEB-INF/pages/admin/NotFound.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/pages/admin/NotFound.jsp").forward(request, response);// Forward to a not found error page
         }
     }
 
