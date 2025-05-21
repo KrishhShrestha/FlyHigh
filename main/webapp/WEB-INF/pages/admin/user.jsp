@@ -13,7 +13,7 @@
 
     <!-- Main Content -->
     <div style="margin-left:15vw;padding-inline: 2rem" class="main-content">
-      <h1 class="page-title">FlyHigh</h1>
+      <h1 class="page-title">User Management</h1>
 
       <div class="card">
 
