@@ -131,12 +131,7 @@ public class ImageUtil {
 	 * @return the absolute path to the folder where files should be saved.
 	 */
 	public static String getSavePath(String saveFolder) {
-<<<<<<< HEAD
-		String BaseUrl = "C:/Users/nowal/eclipse-workspace/";
-		
-=======
 		String BaseUrl = "C:/Users/sayuj/eclipse-workspace/";
->>>>>>> 6734ea25fbed31f3e1f7c3d0a9b21afaaa28aaf9
 		return BaseUrl + "FlyHigh/src/main/webapp/" + saveFolder + "/";
 	}
 }
