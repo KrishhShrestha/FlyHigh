@@ -13,8 +13,7 @@
 </head>
 <body>
 <jsp:include page="header.jsp" />
-	<div class="topbar"></div>
-	<div class="container">
+	<div class="container" style="margin-inline:auto">
 		<div class="sidebar">
 			<h2>Overview</h2>
 			<a href="${pageContext.request.contextPath}/userprofile"
