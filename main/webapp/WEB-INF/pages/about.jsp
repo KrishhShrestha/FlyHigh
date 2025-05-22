@@ -61,7 +61,7 @@
           </p>
         </div>
         <div class="image-box">
-          <img src="pexels-pok-rie-33563-724921.jpg" alt="Drone Experience" />
+          <img src="${pageContext.request.contextPath}/images/pexels-pok-rie-33563-724921.jpg" alt="Drone Experience" />
         </div>
       </div>
     </section>
@@ -70,7 +70,7 @@
       <h2><span class="highlight">Meet Our Team</span></h2>
       <div class="team-container">
         <div class="team-card">
-          <img src="krish.png" alt="krish" />
+          <img src="${pageContext.request.contextPath}/images/krish.png" alt="krish" />
           <h3>Krish Shrestha</h3>
           <span>Creative Leader</span>
           <div class="social-icons">
@@ -80,7 +80,7 @@
         </div>
 
         <div class="team-card">
-          <img src="nowal.png" alt="nowal" />
+          <img src="${pageContext.request.contextPath}/images/nowal.png" alt="nowal" />
           <h3>Nowal Jung Baidwar</h3>
           <p></p>
           <span>Sales Manager</span>
@@ -91,7 +91,7 @@
         </div>
 
         <div class="team-card">
-          <img src="sayuj.png" alt="sayuj" />
+          <img src="${pageContext.request.contextPath}/images/sayuj.png" alt="sayuj" />
           <h3>Sayuj Kuickel</h3>
           <span>Web Developer</span>
           <div class="social-icons">
@@ -101,7 +101,7 @@
         </div>
 
         <div class="team-card">
-          <img src="abhijit.png" alt="abhijit" />
+          <img src="${pageContext.request.contextPath}/images/abhijit.png" alt="abhijit" />
           <h3>Abhijit Mahato</h3>
           <p></p>
           <span>Web Designer</span>
@@ -112,7 +112,7 @@
         </div>
 
         <div class="team-card">
-          <img src="aakrist.png" alt="aakrist" />
+          <img src="${pageContext.request.contextPath}/images/akrist.png" alt="aakrist" />
           <h3>Aakrist Rayamajhi</h3>
           <p></p>
           <span>UI/UX Designer</span>
